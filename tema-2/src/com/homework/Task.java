@@ -1,3 +1,5 @@
+package com.homework;
+
 import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -8,37 +10,34 @@ public class Task{
     private Integer taskId;
     private Integer executionTime;
 
-    static Integer numberOfTasks;
+    private static int numberOfTasks;
 
     private final static Random random = new Random();
 
-    void init(){
-        if(Objects.isNull(numberOfTasks)){
-            numberOfTasks = 0;
-        }
+    private void init(){
         numberOfTasks++;
         this.taskId = generateId();
-        this.taskName = "Task" + this.taskId;
+        this.taskName = "com.homework.Task" + this.taskId;
         this.executionTime = random.nextInt(1,21);
 
-        System.out.println("init called");
+        System.out.println("init called on "+this.taskName+" "+this.taskId);
     }
 
-    void destroy(){
-        System.out.println(" destroying");
+    private void destroy(){
+        System.out.println(" destroying" +this.taskName);
         numberOfTasks--;
     }
 
-    Integer generateId(){return numberOfTasks-1;}
+    Integer generateId(){return numberOfTasks;}
 
     void run() throws InterruptedException{
-        System.out.printf("Slleping for %d seconds", this.executionTime);
+        System.out.printf("Slleping for %d seconds \n", this.executionTime);
         TimeUnit.SECONDS.sleep(this.executionTime);
         System.out.println("run executed");
 
     }
 
-    Integer generatedId(){return numberOfTasks - 1;}
+    Integer generatedId(){return numberOfTasks;}
 
 
 }

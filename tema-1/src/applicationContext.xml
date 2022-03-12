@@ -12,6 +12,4 @@
         <constructor-arg value="CAT" />
     </bean>
 
-
-
 </beans>

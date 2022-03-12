@@ -1,0 +1,3 @@
+configurareAdnotari.Cat_add=org.springframework.stereotype.Component
+configurareAdnotari.Dog_add=org.springframework.stereotype.Component
+configurareAdnotari.Mouse_add=org.springframework.stereotype.Component
