@@ -1,0 +1,8 @@
+configurareAdnotari.AnimalsConfiguration=org.springframework.stereotype.Component
+configurareAdnotari.Cat_add=org.springframework.stereotype.Component
+configurareAdnotari.Dog_add=org.springframework.stereotype.Component
+configurareAdnotari.Mouse_add=org.springframework.stereotype.Component
+lombok.AnimalsConfigurationl=org.springframework.stereotype.Component
+lombok.Cat=org.springframework.stereotype.Component
+lombok.Dog=org.springframework.stereotype.Component
+lombok.Mouse=org.springframework.stereotype.Component

@@ -1,0 +1,7 @@
+com.Masini.Autocar=org.springframework.stereotype.Component
+com.Masini.CarsConfiguration=org.springframework.stereotype.Component
+com.Masini.Masina=org.springframework.stereotype.Component
+com.Masini.Motocicleta=org.springframework.stereotype.Component
+com.Masini.Motor=org.springframework.stereotype.Component
+com.Masini.Test=org.springframework.stereotype.Component
+com.Masini.TestAutomobil=org.springframework.stereotype.Component
