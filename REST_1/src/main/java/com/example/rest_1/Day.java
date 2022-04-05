@@ -21,4 +21,12 @@ public class Day{
     public void setStartingHour(String startingHour) {
         this.startingHour = startingHour;
     }
+
+    @Override
+    public String toString() {
+        return "Day{" +
+                "day='" + day + '\'' +
+                ", startingHour='" + startingHour + '\'' +
+                '}';
+    }
 }

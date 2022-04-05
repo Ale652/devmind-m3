@@ -20,4 +20,12 @@ class Trainer{
     public void setZoomId(String zoomId) {
         this.zoomId = zoomId;
     }
+
+    @Override
+    public String toString() {
+        return "Trainer{" +
+                "name='" + name + '\'' +
+                ", zoomId='" + zoomId + '\'' +
+                '}';
+    }
 }

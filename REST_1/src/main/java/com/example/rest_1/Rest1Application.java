@@ -1,6 +1,7 @@
 package com.example.rest_1;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,6 +19,7 @@ public class Rest1Application {
         ObjectMapper objectMapper = new ObjectMapper();
 
 
+        // read the single json in a Java Object;
         File file = new ClassPathResource("jsonExample.json").getFile();//new File("/src/main/resources/jsonExample.json");
         String json = file.toString();
 
@@ -40,6 +42,40 @@ public class Rest1Application {
         restClass restclassobj = objectMapper.readValue(contentBuilder.toString(), restClass.class);
 
         System.out.println(restclassobj);
+
+
+
+        // read the Array
+
+        objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+        File fileArray = new ClassPathResource("jsonExampleArray.json").getFile();
+
+        json = fileArray.toString();
+
+        StringBuilder contentBuilderArray = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new FileReader(json)))
+        {
+
+            String sCurrentLine;
+            while ((sCurrentLine = br.readLine()) != null)
+            {
+                contentBuilderArray.append(sCurrentLine).append("\n");
+            }
+        }
+        catch (IOException e)
+        {
+            System.out.println("issue from here");
+            e.printStackTrace();
+
+        }
+
+
+        //System.out.println(contentBuilderArray.toString());
+        restClassArray restClassArray = objectMapper.readValue(contentBuilderArray.toString(), restClassArray.class);
+
+        System.out.println(restClassArray);
+
     }
 
 }

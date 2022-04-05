@@ -46,7 +46,7 @@ public class restClass{
                 ", trainer=" + trainer +
                 ", online='" + online + '\'' +
                 ", courseDays=" + courseDays +
-                '}';
+                '}'+"\n";
     }
 
     public void setCourseDays(ArrayList<Day> courseDays) {
