@@ -1,0 +1,19 @@
+S1 9,223,372,036,854,775,807
+s2 9,223,372,036,854,775,807
+
+String s3 = "";
+
+while(s1.length or s2.length){
+	int value_1 = s1.substr(s1,s1.length-1, s1.length); // substract last value of s1
+	int value_2 = s2.substr(s2,s2.length-1, s2.length); // substract last value of s2
+
+	int value_3 = value_1 + value_2;
+
+	s3 = value_3 + " " + s3;
+
+
+	s1 = substring(s1, s1.length-1); // create new string s1 without last letter
+	s2 = substring(s2, s2.length-1);
+}
+
+sout(s3);
