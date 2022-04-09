@@ -1,11 +1,14 @@
 package com.example.rest_1.controllers;
 
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.example.rest_1.Message;
+import com.example.rest_1.MessageResponse;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.function.EntityResponse;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.TimeZone;
@@ -14,16 +17,21 @@ import java.util.TimeZone;
 public class RestConroller {
 
 
+    @PostMapping(value = "/messages")
+    public ResponseEntity<MessageResponse>  messages(@RequestBody Message message,@RequestHeader("authentication") String authentication) {
 
-    @RequestMapping(value = "/restCall", method = RequestMethod.GET)
-    public String time(@RequestParam String callRest) {
+        MessageResponse messageResponse = new MessageResponse();
 
-
-        System.out.println("REST call : "+ callRest);
-        return "REST call : "+ callRest;
+        if(authentication.equals("devmind-api-key"))
+            return new ResponseEntity<>(null, HttpStatus.OK);
+        else return  new ResponseEntity<>(null, HttpStatus.UNAUTHORIZED);
     }
 
 }
+
+
+
+
 
 
 

@@ -1,11 +1,11 @@
 package com.example.rest_1;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -16,11 +16,13 @@ import java.io.IOException;
 public class Rest1Application {
 
     public static void main(String[] args) throws IOException {
+        SpringApplication.run(Rest1Application.class, args);
+
         ObjectMapper objectMapper = new ObjectMapper();
 
 
         // read the single json in a Java Object;
-        File file = new ClassPathResource("jsonExample.json").getFile();//new File("/src/main/resources/jsonExample.json");
+        File file = new ClassPathResource("static/jsonExample.json").getFile();//new File("/src/main/resources/jsonExample.json");
         String json = file.toString();
 
         StringBuilder contentBuilder = new StringBuilder();
@@ -49,7 +51,7 @@ public class Rest1Application {
 
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
-        File fileArray = new ClassPathResource("jsonExampleArray.json").getFile();
+        File fileArray = new ClassPathResource("static/jsonExampleArray.json").getFile();
 
         json = fileArray.toString();
 
