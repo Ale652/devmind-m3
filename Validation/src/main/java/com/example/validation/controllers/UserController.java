@@ -38,7 +38,7 @@ public class UserController {
         if(UserLogin.getUsersAunthenticatedHashTable().containsKey(userLogin.getEmail())) {
 
             System.out.println("Email alredy authenticated.");
-            return new ResponseEntity<>(new UserLoginUnsuccess("This email is already authenticated !"), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(new UserLoginUnsuccess("This email is already authenticated !"), HttpStatus.ACCEPTED);
         }
         else {
             if(this.authentificateUser(userLogin.getEmail(),userLogin.getPassword(),userLogin)) {
@@ -64,7 +64,7 @@ public class UserController {
         return false;
     }
 
-    
+
 
 //    @PostMapping("/login")
 //    public ResponseEntity<User>  login(@Valid @RequestBody User userLogin) {
