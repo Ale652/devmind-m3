@@ -1,9 +1,6 @@
 package com.example.validation.controllers;
 
-import com.example.validation.User;
-import com.example.validation.UserLogin;
-import com.example.validation.UserLoginUnsuccess;
-import com.example.validation.UserUnathorized;
+import com.example.validation.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -62,6 +59,21 @@ public class UserController {
                 return true;
             }
         return false;
+    }
+
+
+    @RequestMapping(value = "/logout/{email}", method = RequestMethod.GET)
+    //@ResponseBody
+    public ResponseEntity<UserLogout>  logout(  @PathVariable String email) {
+
+        if(UserLogin.getUsersAunthenticatedHashTable().containsKey(email)) {
+            UserLogin.getUsersAunthenticatedHashTable().remove(email);
+            System.out.println("Email authenticated. It will be logged out !");
+            return new ResponseEntity<>(new UserLogout("You are logged out !"), HttpStatus.OK);
+        }
+        else
+            return new ResponseEntity<>(new UserLogout("LogOut NOT in success !"), HttpStatus.UNAUTHORIZED);
+
     }
 
 
