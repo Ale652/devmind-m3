@@ -13,7 +13,7 @@ public class Product {
     // mark the relation one-to-many between Order and Products
     @ManyToOne
     @JoinColumn(name = "id_order")
-    private Orders Order;
+    private models.Order Order;
 
     // mark the relation one-to-many between Supplier and Products
     @ManyToOne
@@ -74,11 +74,11 @@ public class Product {
         this.supplier = supplier;
     }
 
-    public Orders getOrder() {
+    public models.Order getOrder() {
         return Order;
     }
 
-    public void setOrder(Orders order) {
+    public void setOrder(models.Order order) {
         this.Order = order;
     }
 
@@ -99,11 +99,11 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
+        return "\n Product{" +
                 "description='" + description + '\'' +
                 ", gtin='" + gtin + '\'' +
                 ", price=" + price +
                 ", supplier='" + supplier + '\'' +
-                '}';
+                '}'+ "\n";
     }
 }

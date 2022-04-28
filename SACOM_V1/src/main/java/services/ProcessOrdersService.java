@@ -1,6 +1,7 @@
 package services;
 
-import models.Orders;
+import Lists.ListOfOrders;
+import models.Order;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -16,13 +17,13 @@ public class ProcessOrdersService {
        JAXBContext jaxbContext;
        try
        {
-           jaxbContext = JAXBContext.newInstance(Orders.class);
+           jaxbContext = JAXBContext.newInstance(ListOfOrders.class);
 
            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
 
-           Orders order = (Orders) jaxbUnmarshaller.unmarshal(xmlFile);
+           ListOfOrders listOfOrders = (ListOfOrders) jaxbUnmarshaller.unmarshal(xmlFile);
 
-           System.out.println(order);
+           System.out.println(listOfOrders);
        }
        catch (JAXBException e)
        {

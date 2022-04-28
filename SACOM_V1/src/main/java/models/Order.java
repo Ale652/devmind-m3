@@ -9,8 +9,8 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "orders")
-public class Orders implements Serializable {
+
+public class Order implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -29,18 +29,18 @@ public class Orders implements Serializable {
 
     private Integer numberFromFile; // ex 23 from orders23.xml / we do not need it saved in Database
 
-    private List<Orders> listOfOrders = new ArrayList<>();
+
 
     // mark the relation one-to-many between Order and Products
     @OneToMany(mappedBy = "Order")
     private List<Product> productsFromOrder = new ArrayList<>();
 
     // Constructors
-    public Orders(){
+    public Order(){
         super();
     }
 
-    public Orders(String created, Integer ID, List<Product> productsFromOrder) {
+    public Order(String created, Integer ID, List<Product> productsFromOrder) {
         super();
         this.created = created;
         this.ID = ID;
@@ -91,25 +91,16 @@ public class Orders implements Serializable {
         this.productsFromOrder = productsFromOrder;
     }
 
-    @XmlElement(name="order")
-    public List<Orders> getListOfOrders() {
-        return listOfOrders;
-    }
-
-    public void setListOfOrders(List<Orders> listOfOrders) {
-        this.listOfOrders = listOfOrders;
-    }
 
     // ToString
 
+
     @Override
     public String toString() {
-        return
-//                "Orders{" + "\n" +
-//                "created=" + created + "\n" +
-//                ", ID=" + ID + "\n" +
-                ", listOfOrders=" + listOfOrders + "\n" +
-                ", productsFromOrder=" + productsFromOrder + "\n" +
-                '}' + "\n\n\n";
+        return "\n Order{" +
+                "created='" + created + '\'' +
+                ", ID=" + ID +
+                ", productsFromOrder=" + productsFromOrder +
+                '}'+ "\n\n";
     }
 }
