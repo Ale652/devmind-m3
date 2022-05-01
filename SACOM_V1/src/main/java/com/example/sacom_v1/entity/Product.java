@@ -1,7 +1,9 @@
-package models;
+package com.example.sacom_v1.entity;
 
 import javax.persistence.*;
 
+@Entity
+@Table(name = "products")
 public class Product {
 
     // Helping fields
@@ -13,7 +15,7 @@ public class Product {
     // mark the relation one-to-many between Order and Products
     @ManyToOne
     @JoinColumn(name = "id_order")
-    private models.Order Order;
+    private com.example.sacom_v1.entity.Order Order;
 
     // mark the relation one-to-many between Supplier and Products
     @ManyToOne
@@ -74,11 +76,11 @@ public class Product {
         this.supplier = supplier;
     }
 
-    public models.Order getOrder() {
+    public com.example.sacom_v1.entity.Order getOrder() {
         return Order;
     }
 
-    public void setOrder(models.Order order) {
+    public void setOrder(com.example.sacom_v1.entity.Order order) {
         this.Order = order;
     }
 
@@ -90,7 +92,7 @@ public class Product {
         this.orderid = orderid;
     }
 
-    public void setSupplier(models.Supplier supplier) {
+    public void setSupplier(com.example.sacom_v1.entity.Supplier supplier) {
         Supplier = supplier;
     }
 

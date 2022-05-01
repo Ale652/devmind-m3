@@ -1,10 +1,12 @@
-package models;
+package com.example.sacom_v1.entity;
 
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table(name = "suppliers")
 public class Supplier {
 
     // Helping fields

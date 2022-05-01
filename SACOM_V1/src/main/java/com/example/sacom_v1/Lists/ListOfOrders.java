@@ -1,6 +1,6 @@
-package Lists;
+package com.example.sacom_v1.Lists;
 
-import models.Order;
+import com.example.sacom_v1.entity.Order;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
