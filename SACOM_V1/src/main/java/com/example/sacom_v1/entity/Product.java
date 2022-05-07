@@ -15,12 +15,12 @@ public class Product {
     // mark the relation one-to-many between Order and Products
     @ManyToOne
     @JoinColumn(name = "id_order")
-    private com.example.sacom_v1.entity.Order Order;
+    private Orders Order;
 
     // mark the relation one-to-many between Supplier and Products
     @ManyToOne
     @JoinColumn(name = "id_supplier")
-    private Supplier Supplier;
+    private Supplier supplierObj;
 
     // Fields associated with what is in orders##.xml && suppliername##.xml
     @Column(name = "description")
@@ -30,7 +30,7 @@ public class Product {
     @Column(name = "price")
     private Double price;
     private String supplier;
-    private String orderid;
+    private String orderId;
 
 
 
@@ -76,24 +76,28 @@ public class Product {
         this.supplier = supplier;
     }
 
-    public com.example.sacom_v1.entity.Order getOrder() {
+    public Orders getOrder() {
         return Order;
     }
 
-    public void setOrder(com.example.sacom_v1.entity.Order order) {
+    public void setOrder(Orders order) {
         this.Order = order;
     }
 
     public String getOrderid() {
-        return orderid;
+        return orderId;
     }
 
     public void setOrderid(String orderid) {
-        this.orderid = orderid;
+        this.orderId = orderid;
     }
 
-    public void setSupplier(com.example.sacom_v1.entity.Supplier supplier) {
-        Supplier = supplier;
+    public void setSupplierObj(Supplier supplier) {
+        supplierObj = supplier;
+    }
+
+    public Supplier getSupplierObj() {
+        return supplierObj;
     }
 
 

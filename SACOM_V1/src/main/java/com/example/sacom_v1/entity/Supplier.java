@@ -21,7 +21,7 @@ public class Supplier {
     // Fields associated with what is in suppliername##.xml
 
     // mark the relation one-to-many between Supplier and Products
-    @OneToMany(mappedBy = "Supplier")
+    @OneToMany(mappedBy = "supplierObj")
     private List<Product> listOfProductsOnSupplier  = new ArrayList<>();
 
 

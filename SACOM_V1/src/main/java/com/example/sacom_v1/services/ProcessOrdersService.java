@@ -1,6 +1,7 @@
 package com.example.sacom_v1.services;
 
 import com.example.sacom_v1.Lists.ListOfOrders;
+import org.springframework.stereotype.Service;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -8,6 +9,7 @@ import javax.xml.bind.Unmarshaller;
 import java.io.File;
 
 // parse orders23.xml file to on Order Object
+@Service
 public class ProcessOrdersService {
 
 

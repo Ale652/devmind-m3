@@ -46,7 +46,7 @@ public class Orders implements Serializable {
     // Helping fields
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Integer idOrder;
 
 
     // Fields associated with what is in orders23.xml
@@ -73,13 +73,13 @@ public class Orders implements Serializable {
 //    }
 
     // Gettrs and Setters
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+//    public Integer getIdOrder() {
+//        return idOrder;
+//    }
+//
+//    public void setIdOrder(Integer id) {
+//        this.idOrder = id;
+//    }
 
     @XmlAttribute
     public String getCreated() {

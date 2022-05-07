@@ -1,6 +1,6 @@
 package com.example.sacom_v1.Lists;
 
-import com.example.sacom_v1.entity.Order;
+import com.example.sacom_v1.entity.Orders;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -9,14 +9,14 @@ import java.util.List;
 
 @XmlRootElement(name = "orders")
 public class ListOfOrders {
-    private List<Order> listOfOrders = new ArrayList<>();
+    private List<Orders> listOfOrders = new ArrayList<>();
 
     @XmlElement(name="order")
-    public List<Order> getListOfOrders() {
+    public List<Orders> getListOfOrders() {
         return listOfOrders;
     }
 
-    public void setListOfOrders(List<Order> listOfOrders) {
+    public void setListOfOrders(List<Orders> listOfOrders) {
         this.listOfOrders = listOfOrders;
     }
 
