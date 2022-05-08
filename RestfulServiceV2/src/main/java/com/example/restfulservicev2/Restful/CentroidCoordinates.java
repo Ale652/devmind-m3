@@ -18,14 +18,6 @@ public class CentroidCoordinates{
 
     private double lat;
     private double lon;
-//
-//    @OneToOne(mappedBy = "centroid_coordinates_c")
-//    @JsonBackReference
-//    private Coords coords;
-//
-//    @OneToOne(mappedBy = "centroid_coordinates")
-//    @JsonBackReference
-//    private Root root;
 
     @Override
     public String toString() {
