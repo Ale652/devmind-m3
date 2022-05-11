@@ -4,6 +4,7 @@ import App2 from "./App2.jsx";
 import Hello from "./Hello.jsx";
 import Counter from "./Counter.jsx";
 import WelcomeMessage from "./WelcomeMessage.jsx";
+import Stopwatch from "./Stopwatch.jsx";
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
         <App2 />
         {/* <Hello /> */}
         <Counter />
-       
+       <Stopwatch />
     </div>
   );
 }
