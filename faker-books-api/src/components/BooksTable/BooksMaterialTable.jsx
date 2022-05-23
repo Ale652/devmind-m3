@@ -6,7 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import "./BooksTable.css";
+import "./BooksMaterialTable.css";
 import { hover } from '@testing-library/user-event/dist/hover';
 import { color, fontSize } from '@mui/system';
 // import { makeStyles } from '@mui/styles';
@@ -15,12 +15,17 @@ import { color, fontSize } from '@mui/system';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
+import { useState } from "react";
 
 
 
-export default function BooksTable(props) {
+export default function BooksMaterialTable(props) {
 
-  const rows = props.data;
+  const [rows, updateRows] = useState(props.data);
+
+  // const rows = props.data;
+
+  // console.log(props.data);
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
@@ -48,6 +53,15 @@ export default function BooksTable(props) {
 //   }
 // `;
 
+const handleRemoveItem = (row,event) => {
+  event.stopPropagation();
+   const id = row.id;
+   updateRows(rows.filter(item => item.id !== id));
+   console.log(id);
+
+  };
+
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 450 }} aria-label="simple table">
@@ -58,12 +72,13 @@ export default function BooksTable(props) {
             <TableCell align="left">AUTHOR&nbsp;</TableCell>
             <TableCell align="left">GENRE&nbsp;</TableCell>
             <TableCell align="left">DESCRIPTION&nbsp;</TableCell>
+            <TableCell align="left">ACTION&nbsp;</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
             <TableRow
-              key={row.name}
+              key={row.id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                className={(row.id%2==0)?'par':'impar'} style={{cursor:"pointer"}}
                onClick={handleOpen}
@@ -76,6 +91,7 @@ export default function BooksTable(props) {
               <TableCell align="left">{row.author}</TableCell>
               <TableCell align="left">{row.genre}</TableCell>
               <TableCell align="left">{row.description}</TableCell>
+              <TableCell align="left"> <button onClick={(event) => handleRemoveItem(row,event)}>Delete</button></TableCell>
               <Modal
                   open={open}
                   onClose={handleClose}
@@ -95,7 +111,7 @@ export default function BooksTable(props) {
                     {/* style={{width: "50px", height: "100px"}}  */}
                   </Box>
                 </Modal>
-
+                
             </TableRow>
           ))}
         </TableBody>

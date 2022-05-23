@@ -1,13 +1,13 @@
 import logo from './logo.svg';
 import './App.css';
-import BooksTable from "./components/BooksTable/BooksTable";
+import BooksMaterialTable from "./components/BooksTable/BooksMaterialTable";
 import KeepMountedModal from "./KeepMountedModal";
 
 
 function App() {
   return (
     <div className="App">
-        <BooksTable data = {data}/>
+        <BooksMaterialTable data = {data}/>
         {/* <KeepMountedModal /> */}
     </div>
   );
