@@ -6,16 +6,15 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import "./BooksMaterialTable.css";
 import { hover } from '@testing-library/user-event/dist/hover';
-import { color, fontSize } from '@mui/system';
-// import { makeStyles } from '@mui/styles';
-// import Backdrop from '@mui/material/Backdrop';
-// import { Backdrop } from '@mui/material';
+// import { color, fontSize } from '@mui/system';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import { useState } from "react";
+import { styled } from '@mui/material/styles';
+import { SwitchRight } from '@mui/icons-material';
+
 
 
 
@@ -47,11 +46,6 @@ export default function BooksMaterialTable(props) {
     }
   };
 
-//   const StyledDialog = styled(Dialog)`
-//   .MuiBackdrop-root {
-//     background-color: lightgreen;
-//   }
-// `;
 
 const handleRemoveItem = (row,event) => {
   event.stopPropagation();
@@ -62,35 +56,60 @@ const handleRemoveItem = (row,event) => {
   };
 
 
+  // const StyledTableCell = styled(TableRow)(({ theme }) => ({
+  //   '&:nth-of-type(odd)': {
+  //     backgroundColor: theme.palette.action.hover,
+  //   },
+  //   // hide last border
+  //   '&:last-child td, &:last-child th': {
+  //     border: 0,
+  //   },
+  // }));
+
+  
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    '&:nth-of-type(odd)': {
+      backgroundColor: '#f5ea98',
+    },
+    '&:nth-of-type(even)': {
+      backgroundColor: '#edaa7e',
+    },
+    // hide last border
+    '&:last-child td, &:last-child th': {
+      border: 6,
+    },
+  }));
+
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 450 }} aria-label="simple table">
         <TableHead>
-          <TableRow>
-            <TableCell align="left">ID</TableCell>
-            <TableCell align="left">TITLE</TableCell>
-            <TableCell align="left">AUTHOR&nbsp;</TableCell>
-            <TableCell align="left">GENRE&nbsp;</TableCell>
+            <TableCell align="left" >ID</TableCell>
+            <TableCell align="left" >TITLE</TableCell>
+            <TableCell align="left" >AUTHOR&nbsp;</TableCell>
+            <TableCell align="left" >GENRE&nbsp;</TableCell>
             <TableCell align="left">DESCRIPTION&nbsp;</TableCell>
-            <TableCell align="left">ACTION&nbsp;</TableCell>
-          </TableRow>
+            <TableCell align="left"  >ACTION&nbsp;</TableCell>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow
-              key={row.id}
+            <StyledTableRow 
+            
+        
+              key={row.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-               className={(row.id%2==0)?'par':'impar'} style={{cursor:"pointer"}}
+               style={{cursor:"pointer"}}
                onClick={handleOpen}
             >
-              {/* <TableCell component="th" scope="row">
+              <TableCell component="th" scope="row">
                 {row.name}
-              </TableCell> */}
-              <TableCell align="left">{row.id}</TableCell>
-              <TableCell align="left">{row.title}</TableCell>
-              <TableCell align="left">{row.author}</TableCell>
-              <TableCell align="left">{row.genre}</TableCell>
-              <TableCell align="left">{row.description}</TableCell>
+              </TableCell>
+              <TableCell align="left"  >{row.id}&nbsp;</TableCell>
+              <TableCell align="left" >{row.title}&nbsp;</TableCell>
+              <TableCell align="left"> {row.author}&nbsp;</TableCell>
+              <TableCell align="left" >{row.genre}&nbsp;</TableCell>
+              <TableCell align="left">{row.description}&nbsp;</TableCell>
               <TableCell align="left"> <button onClick={(event) => handleRemoveItem(row,event)}>Delete</button></TableCell>
               <Modal
                   open={open}
@@ -101,18 +120,12 @@ const handleRemoveItem = (row,event) => {
           
                 >
                   <Box sx={style}>
-                    {/* <Typography id="modal-modal-title" variant="h6" component="h2">
-                      Text in a modal
-                    </Typography>
-                    <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                      Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-                    </Typography> */}
                     <img src={row.image}  style={{ maxWidth: "100%", maxHeight: "calc(100vh - 64px)" }} alt="Girl in a jacket"/> 
-                    {/* style={{width: "50px", height: "100px"}}  */}
                   </Box>
                 </Modal>
                 
-            </TableRow>
+     
+            </StyledTableRow>
           ))}
         </TableBody>
       </Table>
