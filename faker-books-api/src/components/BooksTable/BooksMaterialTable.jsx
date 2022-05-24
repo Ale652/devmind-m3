@@ -6,30 +6,33 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { hover } from '@testing-library/user-event/dist/hover';
-// import { color, fontSize } from '@mui/system';
-import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { styled } from '@mui/material/styles';
-import { SwitchRight } from '@mui/icons-material';
+import useOnClickOutside from "./useOnClickOutside";
+
+
 
 
 
 
 export default function BooksMaterialTable(props) {
 
+  const ref = useRef();
+
   const [rows, updateRows] = useState(props.data);
 
-  // const rows = props.data;
-
-  // console.log(props.data);
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+
+    // Call hook passing in the ref and a function to call on outside click
+    useOnClickOutside(ref, () => setOpen(false));
+
+   
 
   const style = {
     position: 'absolute',
@@ -51,20 +54,8 @@ const handleRemoveItem = (row,event) => {
   event.stopPropagation();
    const id = row.id;
    updateRows(rows.filter(item => item.id !== id));
-   console.log(id);
-
   };
 
-
-  // const StyledTableCell = styled(TableRow)(({ theme }) => ({
-  //   '&:nth-of-type(odd)': {
-  //     backgroundColor: theme.palette.action.hover,
-  //   },
-  //   // hide last border
-  //   '&:last-child td, &:last-child th': {
-  //     border: 0,
-  //   },
-  // }));
 
   
   const StyledTableRow = styled(TableRow)(({ theme }) => ({
@@ -75,9 +66,9 @@ const handleRemoveItem = (row,event) => {
       backgroundColor: '#edaa7e',
     },
     // hide last border
-    '&:last-child td, &:last-child th': {
-      border: 6,
-    },
+    // '&:last-child td, &:last-child th': {
+    //   border: 6,
+    // },
   }));
 
 
@@ -97,20 +88,19 @@ const handleRemoveItem = (row,event) => {
             <StyledTableRow 
             
         
-              key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+        
+               key={row.id}
+               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                style={{cursor:"pointer"}}
                onClick={handleOpen}
             >
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="left"  >{row.id}&nbsp;</TableCell>
+           
+              <TableCell align="left" >{row.id}&nbsp;</TableCell>
               <TableCell align="left" >{row.title}&nbsp;</TableCell>
-              <TableCell align="left"> {row.author}&nbsp;</TableCell>
+              <TableCell align="left" > {row.author}&nbsp;</TableCell>
               <TableCell align="left" >{row.genre}&nbsp;</TableCell>
-              <TableCell align="left">{row.description}&nbsp;</TableCell>
-              <TableCell align="left"> <button onClick={(event) => handleRemoveItem(row,event)}>Delete</button></TableCell>
+              <TableCell align="left" >{row.description}&nbsp;</TableCell>
+              <TableCell align="left" > <button onClick={(event) => handleRemoveItem(row,event)}>Delete</button></TableCell>
               <Modal
                   open={open}
                   onClose={handleClose}
@@ -119,8 +109,9 @@ const handleRemoveItem = (row,event) => {
                   BackdropProps={{ invisible: true }}
           
                 >
-                  <Box sx={style}>
+                  <Box sx={style} ref={ref}>
                     <img src={row.image}  style={{ maxWidth: "100%", maxHeight: "calc(100vh - 64px)" }} alt="Girl in a jacket"/> 
+                    {/* {console.log(row)} */}
                   </Box>
                 </Modal>
                 

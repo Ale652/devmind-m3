@@ -3,12 +3,15 @@ import './App.css';
 import BooksMaterialTable from "./components/BooksTable/BooksMaterialTable";
 import KeepMountedModal from "./KeepMountedModal";
 
+import BooksTable from "./components/BooksTable/BooksTable";
+
 
 function App() {
   return (
     <div className="App">
         <BooksMaterialTable data = {data}/>
         {/* <KeepMountedModal /> */}
+        <BooksTable data = {data} />
     </div>
   );
 }
