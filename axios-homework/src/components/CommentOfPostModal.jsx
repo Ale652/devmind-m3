@@ -1,10 +1,23 @@
 import React from "react";
 import {Box, Button, Modal, TextField} from "@mui/material";
+import {DataGrid} from '@mui/x-data-grid';
+
+
 
 const CommentOfPostModal = (props) => {
     const onClose = props.onClose;
     const postData = props.modalData.post;
     const commentsData = props.modalData.comments;
+
+
+    const columns = [
+        // {field: "postId", headerName: "postId"},
+        {field: "id", headerName: "comment id"},
+        {field: "name", headerName: "name", width: 400},
+        {field: "email", headerName: "email", width: 400},
+        {field: "body", headerName: "body", width:1500},
+    ];
+
  
     return (
         <Modal open onClose={() => onClose(undefined)}>
@@ -26,7 +39,7 @@ const CommentOfPostModal = (props) => {
                     p={3}
                 >
                     <Box fontWeight="bold" py={1}>Post Info:</Box>
-                    <Box width="100%" display="flex" alignItems="center">Id : 
+                    <Box width="100%" display="flex" alignItems="center"> Post Id : 
                         <span>{postData.id}</span>
                     </Box>
                     <Box width="100%" display="flex" alignItems="center">Title :
@@ -37,7 +50,8 @@ const CommentOfPostModal = (props) => {
                     </Box>
 
                     <Box fontWeight="bold" py={1}>Comments Info:</Box>
-                    <Box width="100%" display="flex" alignItems="center">
+                    <DataGrid autoHeight {...commentsData}  rows={commentsData} columns={columns}/>
+                    {/* <Box width="100%" display="flex" alignItems="center">
                         {
                             commentsData.map((row) => ( 
                                 <Box width="100%" display="flex" alignItems="center">comment name :
@@ -45,7 +59,7 @@ const CommentOfPostModal = (props) => {
                                     <span>{row.email}</span>
                                 </Box>
                                 ))}
-                    </Box>
+                    </Box> */}
  
                     <Button variant="contained" onClick={onClose}>Close Modal</Button>
                 </Box>
