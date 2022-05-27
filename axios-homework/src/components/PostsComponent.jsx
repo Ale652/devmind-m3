@@ -3,7 +3,7 @@ import {Box} from "@mui/material";
 import {DataGrid} from '@mui/x-data-grid';
 import { useDemoData } from '@mui/x-data-grid-generator';
 import CommentOfPostModal from "./CommentOfPostModal";
-import { getPostDetails } from "./PostsAPI";
+import { getPostDetails,createPost } from "./PostsAPI";
 
 
 
@@ -36,11 +36,12 @@ const PostsComponent = (props) => {
     };
 
 
+
     return (
         <Box width="100%" height="100%" display="flex" justifyContent="center">
             {postsOnComponent === undefined && <div>There is no post yet</div>}
-            {console.log("Checking if we have posts in the component PostsComponent : ")}
-            {console.log(postsOnComponent)}
+            {/* {console.log("Checking if we have posts in the component PostsComponent : ")} */}
+            {/* {console.log(postsOnComponent)} */}
             {postsOnComponent && (
                 <Box width="80%">
                     <DataGrid autoHeight {...postsOnComponent} onCellClick={onCellClick} rows={postsOnComponent} columns={columns}/>

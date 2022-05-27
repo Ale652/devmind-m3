@@ -23,6 +23,12 @@ const NavBar = (props) => {
             <Link style={linkStyle} to="/posts">
                 Posts
             </Link>
+            <Link style={linkStyle} to="/posts/add">
+                Add Posts
+            </Link>
+
+
+            
         </div>
     );
 };

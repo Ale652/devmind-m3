@@ -18,12 +18,15 @@ const CommentOfPostModal = (props) => {
         {field: "body", headerName: "body", width:1500},
     ];
 
+
+    
+
  
     return (
         <Modal open onClose={() => onClose(undefined)}>
             <Box
                 width="100%"
-                height="100%"
+                height="120%"
                 display="flex"
                 alignItems="center"
                 justifyContent="center"
