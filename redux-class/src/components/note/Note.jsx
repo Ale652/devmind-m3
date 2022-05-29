@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { removeNote } from "../../redux/actions/actions";
+import { removeNote, editNote } from "../../redux/actions/actions";
 
 
      
@@ -8,12 +8,32 @@ const Note = (props) => {
 
    const dispatch = useDispatch();
 
+   const [show, setShow] = useState(true);
+
+
+
+
 
   const removeThisNote = (e) => {
     e.stopPropagation()
     {console.log("Clicked remove on : " +props.index)}
      dispatch(removeNote(props.index));
+
   };
+
+  const editThisNote = (e) => {
+    e.stopPropagation()
+    {console.log("Clicked remove on : " +props.index)}
+     dispatch(editNote(props.index));
+     setShow(prev => !prev);
+
+  };
+
+
+  const saveEdit = (e) => {
+    e.stopPropagation()
+    console.log("Save edited value");
+  }
 
 
   return (
@@ -28,11 +48,22 @@ const Note = (props) => {
       }}
     >
       <h3>{props.title}</h3>
-      <span style={{ marginTop: "8px" }}>{props.description}</span>
+      <div >
+        <span contentEditable={!show}
+        style={{ marginTop: "8px"}}>{props.description}</span>
+      </div>
         <button 
-        // onClick= {() => dispatch(removeNote(props.index))}
         onClick= {(e) => removeThisNote(e)}
-        style={{ height: "24px", width: "72px" }} >Remove me</button>
+        style={{ height: "24px", width: "92px" }} >Remove me</button>
+
+        <button 
+          onClick= {(e) => editThisNote(e)}
+          style={{ height: "24px", width: "92px" }} >Edit me</button>
+
+          <>
+                <button onClick={(e) => saveEdit(e)} hidden={show}>Save</button>
+     
+          </>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { ADD_NOTE, REMOVE_NOTE } from "../actions/actions";
+import { ADD_NOTE, REMOVE_NOTE, EDIT_NOTE } from "../actions/actions";
      
 const initialState = {
   notes: [],
@@ -16,7 +16,7 @@ const rootReducer = (state = initialState, action) => {
                                 description: action.payload.description,
                               },
                             ],
-                          };
+                          }; break;
 
                           case REMOVE_NOTE:
                             const notesRemove = state.notes.filter((note, i) => i != action.payload.index);
@@ -25,7 +25,16 @@ const rootReducer = (state = initialState, action) => {
                               notes: 
                                 notesRemove
                               
-                            };
+                            };break;
+
+                            case EDIT_NOTE:
+                            
+                            return {
+                              notes: [
+                                ...state.notes]
+                                
+                              
+                            };break;
                           
                         default:
                           return state;
