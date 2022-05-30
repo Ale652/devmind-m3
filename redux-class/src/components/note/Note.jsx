@@ -6,12 +6,14 @@ import { removeNote, editNote } from "../../redux/actions/actions";
      
 const Note = (props) => {
 
+   
+
+   const [show, setShow] = useState(props.description);
+
    const dispatch = useDispatch();
+   const [description, setDescription] = useState(null);
 
-   const [show, setShow] = useState(true);
-
-
-
+   const span = document.querySelector('span');
 
 
   const removeThisNote = (e) => {
@@ -32,6 +34,8 @@ const Note = (props) => {
 
   const saveEdit = (e) => {
     e.stopPropagation()
+    setShow(prev => !prev);
+    span.contentEditable=!show
     console.log("Save edited value");
   }
 
@@ -47,10 +51,12 @@ const Note = (props) => {
         margin: "4px",
       }}
     >
-      <h3>{props.title}</h3>
+      <h3 contentEditable={!show} >{props.title}</h3>
       <div >
         <span contentEditable={!show}
-        style={{ marginTop: "8px"}}>{props.description}</span>
+        style={{ marginTop: "8px"}}
+        onChange={(event) => setDescription(event.target.value)}
+        >{props.description}</span>
       </div>
         <button 
         onClick= {(e) => removeThisNote(e)}
