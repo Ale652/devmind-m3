@@ -62,13 +62,6 @@ const ReposComponent = (props) => {
         </TableContainer>
       );
 
-
-
-    // return (
-    //   <div className="home-container">
-    //     Repos hello
-    //   </div>
-    // );
   };
   
   export default ReposComponent;

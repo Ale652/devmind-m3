@@ -6,12 +6,9 @@ import { getAllPosts } from "./components/PostsAPI";
 import { getAllInfoGithub, getAllMyRepositoriesGithub } from "./components/RepositoriesAPI";
 import RepositoryDetails from "./components/RepositoryDetails";
 import PostsComponent from "./components/PostsComponent";
-import RestController from "./components/RestController";
 
 import NavBar from "./NavBar";
 import {useEffect, useState} from "react";
-
-
 
 
 
@@ -45,29 +42,6 @@ function App() {
 });
 
   }, []);
-
-
-  // useEffect(() => {
-
-  //   fetch('https://jsonplaceholder.typicode.com/posts', {
-	// 		method: 'POST',
-	// 		body: JSON.stringify({
-	// 			title: 'New title added',
-	// 			body: 'New body added. Hello body.',
-	// 			userId: 2
-	// 		}),
-	// 		headers: {
-	// 			"Content-type": "application/json; charset=UTF-8"
-	// 		}
-	// 	}).then(response => {
-	// 			return response.json()
-	// 		}).then(json => {
-	// 			setPosts({
-	// 				posts:json
-	// 			});
-	// 		});
-  // }, [posts]);
-  
   
 
 
@@ -104,25 +78,13 @@ function App() {
                         <PostsComponent posts={posts}
                         />}/>
 
-      <Route path="/posts/add" element={
+      {/* <Route path="/posts/add" element={
                         <RestController 
-                        />}/>
+                        />}/> */}
 
       </Routes> 
           
-
-      RestController
       </BrowserRouter >   
-
-      
-      {/* <div>
-				<p><b>New Resource created in the server as shown below</b></p>
-				<p>Id : {this.state.user.id}</p>
-				<p>Title : {this.state.user.title}</p>
-				<p>Body : {this.state.user.body}</p>
-				<p>UserId : {this.state.user.userId}</p>
-			</div> */}
-
 
      </div>
   );
