@@ -1,0 +1,12 @@
+package com.example.project_version_30032022.controllers.request;
+
+import lombok.Data;
+
+@Data
+public class AddBookRequet {
+    private String title;
+    private String description;
+    private String publishedDate;
+    private String type;
+    private Long author_id;
+}

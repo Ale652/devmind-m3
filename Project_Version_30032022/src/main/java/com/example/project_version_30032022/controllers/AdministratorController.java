@@ -1,7 +1,32 @@
 package com.example.project_version_30032022.controllers;
 
+import com.example.project_version_30032022.controllers.request.AddAdministratorRequest;
+import com.example.project_version_30032022.entities.Administrator;
+import com.example.project_version_30032022.services.AdministratorService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
 public class AdministratorController {
 
+@Autowired
+AdministratorService administratorService;
+
+@PostMapping(path="/addAdministator")
+public void addNewAdministrator(@RequestBody AddAdministratorRequest addAdministratorRequest){
+    administratorService.addAdministrator(addAdministratorRequest);
+}
+
+@GetMapping(path= "/getAllAdministrators")
+public List<Administrator> getAllAdministators(){
+    return administratorService.getAllAdministrators();
+}
 
     /*
 * Poate vedea o lista cu toate cartile din aplicatie

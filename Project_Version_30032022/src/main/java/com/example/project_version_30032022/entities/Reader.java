@@ -1,49 +1,58 @@
-package com.example.project_version_30032022;
+package com.example.project_version_30032022.entities;
 
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+import java.util.Objects;
+import java.util.Set;
+
+@Entity
+@Table(name = "readers")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Reader extends User{
-    // ATTRIBUTES
-    List<Book> readBooks  = null;
-    List<Review> reviews   = null;
-    List<Book> wishList  = null;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    // TODO:
-    // REVIEW CONSTRUCTORs DEFINITION
-    // Poate marca o carte ca fiind citita
-    // Poate descarca varianta electronica a unei carti pentru a o citi
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+//    @JoinTable(
+//            name = "readers_to_books_wish",
+//            joinColumns = @JoinColumn(name = "id_reader"),
+//            inverseJoinColumns = @JoinColumn(name = "id_book"))
+    public Set<Book> wishList;
 
 
-    // CONSTRUCTORS
-    public Reader(String email, String password, String firstName, String lastName, List<Book> readBooks, List<Review> reviews, List<Book> wishList) {
-        super(email, password, firstName, lastName);
-        this.readBooks = readBooks;
-        this.reviews = reviews;
-        this.wishList = wishList;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+//    @JoinTable(
+//            name = "readers_to_books_read",
+//            joinColumns = @JoinColumn(name = "id_reader"),
+//            inverseJoinColumns = @JoinColumn(name = "id_book"))
+    public Set<Book> readList;
+
+
+
+    @OneToMany(mappedBy = "reader")
+    @JsonIgnore
+    private Set<Review> reviewuriPosted;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Reader reader = (Reader) o;
+        return Objects.equals(id, reader.id) && this.getEmail().equals(reader.getEmail());
     }
 
-    // GETTERS and SETTERS
-    public List<Book> getReadBooks() {
-        return readBooks;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, this.getEmail());
     }
 
-    public void setReadBooks(List<Book> readBooks) {
-        this.readBooks = readBooks;
-    }
 
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
-
-    public List<Book> getWishList() {
-        return wishList;
-    }
-
-    public void setWishList(List<Book> wishList) {
-        this.wishList = wishList;
-    }
 }

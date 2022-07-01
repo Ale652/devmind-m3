@@ -1,17 +1,19 @@
-package com.example.project_version_30032022;
+package com.example.project_version_30032022.entities;
 
-public class Administrator extends User{
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-    // TODO:
-    // REVIEW CONSTRUCTORs DEFINITION
-    // Poate aproba / respinge publicarea unei noi carti de catre un autor
-    // Poate sterge comentariile / review-ul unui utilizator
+import javax.persistence.*;
 
-    // CONSTRUCTORS
-    public Administrator(String email, String password, String firstName, String lastName) {
-        super(email, password, firstName, lastName);
-    }
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Administrator extends User {
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    public Administrator() {
-    }
 }

@@ -1,6 +1,51 @@
 package com.example.project_version_30032022.services;
 
+import com.example.project_version_30032022.controllers.request.AddReviewRequest;
+import com.example.project_version_30032022.entities.Author;
+import com.example.project_version_30032022.entities.Book;
+import com.example.project_version_30032022.entities.Reader;
+import com.example.project_version_30032022.entities.Review;
+import com.example.project_version_30032022.repositories.BookRepository;
+import com.example.project_version_30032022.repositories.ReaderRepository;
+import com.example.project_version_30032022.repositories.ReviewRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
 public class ReviewService {
+    @Autowired
+    private ReviewRepository reviewRepository;
+
+    @Autowired
+    ReaderRepository readerRepository;
+
+    @Autowired
+    BookRepository bookRepository;
+
+
+    public List<Review> getAllReviews(){
+        return reviewRepository.findAll();
+    }
+
+    public void addReview(AddReviewRequest addReviewRequest){
+        Review review = new Review();
+
+        Optional<Book> optional_book = bookRepository.findById(addReviewRequest.getBook_id());
+        review.setBook(optional_book.get());
+
+        Optional<Reader> optional_reader = readerRepository.findById(addReviewRequest.getReader_id());
+        review.setReader(optional_reader.get());
+
+        review.setComment(addReviewRequest.getComment());
+        review.setPublishedTimestamp(addReviewRequest.getPublishedTimestamp());
+        review.setRating(addReviewRequest.getRating());
+
+
+        reviewRepository.save(review);
+    }
 
     /*
     *     Permite adaugarea unui review pentru o carte

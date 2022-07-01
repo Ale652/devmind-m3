@@ -1,61 +1,21 @@
-package com.example.project_version_30032022;
+package com.example.project_version_30032022.entities;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.Entity;
+import javax.persistence.MappedSuperclass;
+
+@MappedSuperclass
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
  public abstract class User {
-     // ATTRIBUTES
      private String email;
      private String password;
      private String firstName;
      private String lastName;
-
-     // CONSTRUCTORS TODO: TO REVIEW
-     public User(String email, String password, String firstName, String lastName) {
-         this.email = email;
-         this.password = password;
-         this.firstName = firstName;
-         this.lastName = lastName;
-     }
-
-     public User() {
-         this.email = "email";
-         this.password = "password";
-         this.firstName = "firstName";
-         this.lastName = "lastName";
-     }
-
-
-     // GETTERS and SETTERS
-
-     public String getEmail() {
-         return email;
-     }
-
-     public void setEmail(String email) {
-         this.email = email;
-     }
-
-     public String getPassword() {
-         return password;
-     }
-
-     public void setPassword(String password) {
-         this.password = password;
-     }
-
-     public String getFirstName() {
-         return firstName;
-     }
-
-     public void setFirstName(String firstName) {
-         this.firstName = firstName;
-     }
-
-     public String getLastName() {
-         return lastName;
-     }
-
-     public void setLastName(String lastName) {
-         this.lastName = lastName;
-     }
-
+     private String loggedIn;
 
  }

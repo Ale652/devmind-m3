@@ -1,31 +1,28 @@
-package com.example.project_version_30032022;
+package com.example.project_version_30032022.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Author extends User {
-    // ATTRIBUTES
-    List<Book> publishedBooks = null;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    // TODO :
-    // Poate publica noi carti, in varianta electronica - Requestul de a publica o carte trebuie sa fie aprobat de un Administrator
-    // Poate citi review-urile cititorilor pentru toate cartile din cadrul aplicatiei (nu doar cartile proprii)
 
-    // CONSTRUCTORS TODO: TO REVIEW
-    public Author(String email, String password, String firstName, String lastName, List<Book> publishedBooks) {
-        super(email, password, firstName, lastName);
-        this.publishedBooks = publishedBooks;
-    }
+    @OneToMany(mappedBy = "author")
+    @JsonIgnore
+    private Set<Book> listBooksAuthor;
 
-    public Author(List<Book> publishedBooks) {
-        this.publishedBooks = publishedBooks;
-    }
-
-    // GETTERS and SETTERS
-    public List<Book> getPublishedBooks() {
-        return publishedBooks;
-    }
-
-    public void setPublishedBooks(List<Book> publishedBooks) {
-        this.publishedBooks = publishedBooks;
-    }
 }
