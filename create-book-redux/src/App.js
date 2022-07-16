@@ -2,10 +2,12 @@
 import "./App.css";
 import AddBook from "./components/add-book/AddBook";
 import BooksList from "./components/books-list/BooksList";
+import Menu from "./components/menu/Menu";
 
 function App() {
   return (
       <div className="App">
+        <Menu />
         <AddBook />
         <BooksList />
       </div>
