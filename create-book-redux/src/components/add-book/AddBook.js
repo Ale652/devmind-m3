@@ -10,8 +10,13 @@ import TextField from "@mui/material/TextField";
 import { borderColor } from "@mui/system";
 
 const AddBook = (props) => {
+  const [books, updateRows] = useState(props.books);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [type, setType] = useState("");
+  const [publishedDate, setPublishedDate] = useState("");
+  const [author_id, setAuthorId] = useState("");
+  const [id, setId] = useState("");
   const dispatch = useDispatch();
 
   const addNewBook = () => {
@@ -29,12 +34,8 @@ const AddBook = (props) => {
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
-    }).then((response) => {
-      console.log("hello");
-    });
-    //*************************** */
-
-    dispatch(addBook(title, description));
+    })
+  
     setTitle("");
     setDescription("");
   };
