@@ -8,6 +8,11 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { borderColor } from "@mui/system";
+import BooksList from "../books-list/BooksList";
+import {useEffect} from "react";
+
+
+
 
 const AddBook = (props) => {
   const [books, updateRows] = useState(props.books);
@@ -30,15 +35,23 @@ const AddBook = (props) => {
         type: "Fantasy",
         publishedDate: "22-06-2019",
         author_id: 14,
+        id : 1
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
       },
-    })
+    });
+
+    dispatch(addBook(title,description,type,publishedDate,author_id,id));
   
     setTitle("");
     setDescription("");
+    
   };
+
+
+
+
 
   return (
     <Box
@@ -84,6 +97,7 @@ const AddBook = (props) => {
         </Grid>
        
       </Box>
+      <BooksList/>
     </Box>
   );
 };

@@ -1,4 +1,4 @@
-import { ADD_BOOK } from "../actions/actions";
+import { ADD_BOOK, GET_BOOKS } from "../actions/actions";
 
 const initialState = {
   books: [],
@@ -6,6 +6,13 @@ const initialState = {
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    case GET_BOOKS:
+      return {
+      books: action.payload.data,
+    }; break;
+
+
+
     case ADD_BOOK:
       return {
         books: [

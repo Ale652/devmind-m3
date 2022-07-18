@@ -4,7 +4,7 @@ import axios from "axios";
 import {DataGrid} from '@mui/x-data-grid';
 import {useEffect} from "react";
 import Book from "../book/Book";
-import { addBook, closeModal, setModal } from "../redux/actions/actions";
+import { addBook, closeModal, setModal,getBooks } from "../redux/actions/actions";
 import { useSelector } from "react-redux";
 import {Box, Button, Modal, TextField} from "@mui/material";
 
@@ -51,13 +51,26 @@ const BooksList = (props) => {
   ];
 
   useEffect(() => {
+    console.log("called useEffect");
       (axios.get(`http://localhost:8080/getAllBooks`))
       .then((response) => {
-          response.data.map((book, bookIndex) =>
-          dispatch(addBook(book.title,book.description,book.type,book.publishedDate,book.author_id, book.id)))
+          
+          dispatch(getBooks(response.data))
       });
   }, []);
 
+
+//   useEffect(() => {
+//     console.log("called useEffect");
+//       (axios.get(`http://localhost:8080/getAllBooks`))
+//       .then((response) => {
+//           response.data.map((book, bookIndex) =>
+//           dispatch(addBook(book.title,book.description,book.type,book.publishedDate,book.author_id, book.id)))
+//       });
+//   }, []);
+
+
+ 
   // const onCellClick = (cellInfo) => {
   //     const userId = cellInfo.row.userId;
   //     console.log("user id is : "+userId);
@@ -83,7 +96,7 @@ const BooksList = (props) => {
           {books && (
               <Box style={{ height: 300, width: "100%" }}>
                   <DataGrid 
-                  autoHeight="10px"
+                //    autoHeight="5px"
                   // onCellClick={onCellClick}
                   rows={books} columns={columns}  key={books.length+1}/>
               </Box>

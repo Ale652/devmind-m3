@@ -14,7 +14,7 @@
 .navMenu {
   position: absolute;
   top: 5%;
-  width:100%;
+  width:90%;
   height: 7%;;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);

@@ -1,6 +1,21 @@
 export const ADD_BOOK = "ADD_BOOK";
+export const GET_BOOKS = "GET_BOOKS";
 export const SET_MODAL = "SET_MODAL";
 export const CLOSE_MODAL = "CLOSE_MODAL";
+export const GET_BOOKS2 = "GET_BOOKS2";
+
+
+export const getBooks = (data) => {
+    return {
+        type: GET_BOOKS,
+        payload: {
+            data: data
+        }
+    };
+};
+
+
+
 
 
 export const addBook = (title, description, type, publishedDate, author_id, id) => {
