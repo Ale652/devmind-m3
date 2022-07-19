@@ -45,6 +45,9 @@ const Menu = (props) => {
           <Link style={linkStyle} to="/register">
               Register
           </Link>
+          <Link style={linkStyle} to="/login">
+              Login
+          </Link>
       </div>
   );
 };

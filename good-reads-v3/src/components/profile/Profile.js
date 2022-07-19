@@ -52,9 +52,9 @@ const Profile = (props) => {
           </Box>
   
   
-          <TextField  disabled id="outlined-disabled" label={register.email} variant="outlined" onChange={(event) => setEmail(event.target.value)} />
+          <TextField  disabled id="outlined-disabled" label={register!=undefined?register.email:"email"} variant="outlined" onChange={(event) => setEmail(event.target.value)} />
   
-          <TextField  disabled id="outlined-disabled" label={register.role}  variant="outlined" onChange={(event) => setRole(event.target.value)}/>
+          <TextField  disabled id="outlined-disabled" label={register!=undefined?register.role:"role"}  variant="outlined" onChange={(event) => setRole(event.target.value)}/>
 
           {/* <TextField  disabled id="outlined-disabled" label= {register.email}  variant="outlined" onChange={(event) => setPassword(event.target.value)}/> */}
   

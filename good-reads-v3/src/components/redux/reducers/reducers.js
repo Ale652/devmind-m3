@@ -1,8 +1,9 @@
-import { ADD_BOOK, GET_BOOKS, REGISTER } from "../actions/actions";
+import { ADD_BOOK, GET_BOOKS, REGISTER, LOGIN } from "../actions/actions";
 
 const initialState = {
   books: [],
-  register: {}
+  register: {},
+  login: {}
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -21,8 +22,24 @@ const rootReducer = (state = initialState, action) => {
                     ,
         }; break;
 
+        case LOGIN:
+            return {
+                
+                    ...state,
+                    login:
+                                {
+                                    email: action.payload.email,
+                                    password: action.payload.password,
+                                }
+                            ,
+                }; break;
+
+
+
+
     case GET_BOOKS:
       return {
+        ...state,
       books: action.payload.data,
     }; break;
 

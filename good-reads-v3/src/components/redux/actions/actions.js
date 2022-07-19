@@ -5,7 +5,7 @@ export const CLOSE_MODAL = "CLOSE_MODAL";
 export const GET_BOOKS2 = "GET_BOOKS2";
 
 export const REGISTER = "REGISTER";
-
+export const LOGIN = "LOGIN";
 
 export const getBooks = (data) => {
     return {
@@ -34,6 +34,15 @@ export const register = (email, role, password) => {
         type: REGISTER,
         payload: {
             email: email, role: role, password: password
+        }
+    };
+};
+
+export const login = (email, password) => {
+    return {
+        type: LOGIN,
+        payload: {
+            email: email, password: password
         }
     };
 };

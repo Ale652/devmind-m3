@@ -57,6 +57,7 @@ const AddBook = (props) => {
     <Box
       id="AddBookComponent"
       style={{
+        width: "100%",
         padding: "50px",
         display: "flex",
         justifyContent: "center",
@@ -64,7 +65,6 @@ const AddBook = (props) => {
     >
       <Box
         style={{
-          width: "50%",
           height: "240px",
           display: "flex",
           flexDirection: "column",
@@ -97,7 +97,7 @@ const AddBook = (props) => {
         </Grid>
        
       </Box>
-      <BooksList/>
+      <BooksList />
     </Box>
   );
 };

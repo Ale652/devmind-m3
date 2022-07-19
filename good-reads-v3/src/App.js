@@ -8,6 +8,7 @@ import Profile from "./components/profile/Profile";
 
 import { BrowserRouter } from 'react-router-dom';
 import Register from "./components/register/Register";
+import Login from "./components/login/Login";
 
 function App() {
   return (
@@ -28,6 +29,9 @@ function App() {
                 </Routes>
                 <Routes>
                     <Route path="/register" element={<Register/>}/>
+                </Routes>
+                <Routes>
+                    <Route path="/login" element={<Login/>}/>
                 </Routes>
         </BrowserRouter>
       </div>
