@@ -2,7 +2,7 @@ import { ADD_BOOK, GET_BOOKS, REGISTER } from "../actions/actions";
 
 const initialState = {
   books: [],
-  register: []
+  register: {}
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -12,14 +12,13 @@ const rootReducer = (state = initialState, action) => {
       return {
         
             ...state,
-            register:[
-                        ...state.register, 
+            register:
                         {
                             email: action.payload.email,
                             role: action.payload.role,
                             password: action.payload.password,
                         }
-                    ],
+                    ,
         }; break;
 
     case GET_BOOKS:
@@ -31,9 +30,9 @@ const rootReducer = (state = initialState, action) => {
 
     case ADD_BOOK:
       return {
+        ...state,
         books: [
-          ...state,
-
+          ...state.books,
           {
             title: action.payload.title,
             description: action.payload.description,
