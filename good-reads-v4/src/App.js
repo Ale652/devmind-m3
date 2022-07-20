@@ -28,7 +28,7 @@ function App() {
       <div className="App">
        
         {loginState.email==null && <Home />}
-        {loginState.email!=null && 
+        {loginState.email!=null && loginState.role == "ADMIN" &&
         <Grid container direction={"row"} spacing={12}>
         <Grid item xs={11}>
         <BrowserRouter>
@@ -59,68 +59,74 @@ function App() {
         </Grid>
         
     }
+
+
+    {loginState.email!=null && loginState.role == "READER" &&
+        <Grid container direction={"row"} spacing={12}>
+        <Grid item xs={11}>
+        <BrowserRouter>
+            <Menu/>
+                <Routes>
+                    <Route path="/Dashboard" element={<BooksList/>}/>
+                </Routes>
+                <Routes>
+                    <Route path="/profile" element={<Profile/>}/>
+                </Routes>
+                {/* <Routes>
+                    <Route path="/register" element={<Register/>}/>
+                </Routes>
+                <Routes>
+                    <Route path="/login" element={<Login/>}/>
+                </Routes> */}
+        </BrowserRouter>
+        </Grid>
+        <Grid item xs={1} >
+        <Button onClick={singOutUI} variant="text">
+            {" "}
+                Sing OUT 
+            </Button>
+            </Grid>
+        </Grid>
+        
+    }
+
+
+
+    {loginState.email!=null && loginState.role == "AUTHOR" &&
+        <Grid container direction={"row"} spacing={12}>
+        <Grid item xs={11}>
+        <BrowserRouter>
+            <Menu/>
+                <Routes>
+                    <Route path="/addBook" element={<AddBook/>}/>
+                </Routes>
+                <Routes>
+                    <Route path="/Dashboard" element={<BooksList/>}/>
+                </Routes>
+                <Routes>
+                    <Route path="/profile" element={<Profile/>}/>
+                </Routes>
+                {/* <Routes>
+                    <Route path="/register" element={<Register/>}/>
+                </Routes>
+                <Routes>
+                    <Route path="/login" element={<Login/>}/>
+                </Routes> */}
+        </BrowserRouter>
+        </Grid>
+        <Grid item xs={1} >
+        <Button onClick={singOutUI} variant="text">
+            {" "}
+                Sing OUT 
+            </Button>
+            </Grid>
+        </Grid>
+        
+    }
+
       </div>
   );
 }
 
 export default App;
 
-
-const notes = [
-    {
-        title: "sal",
-        description:
-            "dadasdss, f5b042 f5b042, dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdssdadasdss dadasdss, f5b042 f5b042, dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdssdadasdss",
-    },
-    {
-        title: "sal",
-        description:
-            "dadasdss, f5b042 f5b042, dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdssdadasdss dadasdss, f5b042 f5b042, dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdssdadasdss",
-    },
-    {
-        title: "sal",
-        description:
-            "dadasdss, f5b042 f5b042, dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdssdadasdss dadasdss, f5b042 f5b042, dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdssdadasdss",
-    },
-    {
-        title: "sal",
-        description:
-            "dadasdss, f5b042 f5b042, dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdssdadasdss dadasdss, f5b042 f5b042, dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdssdadasdss",
-    },
-
-    {
-        title: "sal",
-        description:
-            "dadasdss, f5b042 f5b042, dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdssdadasdss dadasdss, f5b042 f5b042, dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdssdadasdss",
-    },
-    {
-        title: "sal",
-        description:
-            "dadasdss, f5b042 f5b042, dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdssdadasdss dadasdss, f5b042 f5b042, dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdssdadasdss",
-    },
-    {
-        title: "sal",
-        description:
-            "dadasdss, f5b042 f5b042, dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdssdadasdss dadasdss, f5b042 f5b042, dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdssdadasdss",
-    },
-    {
-        title: "sal",
-        description:
-            "dadasdss, f5b042 f5b042, dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdssdadasdss dadasdss, f5b042 f5b042, dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdssdadasdss",
-    },
-    {
-        title: "sal",
-        description:
-            "dadasdss, f5b042 f5b042, dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdssdadasdss dadasdss, f5b042 f5b042, dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdssdadasdss",
-    },
-    {
-        title: "sal",
-        description:
-            "dadasdss, f5b042 f5b042, dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdssdadasdss dadasdss, f5b042 f5b042, dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdssdadasdss",
-    },
-    {
-        title: "sal",
-        description:
-            "dadasdss, f5b042 f5b042, dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdssdadasdss dadasdss, f5b042 f5b042, dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdss dadasdssdadasdss",
-    },
-];

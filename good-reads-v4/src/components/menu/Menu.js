@@ -1,6 +1,7 @@
 import "./Menu.css";
 import Box from '@mui/material/Box';
 import {Link} from "react-router-dom";
+import { useSelector } from "react-redux";
 
 // export default function Menu() {
 //   return (
@@ -17,6 +18,8 @@ import {Link} from "react-router-dom";
 // }
 
 const Menu = (props) => {
+
+ const loginState = useSelector((state) => state.login);
 
   const linkStyle = {
     
@@ -36,9 +39,9 @@ const Menu = (props) => {
           <Link style={linkStyle} to="/Dashboard">
               Dashboard
           </Link>
-          <Link style={linkStyle} to="/addBook">
+          {(loginState.role == "ADMIN" || loginState.role == "AUTHOR" ) && <Link style={linkStyle} to="/addBook">
               Add Book
-          </Link>
+          </Link> }
           <Link style={linkStyle} to="/profile">
               Profile
           </Link>
