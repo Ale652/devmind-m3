@@ -5,25 +5,32 @@ import BooksList from "./components/books-list/BooksList";
 import Menu from "./components/menu/Menu";
 import {Routes, Route} from "react-router-dom";
 import Profile from "./components/profile/Profile";
-
+import Grid from "@mui/material/Grid";
 import { BrowserRouter } from 'react-router-dom';
 import Register from "./components/register/Register";
-import Login from "./components/login/Login";
 import Home from "./components/home/Home";
 import { useSelector } from "react-redux";
+import Button from "@mui/material/Button";
+import { useDispatch } from "react-redux";
+import { login } from "./components/redux/actions/actions";
 
 
 function App() {
 
-    const login = useSelector((state) => state.login);
+    const loginState = useSelector((state) => state.login);
+    const dispatch = useDispatch();
 
-    console.log(login);
+    const singOutUI = () => {
+        dispatch(login(undefined,undefined, undefined));
+    };
 
   return (
       <div className="App">
        
-        {login.email==null && <Home />}
-        {login.email!=null && 
+        {loginState.email==null && <Home />}
+        {loginState.email!=null && 
+        <Grid container direction={"row"} spacing={12}>
+        <Grid item xs={11}>
         <BrowserRouter>
             <Menu/>
                 <Routes>
@@ -35,13 +42,22 @@ function App() {
                 <Routes>
                     <Route path="/profile" element={<Profile/>}/>
                 </Routes>
-                <Routes>
+                {/* <Routes>
                     <Route path="/register" element={<Register/>}/>
                 </Routes>
                 <Routes>
                     <Route path="/login" element={<Login/>}/>
-                </Routes>
+                </Routes> */}
         </BrowserRouter>
+        </Grid>
+        <Grid item xs={1} >
+        <Button onClick={singOutUI} variant="text">
+            {" "}
+                Sing OUT 
+            </Button>
+            </Grid>
+        </Grid>
+        
     }
       </div>
   );

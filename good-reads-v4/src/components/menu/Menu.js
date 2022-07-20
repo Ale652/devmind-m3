@@ -42,12 +42,12 @@ const Menu = (props) => {
           <Link style={linkStyle} to="/profile">
               Profile
           </Link>
-          <Link style={linkStyle} to="/register">
+          {/* <Link style={linkStyle} to="/register">
               Register
           </Link>
           <Link style={linkStyle} to="/login">
               Login
-          </Link>
+          </Link> */}
       </div>
   );
 };
