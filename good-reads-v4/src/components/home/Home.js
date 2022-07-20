@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addBook } from "../redux/actions/actions";
+import { addBook, singup, singupAction } from "../redux/actions/actions";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Login from "../login/Login";
@@ -12,6 +12,9 @@ import BooksList from "../books-list/BooksList";
 import {useEffect} from "react";
 import { autocompleteClasses } from "@mui/material";
 import ButtonBase from '@mui/material/ButtonBase';
+import Register from "../register/Register";
+import { useSelector } from "react-redux";
+
 
 
 
@@ -20,7 +23,21 @@ const Home = (props) => {
   const [description, setDescription] = useState("");
   const [id, setId] = useState("");
   const dispatch = useDispatch();
+  const singup = useSelector((state) => state.singup);
 
+  {console.log(singup);}
+
+  const singupUI = () => {
+         dispatch(singupAction(true));
+         console.log(singup);
+     
+  };
+
+  const singinUI = () => {
+    dispatch(singupAction(false));
+    console.log(singup);
+
+};
 
 
 
@@ -62,13 +79,26 @@ const Home = (props) => {
           multiline
         />
           <img src="/images/home.jpg" height="340px" width="400px" sx={{ width: 128, height: 128 }} />
-          <Login />
-          {/* <a href="http://localhost:3000/user/login">Login</a>  */}
-          {/* <Button  onClick={() => navigate('/login')} variant="text">
-          {" "}
-         Login
-        </Button> */}
+       
+     
+          { singup===true ? <Register /> : <Login />}
         </Grid>
+       
+        
+        <Grid container direction={"row"} spacing={1} style={{width: '200px'}}>
+        { singup===false ?
+            <Button onClick={singupUI} variant="text">
+            {" "}
+                Sing UP 
+            </Button> 
+            : 
+            <Button onClick={singinUI} variant="text">
+            {" "}
+                Sing IN 
+            </Button> 
+          }
+          </Grid>
+        
        
       </Box>
     </Box>

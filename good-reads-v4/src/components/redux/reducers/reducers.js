@@ -1,9 +1,10 @@
-import { ADD_BOOK, GET_BOOKS, REGISTER, LOGIN } from "../actions/actions";
+import { ADD_BOOK, GET_BOOKS, REGISTER, LOGIN, LOGOUT, SINGUP } from "../actions/actions";
 
 const initialState = {
   books: [],
   register: {},
-  login: {}
+  login: {},
+  singup: false
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -22,6 +23,15 @@ const rootReducer = (state = initialState, action) => {
                     ,
         }; break;
 
+        case SINGUP:
+          return {
+            
+                ...state,
+                singup : action.payload.status,
+
+            }; break;
+    
+
         case LOGIN:
             return {
                 
@@ -31,6 +41,19 @@ const rootReducer = (state = initialState, action) => {
                                     email: action.payload.email,
                                     role: action.payload.role,
                                     token: action.payload.token,
+                                }
+                            ,
+                }; break;
+
+            case LOGOUT:
+            return {
+                
+                    ...state,
+                    login:
+                                {
+                                    email: undefined,
+                                    role: undefined,
+                                    token: undefined,
                                 }
                             ,
                 }; break;

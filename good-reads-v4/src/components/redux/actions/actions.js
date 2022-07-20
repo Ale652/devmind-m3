@@ -6,6 +6,8 @@ export const GET_BOOKS2 = "GET_BOOKS2";
 
 export const REGISTER = "REGISTER";
 export const LOGIN = "LOGIN";
+export const LOGOUT = "LOGOUT";
+export const SINGUP = "SINGUP";
 
 export const getBooks = (data) => {
     return {
@@ -38,12 +40,29 @@ export const register = (email, role, password) => {
     };
 };
 
+export const singupAction = (status) => {
+    return {
+        type: SINGUP,
+        payload: {
+            status: status
+        }    
+        
+    };
+};
+
 export const login = (email, role, token) => {
     return {
         type: LOGIN,
         payload: {
             email: email, role: role, token: token
         }
+    };
+};
+
+export const logout = () => {
+    return {
+        type: LOGOUT,
+       
     };
 };
 
