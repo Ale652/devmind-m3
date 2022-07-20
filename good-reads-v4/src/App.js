@@ -9,13 +9,21 @@ import Profile from "./components/profile/Profile";
 import { BrowserRouter } from 'react-router-dom';
 import Register from "./components/register/Register";
 import Login from "./components/login/Login";
+import Home from "./components/home/Home";
+import { useSelector } from "react-redux";
+
 
 function App() {
+
+    const login = useSelector((state) => state.login);
+
+    console.log(login);
+
   return (
       <div className="App">
-        {/* <Menu />
-        <AddBook />
-        <BooksList /> */}
+       
+        {login.email==null && <Home />}
+        {login.email!=null && 
         <BrowserRouter>
             <Menu/>
                 <Routes>
@@ -34,6 +42,7 @@ function App() {
                     <Route path="/login" element={<Login/>}/>
                 </Routes>
         </BrowserRouter>
+    }
       </div>
   );
 }

@@ -21,9 +21,9 @@ const Profile = (props) => {
     const login = useSelector((state) => state.login);
   
   
-    useEffect(() => {
-        console.log(login);
-      }, []);
+    // useEffect(() => {
+    //     console.log(login);
+    //   }, []);
     
    
     return (
