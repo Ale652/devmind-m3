@@ -21,7 +21,7 @@ public class Book {
     private String description;
     private String publishedDate;
     private String type;
-    private String status; // published , unpublished or rejected
+    private StatusBook status; // published , unpublished or rejected
     //    private String author;
     @Id
     @Column(name = "id")

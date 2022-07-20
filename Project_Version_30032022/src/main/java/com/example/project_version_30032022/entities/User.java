@@ -1,21 +1,46 @@
 package com.example.project_version_30032022.entities;
 
+//import lombok.AllArgsConstructor;
+//import lombok.Data;
+//import lombok.NoArgsConstructor;
+//
+//import javax.persistence.Entity;
+//import javax.persistence.MappedSuperclass;
+//
+//@MappedSuperclass
+//@Data
+//@NoArgsConstructor
+//@AllArgsConstructor
+
+import com.example.project_version_30032022.security.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
-import javax.persistence.Entity;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
-@MappedSuperclass
 @Data
-@NoArgsConstructor
+@Entity
 @AllArgsConstructor
- public abstract class User {
-     private String email;
-     private String password;
-     private String firstName;
-     private String lastName;
-     private String loggedIn;
+@NoArgsConstructor
+@Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
+public class User {
 
- }
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+    @NotEmpty
+    @Email
+    private String email;
+    @JsonIgnore
+    @ToString.Exclude
+    private String password;
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private Role role;
+}

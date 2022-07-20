@@ -3,16 +3,16 @@ package com.example.project_version_30032022.controllers;
 import com.example.project_version_30032022.controllers.request.AddReaderRequest;
 import com.example.project_version_30032022.controllers.request.AddReviewRequest;
 import com.example.project_version_30032022.entities.Author;
+import com.example.project_version_30032022.entities.Reader;
 import com.example.project_version_30032022.entities.Review;
 import com.example.project_version_30032022.services.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class ReviewController {
 
@@ -31,6 +31,17 @@ public class ReviewController {
         return reviewService.getAllReviews();
     }
 
+
+    @GetMapping(path = "/review/{id}")
+    public @ResponseBody
+    Review getAuthor(@PathVariable String id) {
+        return reviewService.getReviewById(Long.valueOf(id)).get();
+    }
+
+    @RequestMapping(path = "/review/{id}", method = RequestMethod.DELETE)
+    public void deleteReview(@PathVariable String id) {
+        reviewService.deleteReview(Long.valueOf(id));
+    }
 
 
 

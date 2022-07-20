@@ -25,11 +25,26 @@ public class ReviewService {
     @Autowired
     BookRepository bookRepository;
 
+    @Autowired
+    ReviewService reviewService;
 
     public List<Review> getAllReviews(){
         return reviewRepository.findAll();
     }
 
+    public Optional<Review> getReviewById(Long id){
+        return reviewRepository.findById(id);
+    }
+
+    /*
+     Permite modificarea / stergerea unui review de catre persoana care l-a adaugat sau de catre administrator
+
+    * */
+    public void deleteReview(Long id){reviewRepository.delete(reviewRepository.getById(id));}
+
+    /*
+     *     Permite adaugarea unui review pentru o carte
+     * */
     public void addReview(AddReviewRequest addReviewRequest){
         Review review = new Review();
 
@@ -47,14 +62,4 @@ public class ReviewService {
         reviewRepository.save(review);
     }
 
-    /*
-    *     Permite adaugarea unui review pentru o carte
-     * */
-    public void addReviewToBook(){}
-
-    /*
-     Permite modificarea / stergerea unui review de catre persoana care l-a adaugat sau de catre administrator
-
-    * */
-    public void removeReview(){}
 }

@@ -10,7 +10,12 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Administrator extends User {
+public class Administrator {
+
+    private String email;
+    private String firstName;
+    private String lastName;
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

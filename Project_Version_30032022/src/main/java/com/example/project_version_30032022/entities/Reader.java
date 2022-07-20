@@ -14,7 +14,11 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Reader extends User{
+public class Reader {
+    private String email;
+    private String firstName;
+    private String lastName;
+
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -2,22 +2,33 @@ package com.example.project_version_30032022.controllers;
 
 import com.example.project_version_30032022.controllers.request.AddAuthorRequest;
 import com.example.project_version_30032022.controllers.request.AddReaderRequest;
+import com.example.project_version_30032022.controllers.request.AddReviewRequest;
 import com.example.project_version_30032022.entities.Author;
+import com.example.project_version_30032022.entities.Book;
 import com.example.project_version_30032022.entities.Reader;
+import com.example.project_version_30032022.entities.Review;
+import com.example.project_version_30032022.services.BookService;
 import com.example.project_version_30032022.services.ReaderService;
+import com.example.project_version_30032022.services.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class ReaderController {
 
 @Autowired
     ReaderService readerService;
+
+    @Autowired
+    BookService bookService;
+
+    @Autowired
+    ReviewService reviewService;
+
 
 
     @PostMapping(path="/addReader")
@@ -31,30 +42,48 @@ public class ReaderController {
     }
 
 
+    @GetMapping(path = "/reader/{id}")
+    public @ResponseBody
+    Reader getAuthor(@PathVariable String id) {
+        return readerService.getReaderById(Long.valueOf(id)).get();
+    }
+
+
     /*
     *     Poate vedea o lista cu toate cartile din aplicatie
         Lista poate fi filtrata dupa tipul cartii (Comic Book, Fantasy, Classics, Historical Fiction etc.)
     * */
-    public void showAllBooks(){}
+    @GetMapping(path= "/showAllBooksReader")
+    public List<Book> showAllBooks(){
+        return bookService.getAllBooks();
+    }
+
 
     /*
     *     Poate adauga o carte in lista de carti citite
      * */
-    public void addBookToReadListOfBooks(){}
+    @PostMapping(path="/addBookToReadListOfBooks")
+    public void addBookToReadListOfBooks(@RequestBody AddReaderRequest addReaderRequest){
+        readerService.addReader(addReaderRequest);
+    }
 
     /*
     *     Poate adauga un review unei carti citite
      * */
-    public void addReviewToBook(){}
+    @PostMapping(path="/addReviewReader")
+    public void addReviewToBook(@RequestBody AddReviewRequest addReviewRequest){
+        readerService.addReviewToReadBook(addReviewRequest);
+    }
+
 
     /*
     *     Poate adauga o carte in wishList
      * */
-    public void addBookToWishList(){}
 
-    /*
-    [EXTRA] Poate incarca o poza de profil (avatar)
-    * */
-    public void uploadAvatarPicture(){}
+    @PostMapping(path="/addBookToWishList")
+    public void addBookToWishList(@RequestBody AddReaderRequest addReaderRequest){
+        readerService.addReader(addReaderRequest);
+    }
+
 
 }
