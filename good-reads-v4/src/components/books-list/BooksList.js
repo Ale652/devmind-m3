@@ -44,12 +44,63 @@ const BooksList = (props) => {
   const login = useSelector((state) => state.login);
 
   const columns = [
-      {field: "title", headerName: "title"},
-      {field: "description", headerName: "description"},
-      {field: "type", headerName: "type", width: 900},
-      {field: "publishedDate", headerName: "publishedDate"},
-      {field: "author_id", headerName: "author_id"},
-      {field: "id", headerName: "id"},
+      {field: "id", headerName: "Id"},
+      {field: "title", headerName: "Title"},
+      {field: "description", headerName: "Description"},
+      {field: "type", headerName: "Type", width: 900},
+      {field: "publishedDate", headerName: "PublishedDate"},
+      {field: "author_id", headerName: "Author Id"},
+      {field: "details", headerName: "Details", renderCell: (cellValues) => {
+        return (
+          <Button
+            variant="contained"
+            color="primary"
+            // onClick={(event) => {
+            //   handleClick(event, cellValues);
+            // }}
+          >
+            Details
+          </Button>
+        );
+      }},
+      {field: "deteditails", headerName: "Edit", renderCell: (cellValues) => {
+        return (
+          <Button
+            variant="contained"
+            color="info"
+            // onClick={(event) => {
+            //   handleClick(event, cellValues);
+            // }}
+          >
+            Edit
+          </Button>
+        );
+      }},
+      {field: "delete", headerName: "Delete", renderCell: (cellValues) => {
+        return (
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={(event) => {
+                const idBookToDelete = cellValues.id;
+                console.log(typeof idBookToDelete);
+                axios.delete("http://localhost:8080/book/"+idBookToDelete, {
+                    
+                // headers: {
+                //     Authorization: authorizationToken
+                // },
+                // data: {
+                //     source: source
+                // }
+});
+         dispatch(getBooks(books.filter(item => item.id !== idBookToDelete)));
+
+            }}
+          >
+            Delete
+          </Button>
+        );
+      }}
   ];
 
   useEffect(() => {
@@ -59,40 +110,11 @@ const BooksList = (props) => {
           
           dispatch(getBooks(response.data))
       });
-  }, []);
+  },[]);
 
-
-//   useEffect(() => {
-//     console.log("called useEffect");
-//       (axios.get(`http://localhost:8080/getAllBooks`))
-//       .then((response) => {
-//           response.data.map((book, bookIndex) =>
-//           dispatch(addBook(book.title,book.description,book.type,book.publishedDate,book.author_id, book.id)))
-//       });
-//   }, []);
-
-
- 
-  // const onCellClick = (cellInfo) => {
-  //     const userId = cellInfo.row.userId;
-  //     console.log("user id is : "+userId);
-
-  //     axios.get(`https://jsonplaceholder.typicode.com/users/${userId}`)
-  //         .then((userData) => {
-             
-  //                const user = userData.data;
-  //                const todo = cellInfo.row;
-
-  //                dispatch(setModal(user,todo));
-  //             //    console.log("in modal " + user.username + " " + todo.id);
-              
-  //         })
-  //         .catch(() => {
-  //             console.error("Something went wrong for modal");
-  //         });
-  // };
 
   return (
+    
       <Box width="100%" height="100%" display="flex" justifyContent="center">
           {books === undefined && <div>There is no todo yet</div>}
           {books && (
@@ -103,54 +125,6 @@ const BooksList = (props) => {
                   rows={books} columns={columns}  key={books.length+1}/>
               </Box>
           )}
-          {/* {modal && (<div>
-              <Modal open
-              //  onClose={() => (modal =  undefined)}
-              >
-                  <Box
-                      width="100%"
-                      height="100%"
-                      display="flex"
-                      alignItems="center"
-                      justifyContent="center"
-                  >
-                      <Box
-                          position="relative"
-                          borderRadius="15px"
-                          width="50%"
-                          height="50%"
-                          bgcolor="#f5aa7f"
-                          display="flex"
-                          flexDirection="column"
-                          p={3}
-                      >
-                          <Box fontWeight="bold" py={1}>Person Info:</Box>
-
-                          <Box width="100%" display="flex" alignItems="center">
-                              Email : &nbsp; <span>{modal.email}</span>
-                          </Box>
-
-                          <Box width="100%" display="flex" alignItems="center">
-                              Name : &nbsp; <span>{modal.name}</span>
-                          </Box>
-
-                          <Box width="100%" display="flex" alignItems="center">
-                              City : &nbsp;  <span>{modal.city}</span>
-                          </Box>
-                          <Box width="100%" display="flex" alignItems="center">
-                              Street :  &nbsp;   <span>{modal.street}</span>
-                          </Box>
-                          <Box width="100%" display="flex" alignItems="center">
-                              Websiste :  &nbsp; <span>{modal.website}</span>
-                          </Box>
-
-                          <Button variant="contained" 
-                           onClick={() => dispatch(closeModal(modal))}
-                          >Close Modal</Button>
-                      </Box>
-                  </Box>
-              </Modal>
-              </div>)} */}
       </Box>
   );
 };
