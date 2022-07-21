@@ -1,16 +1,12 @@
 import React, { useState } from "react";
-import {DataGrid} from '@mui/x-data-grid';
 import Grid from "@mui/material/Grid";
-import {Box, Button, Modal, setRef, TextField} from "@mui/material";
+import {Box, Button, TextField} from "@mui/material";
 import { useDispatch } from "react-redux";
 import { register } from "../redux/actions/actions";
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
-import FilledInput from '@mui/material/FilledInput';
-import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
-import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
@@ -27,7 +23,6 @@ const Register = (props) => {
   const [password, setPassword] = useState("");
   const [chekPassword, setCheckPassword] = useState("");
   const dispatch = useDispatch();
-
 
 
   const [values, setValues] = React.useState({
@@ -83,7 +78,7 @@ const Register = (props) => {
       });
 
 
-      dispatch(register(email,role,password));
+    dispatch(register(email,role,password));
  
 
     setUsername("");
@@ -96,13 +91,13 @@ const Register = (props) => {
 
   return (
     <Box
-    id="AddBookComponent"
-    style={{
-      padding: "50px",
-      display: "flex",
-      justifyContent: "center",
-    }}
-  >
+      id="AddBookComponent"
+      style={{
+        padding: "50px",
+        display: "flex",
+        justifyContent: "center",
+      }}
+    >
     <Box
       style={{
         width: "50%",
@@ -127,10 +122,6 @@ const Register = (props) => {
 
         <TextField id="filled-basic" label="Role" variant="outlined" onChange={(event) => setRole(event.target.value)}/>
 
-        {/* <TextField id="filled-basic" label="Password" variant="outlined" onChange={(event) => setPassword(event.target.value)}/> */}
-
-        {/* <TextField id="filled-basic" label="Re-enter password " variant="outlined" onChange={(event) => setCheckPassword(event.target.value)}/> */}
-
         <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
           <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
           <Input
@@ -138,7 +129,6 @@ const Register = (props) => {
             type={values.showPassword ? 'text' : 'password'}
             value={values.password}
             onChange={handleChange('password')}
-            // onChange={(event) => setPassword(event.target.value)}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -153,7 +143,6 @@ const Register = (props) => {
           />
         </FormControl>
 
-
         <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
           <InputLabel htmlFor="standard-adornment-password">Re-type Password</InputLabel>
           <Input
@@ -161,7 +150,6 @@ const Register = (props) => {
             type={values.showchekPassword ? 'text' : 'c'}
             value={values.chekPassword}
             onChange={handleChange('chekPassword')}
-            // onChange={(event) => setCheckPassword(event.target.value)}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -177,13 +165,11 @@ const Register = (props) => {
         </FormControl>
 
         <Button onClick={registerUI} variant="text">
-        {" "}
-            Sing UP
+          {" "}
+          Sing UP
         </Button>
       </Grid>
-     
     </Box>
-   
   </Box>
   );
 };

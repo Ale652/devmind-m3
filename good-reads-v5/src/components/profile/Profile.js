@@ -14,58 +14,40 @@ const Profile = (props) => {
     const [password, setPassword] = useState("");
     const [chekPassword, setCheckPassword] = useState("");
     const dispatch = useDispatch();
-
-
-    // const register = useSelector((state) => state.register);
-
     const login = useSelector((state) => state.login);
-  
-  
-    // useEffect(() => {
-    //     console.log(login);
-    //   }, []);
-    
-   
+
+     
     return (
       <Box
-      id="AddBookComponent"
-      style={{
-        padding: "50px",
-        display: "flex",
-        justifyContent: "center",
-      }}
-    >
-      <Box
+        id="AddBookComponent"
         style={{
-          width: "50%",
-          height: "240px",
+          padding: "50px",
           display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          padding: "20px",
-          boxSizing: "border-box",
+          justifyContent: "center",
         }}
       >
+        <Box
+          style={{
+            width: "50%",
+            height: "240px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            padding: "20px",
+            boxSizing: "border-box",
+          }}
+        >
       
-        <Grid container direction={"column"} spacing={5} style={{width: '200px'}}>
-            <Box style={{ fontSize: 20, fontWeight: "bold" }}>
-            {" "}
-            MyProfile:
-          </Box>
-  
-  
-          <TextField  disabled id="outlined-disabled" label={login!=undefined?login.email:"email"} variant="outlined" onChange={(event) => setEmail(event.target.value)} />
-  
-          <TextField  disabled id="outlined-disabled" label={login!=undefined?login.role:"role"}  variant="outlined" onChange={(event) => setRole(event.target.value)}/>
-
-          {/* <TextField  disabled id="outlined-disabled" label= {register.email}  variant="outlined" onChange={(event) => setPassword(event.target.value)}/> */}
-  
-          
-        </Grid>
-       
+          <Grid container direction={"column"} spacing={5} style={{width: '200px'}}>
+              <Box style={{ fontSize: 20, fontWeight: "bold" }}>
+                {" "}
+                MyProfile:
+              </Box>       
+              <TextField  disabled id="outlined-disabled" label={login!=undefined?login.email:"email"} variant="outlined" onChange={(event) => setEmail(event.target.value)} />
+              <TextField  disabled id="outlined-disabled" label={login!=undefined?login.role:"role"}  variant="outlined" onChange={(event) => setRole(event.target.value)}/>
+          </Grid>
+        </Box>  
       </Box>
-     
-    </Box>
     );
   };
   

@@ -4,18 +4,15 @@ import { addBook } from "../redux/actions/actions";
 import Button from "@mui/material/Button";
 import "./AddBook.css";
 import Grid from "@mui/material/Grid";
-
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
-import { borderColor } from "@mui/system";
 import BooksList from "../books-list/BooksList";
-import {useEffect} from "react";
 
 
 
 
 const AddBook = (props) => {
-  const [books, updateRows] = useState(props.books);
+ 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [type, setType] = useState("");
@@ -25,8 +22,6 @@ const AddBook = (props) => {
   const dispatch = useDispatch();
 
   const addNewBook = () => {
-    //*************************** */
-
     fetch("http://localhost:8080/addBook", {
       method: "POST",
       body: JSON.stringify({
@@ -42,15 +37,10 @@ const AddBook = (props) => {
       },
     });
 
-    dispatch(addBook(title,description,type,publishedDate,author_id,id));
-  
+    dispatch(addBook(title,description,type,publishedDate,author_id,id)); 
     setTitle("");
-    setDescription("");
-    
+    setDescription("");  
   };
-
-
-
 
 
   return (
@@ -75,7 +65,7 @@ const AddBook = (props) => {
       >
       
         <Grid container direction={"column"} spacing={5} style={{width: '200px'}}>
-        <Box style={{ fontSize: 20, fontWeight: "bold" }}>
+          <Box style={{ fontSize: 20, fontWeight: "bold" }}>
             {" "}
             Create a book:
           </Box>
@@ -91,11 +81,10 @@ const AddBook = (props) => {
           <TextField id="filled-basic" label="Author Id" variant="outlined" onChange={(event) => setAuthorId(event.target.value)} />
 
           <Button onClick={addNewBook} variant="text">
-          {" "}
-          Add book
-        </Button>
-        </Grid>
-       
+            {" "}
+            Add book
+          </Button>
+        </Grid>    
       </Box>
       <BooksList />
     </Box>

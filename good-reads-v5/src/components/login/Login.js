@@ -1,22 +1,15 @@
 import React, { useState } from "react";
-import {DataGrid} from '@mui/x-data-grid';
 import Grid from "@mui/material/Grid";
-import {Box, Button, Modal, setRef, TextField} from "@mui/material";
+import {Box, Button, TextField} from "@mui/material";
 import { useDispatch } from "react-redux";
 import { login } from "../redux/actions/actions";
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
-import FilledInput from '@mui/material/FilledInput';
-import OutlinedInput from '@mui/material/OutlinedInput';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';
-import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-
-
-
 
 
 const Login = (props) => {
@@ -50,12 +43,9 @@ const Login = (props) => {
     });
   };
 
-
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-
-
 
   const loginUI = () => {
 
@@ -67,35 +57,28 @@ const Login = (props) => {
         }),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
-          'Accept': 'application/json'
+          "Accept": "application/json"
         },
       })
       .then(response => response.json())
       .then(data => {
-        // tratarea cazului in care promisiunea a fost indeplinita
-        console.log(data);
-        // console.log(response.email);
          dispatch(login(data.email,data.role, data.token));
       })
       .catch((error) => {
-        // tratarea cazurilor de eroare
         console.log(error);
       });
 
- 
-
     setEmail("");
-    setPassword("");
-      
+    setPassword("");      
   };
 
   return (
     <Box
-    id="AddBookComponent"
-    style={{
-      padding: "50px",
-      display: "flex",
-      justifyContent: "center",
+      id="AddBookComponent"
+      style={{
+        padding: "50px",
+        display: "flex",
+        justifyContent: "center",
     }}
   >
     <Box
@@ -111,13 +94,12 @@ const Login = (props) => {
     >
     
       <Grid container direction={"column"} spacing={5} style={{width: '200px'}}>
-      <Box style={{ fontSize: 20, fontWeight: "bold" }}>
+        <Box style={{ fontSize: 20, fontWeight: "bold" }}>
           {" "}
           Sing IN:
         </Box>
 
         <TextField id="filled-basic" label="Email" variant="outlined" onChange={(event) => setEmail(event.target.value)} />
-
 
         <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
           <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
@@ -126,7 +108,6 @@ const Login = (props) => {
             type={values.showPassword ? 'text' : 'password'}
             value={values.password}
             onChange={handleChange('password')}
-            // onChange={(event) => setPassword(event.target.value)}
             endAdornment={
               <InputAdornment position="end">
                 <IconButton
@@ -142,13 +123,11 @@ const Login = (props) => {
         </FormControl>
 
         <Button onClick={loginUI} variant="text">
-        {" "}
-            Sing IN
+          {" "}
+          Sing IN
         </Button>
-      </Grid>
-     
+      </Grid>    
     </Box>
-   
   </Box>
   );
 };
