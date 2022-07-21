@@ -6,6 +6,7 @@ import lombok.Data;
 public class EditBookRequest {
     private String title;
     private String description;
+    private String type;
     private String publishedDate;
     private Long author_id;
 }

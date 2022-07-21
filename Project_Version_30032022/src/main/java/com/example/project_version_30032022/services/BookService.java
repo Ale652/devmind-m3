@@ -74,19 +74,30 @@ public class BookService {
     }
 
 
+    public void editBook(Long id, EditBookRequest editBookRequest){
+        Book book = bookRepository.getById(id);
+        book.setDescription(editBookRequest.getDescription());
+        book.setTitle(editBookRequest.getTitle());
+        book.setType(editBookRequest.getType());
+        book.setPublishedDate(editBookRequest.getPublishedDate());
+
+
+        bookRepository.save(book);}
+
 
     /*
     *       Permite modificarea, de catre autor sau de catre un utilizator de tip Administrator
     *       , a informatiilor despre carte
     *       (titlu, descriere, anul publicarii etc.)
      * */
-    public void editBookInformation(EditBookRequest editBookRequest){
-        Book book = bookRepository.findByAuthorAndTitle(editBookRequest.getAuthor_id(),editBookRequest.getTitle());
-        book.setDescription(editBookRequest.getDescription());
-        book.setTitle(editBookRequest.getTitle());
-        book.setPublishedDate(editBookRequest.getPublishedDate());
-
-        bookRepository.save(book);
-    }
+//    public void editBookInformation(EditBookRequest editBookRequest){
+//        Book book = bookRepository.findByAuthorAndTitle(editBookRequest.getAuthor_id(),editBookRequest.getTitle());
+//        book.setDescription(editBookRequest.getDescription());
+//        book.setTitle(editBookRequest.getTitle());
+//        book.setType(editBookRequest.getType());
+//        book.setPublishedDate(editBookRequest.getPublishedDate());
+//
+//        bookRepository.save(book);
+//    }
 
 }

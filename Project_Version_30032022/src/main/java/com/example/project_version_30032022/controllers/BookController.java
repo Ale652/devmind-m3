@@ -2,6 +2,7 @@ package com.example.project_version_30032022.controllers;
 
 import com.example.project_version_30032022.controllers.request.AddBookRequestTitleDescription;
 import com.example.project_version_30032022.controllers.request.AddBookRequest;
+import com.example.project_version_30032022.controllers.request.EditBookRequest;
 import com.example.project_version_30032022.entities.Book;
 import com.example.project_version_30032022.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,6 +53,15 @@ public class BookController {
     public void deleteBook(@PathVariable String id) {
          bookService.deleteBook(Long.valueOf(id));
     }
+
+
+    @PutMapping(path="/editBook/{id}")
+        public void editBook(@RequestBody EditBookRequest editBookRequest,@PathVariable String id){
+//            bookService.editBookInformation(editBookRequest);
+              bookService.editBook(Long.valueOf(id), editBookRequest);
+    }
+
+
 
 
 }

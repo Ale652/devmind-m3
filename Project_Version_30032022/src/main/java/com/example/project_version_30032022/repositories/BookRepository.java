@@ -17,5 +17,6 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     @Query(value="SELECT * from books where status = ?1",nativeQuery = true)
     List<Book> findByStatus(String status);
 
+    @Query(value="SELECT * from books where id_author = ?1 and title - ?2",nativeQuery = true)
     Book findByAuthorAndTitle(Long id_author, String title);
 }
