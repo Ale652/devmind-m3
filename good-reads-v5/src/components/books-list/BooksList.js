@@ -52,7 +52,7 @@ const BooksList = (props) => {
           description: newRow.description,
           type: newRow.type,
           publishedDate: newRow.publishedDate,
-          author_id: newRow.author_id
+          // author_id: newRow.author_id
         }),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
@@ -105,10 +105,10 @@ const BooksList = (props) => {
   const columns = [
     {field: "id", headerName: "Id"},
     {field: "title", headerName: "Title", editable: true, width: 450, },
-    {field: "description", headerName: "Description", editable: true, width: 450,},
-    {field: "type", headerName: "Type", width: 100},
-    {field: "publishedDate", headerName: "PublishedDate"},
-    {field: "author_id", headerName: "Author Id"},
+    {field: "description", headerName: "Description", editable: true, width: 500,},
+    {field: "type", headerName: "Type", width: 150},
+    {field: "publishedDate", headerName: "PublishedDate", width: 150},
+    // {field: "author_id", headerName: "Author Id"},
     {field: "details", headerName: "Details" ,renderCell: (cellValues) => {
       return (
         <Button

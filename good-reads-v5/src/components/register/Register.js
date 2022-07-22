@@ -20,7 +20,7 @@ import Alert from '@mui/material/Alert';
 
 const Register = (props) => {
 
-  const [username, setUsername] = useState("");
+  // const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -32,7 +32,7 @@ const Register = (props) => {
   const handleCloseSnackbar = () => setSnackbar(null);
 
   const [values, setValues] = React.useState({
-    username: '',
+    // username: '',
     email: '',
     firstName: '',
     lastName: '',
@@ -110,7 +110,7 @@ const Register = (props) => {
     });
 
 
-    setUsername("");
+    // setUsername("");
     setEmail("");
     setFirstName("");
     setLastName("");
@@ -154,7 +154,7 @@ const Register = (props) => {
           Sign UP:
         </Box>
 
-        <TextField value={username} id="filled-basic" label="Username" variant="outlined" onChange={(event) => setUsername(event.target.value)}/>
+        {/* <TextField value={username} id="filled-basic" label="Username" variant="outlined" onChange={(event) => setUsername(event.target.value)}/> */}
 
         <TextField value={email} id="filled-basic" label="Email" variant="outlined" onChange={(event) => setEmail(event.target.value)} />
 

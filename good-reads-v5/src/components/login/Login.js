@@ -14,7 +14,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 const Login = (props) => {
 
-  const [username, setUsername] = useState("");
+  // const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [role, setRole] = useState("");
   const [password, setPassword] = useState("");
@@ -24,7 +24,7 @@ const Login = (props) => {
 
 
   const [values, setValues] = React.useState({
-    username: '',
+    // username: '',
     email: '',
     role: '',
     password: '',
