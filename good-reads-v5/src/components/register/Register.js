@@ -76,6 +76,7 @@ const Register = (props) => {
 
 
   const registerUI = () => {
+    console.log(role);
 
     if(values.password!=values.chekPassword)
       setSnackbar({ children: 'The two passwords do not match ! Please review !', severity: 'error' });
@@ -89,7 +90,7 @@ const Register = (props) => {
             firstName: firstName,
             lastName: lastName,
             role: role,
-            password: password,
+            password: values.password,
           }),
           headers: {
             "Content-type": "application/json; charset=UTF-8",
@@ -171,9 +172,9 @@ const Register = (props) => {
               label="Role"
               onChange={(event) => setRole(event.target.value)}
             >
-              <MenuItem value="admin">Admin</MenuItem>
-              <MenuItem value="reader">Reader</MenuItem>
-              <MenuItem value="author">Author</MenuItem>
+              <MenuItem value="admin">admin</MenuItem>
+              <MenuItem value="reader">reader</MenuItem>
+              <MenuItem value="author">author</MenuItem>
             </Select>
           </FormControl>
         </Box>
