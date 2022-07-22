@@ -10,6 +10,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Register from "../register/Register";
 import WishList from "../books-list/WishList";
+import ReadList from "../books-list/ReadList";
 
 
 function TabPanel(props) {
@@ -98,8 +99,8 @@ const Profile = (props) => {
                 </Box>       
                 <TextField  disabled id="outlined-disabled" label={login!=undefined?login.email:"email"} variant="outlined" onChange={(event) => setEmail(event.target.value)} />
                 <TextField  disabled id="outlined-disabled" label={login!=undefined?login.role:"role"}  variant="outlined" onChange={(event) => setRole(event.target.value)}/>
-                <TextField  disabled id="outlined-disabled" label={login!=undefined?login.firstName:"firstName"}  variant="outlined" onChange={(event) => setFirstName(event.target.value)}/>
-                <TextField  disabled id="outlined-disabled" label={login!=undefined?login.lastName:"lastName"}  variant="outlined" onChange={(event) => setLastName(event.target.value)}/>
+                {/* <TextField  disabled id="outlined-disabled" label={login!=undefined?login.firstName:"firstName"}  variant="outlined" onChange={(event) => setFirstName(event.target.value)}/>
+                <TextField  disabled id="outlined-disabled" label={login!=undefined?login.lastName:"lastName"}  variant="outlined" onChange={(event) => setLastName(event.target.value)}/> */}
 
             </Grid>
           </Grid>
@@ -117,18 +118,18 @@ const Profile = (props) => {
               sx={{ borderRight: 1, borderColor: 'divider' }}
             >
               <Tab label="Wish List" {...a11yProps(0)} />
-              <Tab label="Item Two" {...a11yProps(1)} />
-              <Tab label="Item Three" {...a11yProps(2)} />
+              <Tab label="Read List" {...a11yProps(1)} />
+              <Tab label="Explore" {...a11yProps(2)} />
 
             </Tabs>
             <TabPanel value={value} index={0} style={{width: "100%"}}>
               <WishList />
             </TabPanel>
             <TabPanel value={value} index={1}>
-              Item Two
+              <ReadList />
             </TabPanel>
             <TabPanel value={value} index={2}>
-              Item Three
+              Explore
             </TabPanel>
 
           </Box>

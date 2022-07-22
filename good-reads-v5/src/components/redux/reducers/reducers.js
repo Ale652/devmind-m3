@@ -1,4 +1,4 @@
-import { ADD_BOOK, GET_BOOKS, REGISTER, LOGIN, LOGOUT, SIGNUPP,SET_MODAL,CLOSE_MODAL, GET_WISHED_BOOKS } from "../actions/actions";
+import { ADD_BOOK, GET_BOOKS, REGISTER, LOGIN, LOGOUT, SIGNUPP,SET_MODAL,CLOSE_MODAL, GET_WISHED_BOOKS, GET_READ_BOOKS } from "../actions/actions";
 
 const initialState = {
   books: [],
@@ -6,7 +6,8 @@ const initialState = {
   login: {},
   signup: false,
   modal: undefined,
-  books_wished: []
+  books_wished: [],
+  books_read: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -74,6 +75,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
             books_wished: action.payload.data,
+    }; break;
+
+    case GET_READ_BOOKS:
+      return {
+        ...state,
+            books_read: action.payload.data,
     }; break;
 
 

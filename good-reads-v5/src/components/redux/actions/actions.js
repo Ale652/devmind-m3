@@ -9,6 +9,8 @@ export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 export const SIGNUPP = "SIGNUPP";
 export const GET_WISHED_BOOKS = "GET_WISHED_BOOKS";
+export const GET_READ_BOOKS = "GET_READ_BOOKS";
+
 
 
 export const getBooks = (data) => {
@@ -23,6 +25,16 @@ export const getBooks = (data) => {
 export const getBooksWishedBooks = (data) => {
     return {
         type: GET_WISHED_BOOKS,
+        payload: {
+            data: data
+        }
+    };
+};
+
+
+export const getReadsdBooks = (data) => {
+    return {
+        type: GET_READ_BOOKS,
         payload: {
             data: data
         }
