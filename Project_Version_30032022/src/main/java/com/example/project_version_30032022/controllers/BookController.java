@@ -62,6 +62,10 @@ public class BookController {
     }
 
 
+    @GetMapping(path= "/getAllWishedBooksForReader/{id}")
+    public List<Book> getAllWishedBooksForReader(@PathVariable String id){
+        return bookService.getWishListForReader(Long.valueOf(id));
+    }
 
 
 }

@@ -62,7 +62,8 @@ public class UserService {
      *     Executa logica de login pe baza adresei de email si parolei
      * */
     public ResponseEntity<?> login(@RequestBody LoginRequestDTO loginRequest) {
-
+        System.out.println(loginRequest.getEmail());
+        System.out.println(loginRequest.getPassword());
         Authentication authentication = authenticationManager
                 .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
 
@@ -85,8 +86,8 @@ public class UserService {
     @Transactional
     public ResponseEntity<?> register(@RequestBody RegisterRequestDTO registerRequestDTO) {
         if (userRepository.existsByEmail(registerRequestDTO.getEmail())) {
-            throw new RuntimeException("Email used");
-//            return ResponseEntity.badRequest().body("Email used");
+//            throw new RuntimeException("Email used");
+            return ResponseEntity.badRequest().body("Email used");
         }
 
         String role = registerRequestDTO.getRole();
@@ -136,7 +137,7 @@ public class UserService {
 
             user.setEmail(registerRequestDTO.getEmail());
             user.setPassword(encoder.encode(registerRequestDTO.getPassword()));
-            user.setRole(Role.READER);
+            user.setRole(Role.AUTHOR);
 //            user = new User(null, registerRequestDTO.getEmail(), encoder.encode(registerRequestDTO.getPassword()), Role.USER);
         }
 

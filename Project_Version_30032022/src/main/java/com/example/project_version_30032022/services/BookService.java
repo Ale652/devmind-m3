@@ -11,6 +11,7 @@ import com.example.project_version_30032022.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -57,7 +58,7 @@ public class BookService {
         book.setTitle(addBookRequest.getTitle());
         book.setType(addBookRequest.getType());
         book.setPublishedDate(addBookRequest.getPublishedDate());
-        book.setStatus(StatusBook.UNPUBLISHED);
+        book.setStatus(0);
 
         bookRepository.save(book);
     }
@@ -68,7 +69,7 @@ public class BookService {
 
         book.setDescription(addBookRequestTitleDescription.getDescription());
         book.setTitle(addBookRequestTitleDescription.getTitle());
-        book.setStatus(StatusBook.UNPUBLISHED);
+        book.setStatus(0);
 
         bookRepository.save(book);
     }
@@ -99,5 +100,21 @@ public class BookService {
 //
 //        bookRepository.save(book);
 //    }
+
+
+    public List<Book> getWishListForReader(Long id){
+        List<Long> ListIDsBooksWishList= bookRepository.getIDsBooksWishList(id);
+
+        List<Book> ListWishListForReader = new ArrayList<Book>();
+
+        for(Long i : ListIDsBooksWishList){
+            System.out.println("Book id : " + i);
+            ListWishListForReader.add(bookRepository.findById(i).get());
+        }
+
+        return ListWishListForReader;
+    }
+
+
 
 }

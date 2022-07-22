@@ -45,11 +45,15 @@ public class AdministratorService {
     * */
     public void publishBook(Long id){
         Book book = bookRepository.findById(id).get();
-        book.setStatus(StatusBook.PUBLISHED);
+        System.out.println(book);
+        book.setStatus(1);
+//        System.out.println(StatusBook.PUBLISHED.getDeclaringClass());
+        bookRepository.save(book);
     }
     public void rejectBook(Long id){
         Book book = bookRepository.findById(id).get();
-        book.setStatus(StatusBook.REJECTED);
+        book.setStatus(2);
+        bookRepository.save(book);
     }
 
 

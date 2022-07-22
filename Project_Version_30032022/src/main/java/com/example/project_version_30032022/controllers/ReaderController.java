@@ -1,5 +1,6 @@
 package com.example.project_version_30032022.controllers;
 
+import com.example.project_version_30032022.controllers.dto.AddBookToWishListDTO;
 import com.example.project_version_30032022.controllers.request.AddAuthorRequest;
 import com.example.project_version_30032022.controllers.request.AddReaderRequest;
 import com.example.project_version_30032022.controllers.request.AddReviewRequest;
@@ -80,9 +81,9 @@ public class ReaderController {
     *     Poate adauga o carte in wishList
      * */
 
-    @PostMapping(path="/addBookToWishList")
-    public void addBookToWishList(@RequestBody AddReaderRequest addReaderRequest){
-        readerService.addReader(addReaderRequest);
+    @PostMapping(path="/addBookToWishList/{readerID}")
+    public void addBookToWishList(@RequestBody AddBookToWishListDTO addBookToWishListDTO,@PathVariable String readerID){
+        readerService.addBookToWishList(Long.valueOf(readerID), addBookToWishListDTO);
     }
 
 
