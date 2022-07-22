@@ -1,10 +1,10 @@
-import { ADD_BOOK, GET_BOOKS, REGISTER, LOGIN, LOGOUT, SINGUP,SET_MODAL,CLOSE_MODAL } from "../actions/actions";
+import { ADD_BOOK, GET_BOOKS, REGISTER, LOGIN, LOGOUT, SIGNUPP,SET_MODAL,CLOSE_MODAL } from "../actions/actions";
 
 const initialState = {
   books: [],
   register: {},
   login: {},
-  singup: false,
+  signup: false,
   modal: undefined
 };
 
@@ -24,11 +24,11 @@ const rootReducer = (state = initialState, action) => {
                     ,
         }; break;
 
-        case SINGUP:
+        case SIGNUPP:
           return {
             
                 ...state,
-                singup : action.payload.status,
+                signup : action.payload.status,
 
             }; break;
     

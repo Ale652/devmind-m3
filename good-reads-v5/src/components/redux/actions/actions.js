@@ -7,7 +7,7 @@ export const GET_BOOKS2 = "GET_BOOKS2";
 export const REGISTER = "REGISTER";
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
-export const SINGUP = "SINGUP";
+export const SIGNUPP = "SIGNUPP";
 
 export const getBooks = (data) => {
     return {
@@ -40,9 +40,9 @@ export const register = (email, role, password) => {
     };
 };
 
-export const singupAction = (status) => {
+export const signupAction = (status) => {
     return {
-        type: SINGUP,
+        type: SIGNUPP,
         payload: {
             status: status
         }    

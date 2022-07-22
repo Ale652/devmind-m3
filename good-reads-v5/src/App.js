@@ -19,7 +19,7 @@ function App() {
     const loginState = useSelector((state) => state.login);
     const dispatch = useDispatch();
 
-    const singOutUI = () => {
+    const signOutUI = () => {
         dispatch(login(undefined,undefined, undefined));
     };
 
@@ -44,9 +44,9 @@ function App() {
                 </BrowserRouter>
             </Grid>
             <Grid item xs={1} >
-                <Button onClick={singOutUI} variant="text">
+                <Button onClick={signOutUI} variant="text">
                     {" "}
-                    Sing OUT 
+                    Sign OUT 
                 </Button>
             </Grid>
         </Grid>
@@ -68,9 +68,9 @@ function App() {
                 </BrowserRouter>
             </Grid>
             <Grid item xs={1} >
-                <Button onClick={singOutUI} variant="text">
+                <Button onClick={signOutUI} variant="text">
                     {" "}
-                    Sing OUT 
+                    Sign OUT 
                 </Button>
             </Grid>
         </Grid>
@@ -96,15 +96,13 @@ function App() {
                 </BrowserRouter>
             </Grid>
             <Grid item xs={1} >
-                <Button onClick={singOutUI} variant="text">
+                <Button onClick={signOutUI} variant="text">
                     {" "}
-                    Sing OUT 
+                    Sign OUT 
                 </Button>
             </Grid>
-        </Grid>
-        
+        </Grid>     
     }
-
       </div>
   );
 }

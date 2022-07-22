@@ -1,5 +1,5 @@
 import React from "react";
-import { singupAction } from "../redux/actions/actions";
+import { signupAction } from "../redux/actions/actions";
 import Button from "@mui/material/Button";
 import Grid from "@mui/material/Grid";
 import Login from "../login/Login";
@@ -11,14 +11,14 @@ import { useSelector, useDispatch } from "react-redux";
 
 const Home = (props) => {
   const dispatch = useDispatch();
-  const singup = useSelector((state) => state.singup);
+  const signup = useSelector((state) => state.signup);
 
-  const singupUI = () => {
-         dispatch(singupAction(true));
+  const signupUI = () => {
+         dispatch(signupAction(true));
   };
 
-  const singinUI = () => {
-    dispatch(singupAction(false));
+  const signinUI = () => {
+    dispatch(signupAction(false));
   };
 
 
@@ -58,19 +58,19 @@ const Home = (props) => {
             multiline
           />       
           <img src="/images/home.jpg" height="340px" width="400px" sx={{ width: 128, height: 128 }} />
-          { singup===true ? <Register /> : <Login />}
+          { signup===true ? <Register /> : <Login />}
         </Grid>
              
         <Grid container direction={"row"} spacing={1} style={{width: '200px'}}>
-        { singup===false ?
-            <Button onClick={singupUI} variant="text">
+        { signup===false ?
+            <Button onClick={signupUI} variant="text">
             {" "}
-                Sing UP 
+                SIGN UP 
             </Button> 
             : 
-            <Button onClick={singinUI} variant="text">
+            <Button onClick={signinUI} variant="text">
             {" "}
-                Sing IN 
+                SIGN IN 
             </Button> 
         }
         </Grid>

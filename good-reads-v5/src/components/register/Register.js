@@ -10,7 +10,10 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 
 
 
@@ -19,15 +22,20 @@ const Register = (props) => {
 
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [role, setRole] = useState("");
   const [password, setPassword] = useState("");
   const [chekPassword, setCheckPassword] = useState("");
   const dispatch = useDispatch();
-
+  const [snackbar, setSnackbar] = React.useState(null);
+  const handleCloseSnackbar = () => setSnackbar(null);
 
   const [values, setValues] = React.useState({
     username: '',
     email: '',
+    firstName: '',
+    lastName: '',
     role: '',
     password: '',
     showPassword: false,
@@ -62,30 +70,59 @@ const Register = (props) => {
     event.preventDefault();
   };
 
+  const handleProcessRowUpdateError = React.useCallback((error) => {
+    setSnackbar({ children: error.message, severity: 'error' });
+  }, []);
+
 
   const registerUI = () => {
 
-    fetch("http://localhost:8080/user/register", {
-        method: "POST",
-        body: JSON.stringify({
-          email: email,
-          role: role,
-          password: password,
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      });
+    if(values.password!=values.chekPassword)
+      setSnackbar({ children: 'The two passwords do not match ! Please review !', severity: 'error' });
+    
+    else
 
+      fetch("http://localhost:8080/user/register", {
+          method: "POST",
+          body: JSON.stringify({
+            email: email,
+            firstName: firstName,
+            lastName: lastName,
+            role: role,
+            password: password,
+          }),
+          headers: {
+            "Content-type": "application/json; charset=UTF-8",
+          }
 
-    dispatch(register(email,role,password));
- 
+        })
+        .then((response) => {
+          
+          if (response.status === 401 || response.status === 500) {
+            setSnackbar({ children: 'Somthing wrong with your data ! Please review ! ', severity: 'error' });
+          }
+          else{
+            dispatch(register(email,role,password));
+            setSnackbar({ children: 'Account successfully created', severity: 'success' });
+          }     
+
+    });
+
 
     setUsername("");
     setEmail("");
+    setFirstName("");
+    setLastName("");
     setRole("");
-    setPassword("");
-    setCheckPassword("");
+
+    setValues({
+      username : "",
+      email : "",
+      firstName : "",
+      lastName : "",
+      password : "",
+      chekPassword : ""
+    });
       
   };
 
@@ -113,19 +150,39 @@ const Register = (props) => {
       <Grid container direction={"column"} spacing={5} style={{width: '200px'}}>
       <Box style={{ fontSize: 20, fontWeight: "bold" }}>
           {" "}
-          Sing UP:
+          Sign UP:
         </Box>
 
-        <TextField id="filled-basic" label="Username" variant="outlined" onChange={(event) => setUsername(event.target.value)}/>
+        <TextField value={username} id="filled-basic" label="Username" variant="outlined" onChange={(event) => setUsername(event.target.value)}/>
 
-        <TextField id="filled-basic" label="Email" variant="outlined" onChange={(event) => setEmail(event.target.value)} />
+        <TextField value={email} id="filled-basic" label="Email" variant="outlined" onChange={(event) => setEmail(event.target.value)} />
 
-        <TextField id="filled-basic" label="Role" variant="outlined" onChange={(event) => setRole(event.target.value)}/>
+        <TextField value={firstName}  id="filled-basic" label="First Name" variant="outlined" onChange={(event) => setFirstName(event.target.value)}/>
+
+        <TextField value={lastName}  id="filled-basic" label="Last Name" variant="outlined" onChange={(event) => setLastName(event.target.value)}/>
+
+        <Box sx={{ minWidth: 120 }}>
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Role</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={role}
+              label="Role"
+              onChange={(event) => setRole(event.target.value)}
+            >
+              <MenuItem value="admin">Admin</MenuItem>
+              <MenuItem value="reader">Reader</MenuItem>
+              <MenuItem value="author">Author</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
 
         <FormControl sx={{ m: 1, width: '25ch' }} variant="standard">
           <InputLabel htmlFor="standard-adornment-password">Password</InputLabel>
           <Input
             id="standard-adornment-password"
+            required= {true}
             type={values.showPassword ? 'text' : 'password'}
             value={values.password}
             onChange={handleChange('password')}
@@ -147,7 +204,8 @@ const Register = (props) => {
           <InputLabel htmlFor="standard-adornment-password">Re-type Password</InputLabel>
           <Input
             id="standard-adornment-password"
-            type={values.showchekPassword ? 'text' : 'c'}
+            required= {true}
+            type={values.showchekPassword ? 'text' : 'password'}
             value={values.chekPassword}
             onChange={handleChange('chekPassword')}
             endAdornment={
@@ -166,10 +224,21 @@ const Register = (props) => {
 
         <Button onClick={registerUI} variant="text">
           {" "}
-          Sing UP
+          Sign UP
         </Button>
       </Grid>
     </Box>
+    {!!snackbar && (
+      <Snackbar
+        open
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+        onClose={handleCloseSnackbar}
+        autoHideDuration={6000}
+      >
+        <Alert {...snackbar} onClose={handleCloseSnackbar} />
+      </Snackbar>
+    )}
+
   </Box>
   );
 };

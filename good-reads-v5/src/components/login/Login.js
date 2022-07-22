@@ -53,7 +53,7 @@ const Login = (props) => {
         method: "POST",
         body: JSON.stringify({
           email: email,
-          password: password,
+          password: values.password,
         }),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
@@ -96,7 +96,7 @@ const Login = (props) => {
       <Grid container direction={"column"} spacing={5} style={{width: '200px'}}>
         <Box style={{ fontSize: 20, fontWeight: "bold" }}>
           {" "}
-          Sing IN:
+          Sign IN:
         </Box>
 
         <TextField id="filled-basic" label="Email" variant="outlined" onChange={(event) => setEmail(event.target.value)} />
@@ -124,7 +124,7 @@ const Login = (props) => {
 
         <Button onClick={loginUI} variant="text">
           {" "}
-          Sing IN
+          Sign IN
         </Button>
       </Grid>    
     </Box>
