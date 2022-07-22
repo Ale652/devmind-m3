@@ -1,10 +1,11 @@
-import { ADD_BOOK, GET_BOOKS, REGISTER, LOGIN, LOGOUT, SINGUP } from "../actions/actions";
+import { ADD_BOOK, GET_BOOKS, REGISTER, LOGIN, LOGOUT, SINGUP,SET_MODAL,CLOSE_MODAL } from "../actions/actions";
 
 const initialState = {
   books: [],
   register: {},
   login: {},
-  singup: false
+  singup: false,
+  modal: undefined
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -84,6 +85,36 @@ const rootReducer = (state = initialState, action) => {
           },
         ],
       }; break;
+
+
+      case SET_MODAL:
+                            return {
+                              ...state,
+                              modal:
+                                {
+                                  title: action.payload.title,
+                                  description: action.payload.description,
+                                  publishedDate: action.payload.publishedDate,
+                                  type: action.payload.type,
+                                  status: action.payload.status,
+                                  id: action.payload.id,
+                                  author_email: "action.payload.author.email",
+                                  author_firstName: "action.payload.author.firstName",
+                                  author_lastName: "action.payload.author.lastName",
+                              }
+                            };
+                            break;
+
+
+                        case CLOSE_MODAL:
+
+                          return {
+                            ...state,
+                            modal: undefined
+                            
+                          };
+                          break;
+
 
     default:
       return state;

@@ -66,11 +66,12 @@ export const logout = () => {
     };
 };
 
-export const setModal = (user, todos) => {
+export const setModal = (title,description,publishedDate,type,status,id,author) => {
     return {
         type: SET_MODAL,
         payload: {
-            user: user, todos: todos
+            title: title,description: description,publishedDate:publishedDate,type:type,status:status,id:id,
+            author_email:author.email,author_firstName:author.firstName,author_lastName:author.lastname
         }
     };
 };
