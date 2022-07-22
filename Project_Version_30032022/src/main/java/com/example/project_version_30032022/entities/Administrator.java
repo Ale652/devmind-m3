@@ -15,6 +15,7 @@ public class Administrator {
     private String email;
     private String firstName;
     private String lastName;
+    private String password;
 
     @Id
     @Column(name = "id")

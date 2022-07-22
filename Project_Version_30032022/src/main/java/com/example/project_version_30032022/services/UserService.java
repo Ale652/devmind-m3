@@ -85,7 +85,8 @@ public class UserService {
     @Transactional
     public ResponseEntity<?> register(@RequestBody RegisterRequestDTO registerRequestDTO) {
         if (userRepository.existsByEmail(registerRequestDTO.getEmail())) {
-            return ResponseEntity.badRequest().body("Email used");
+            throw new RuntimeException("Email used");
+//            return ResponseEntity.badRequest().body("Email used");
         }
 
         String role = registerRequestDTO.getRole();
@@ -101,6 +102,7 @@ public class UserService {
             reader.setEmail(registerRequestDTO.getEmail());
             reader.setLastName(registerRequestDTO.getLastName());
             reader.setFirstName(registerRequestDTO.getFirstName());
+//            reader.setPassword(encoder.encode(registerRequestDTO.getPassword()));
 
             readerRepository.save(reader);
 
@@ -113,6 +115,7 @@ public class UserService {
             administrator.setEmail(registerRequestDTO.getEmail());
             administrator.setLastName(registerRequestDTO.getLastName());
             administrator.setFirstName(registerRequestDTO.getFirstName());
+//            administrator.setPassword(encoder.encode(registerRequestDTO.getPassword()));
 
             administratorRepository.save(administrator);
 
@@ -127,6 +130,7 @@ public class UserService {
             author.setEmail(registerRequestDTO.getEmail());
             author.setLastName(registerRequestDTO.getLastName());
             author.setFirstName(registerRequestDTO.getFirstName());
+//            author.setPassword(encoder.encode(registerRequestDTO.getPassword()));
 
             authorRpository.save(author);
 
