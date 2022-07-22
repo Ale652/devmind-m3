@@ -116,5 +116,30 @@ public class BookService {
     }
 
 
+    public List<Book> getReadListForReader(Long id){
+        List<Long> ListIDsBooksReadList= bookRepository.getIDsBooksReadList(id);
+
+        List<Book> ListReadListForReader = new ArrayList<Book>();
+
+        for(Long i : ListIDsBooksReadList){
+            System.out.println("Book id : " + i);
+            ListReadListForReader.add(bookRepository.findById(i).get());
+        }
+
+        return ListReadListForReader;
+    }
+
+
+    public void removeBookFromWishList(Long id_reader, Long id_book){
+        bookRepository.removeBookFromWishList(id_reader, id_book);
+    }
+
+    public void removeBookFromReadList(Long id_reader, Long id_book){
+        bookRepository.removeBookFromWishList(id_reader, id_book);
+    }
+
+
+
+
 
 }

@@ -67,5 +67,21 @@ public class BookController {
         return bookService.getWishListForReader(Long.valueOf(id));
     }
 
+    @GetMapping(path= "/getAllReadBooksForReader/{id}")
+    public List<Book> getAllReadBooksForReader(@PathVariable String id){
+        return bookService.getReadListForReader(Long.valueOf(id));
+    }
+
+    @RequestMapping(path = "/removeFromWishedBookForReader/{id_reader}/{id_book}", method = RequestMethod.DELETE)
+    public void removeBookFromWishList(@PathVariable String id_reader, @PathVariable String id_book){
+         bookService.removeBookFromWishList(Long.valueOf(id_reader),Long.valueOf(id_book));
+    }
+
+    @RequestMapping(path = "/removeFromReadBookForReader/{id_reader}/{id_book}", method = RequestMethod.DELETE)
+    public void removeBookFromReadList(@PathVariable String id_reader, @PathVariable String id_book){
+        bookService.removeBookFromReadList(Long.valueOf(id_reader),Long.valueOf(id_book));
+    }
+
+
 
 }

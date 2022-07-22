@@ -86,5 +86,10 @@ public class ReaderController {
         readerService.addBookToWishList(Long.valueOf(readerID), addBookToWishListDTO);
     }
 
+    @PostMapping(path="/addBookToReadList/{readerID}/{bookID}")
+    public void addBookToReadList(@PathVariable String readerID,@PathVariable String bookID){
+        readerService.addBookToReadList(Long.valueOf(readerID), Long.valueOf(bookID));
+    }
+
 
 }

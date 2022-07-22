@@ -88,4 +88,13 @@ public class ReaderService {
         readerRepository.save(reader);
     }
 
+
+    public void addBookToReadList(Long id_reader, Long id_book){
+        Book book = bookRepository.findById(id_book).get();
+
+        Reader reader = readerRepository.findById(id_reader).get();
+        reader.getReadList().add(book);
+        readerRepository.save(reader);
+    }
+
 }
