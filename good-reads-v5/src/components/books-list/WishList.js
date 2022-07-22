@@ -30,9 +30,11 @@ const WishList = (props) => {
             color="secondary"
             onClick={(event) => {
                 const idBookToDelete = cellValues.id;
-                // axios.delete("http://localhost:8080/book/"+idBookToDelete, {
-                // });
-                // dispatch(getBooks(books.filter(item => item.id !== idBookToDelete)));
+                console.log(idBookToDelete);
+                console.log(cellValues);
+                axios.delete("http://localhost:8080/removeFromWishedBookForReader/"+login.id+"/"+idBookToDelete, {
+                });
+                dispatch(getBooksWishedBooks(books_wished.filter(item => item.id !== idBookToDelete)));
               }}
           >
             Delete
