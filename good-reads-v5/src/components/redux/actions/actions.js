@@ -10,6 +10,9 @@ export const LOGOUT = "LOGOUT";
 export const SIGNUPP = "SIGNUPP";
 export const GET_WISHED_BOOKS = "GET_WISHED_BOOKS";
 export const GET_READ_BOOKS = "GET_READ_BOOKS";
+export const USER = "USER";
+
+
 
 
 
@@ -81,6 +84,17 @@ export const login = (email, role, token) => {
         }
     };
 };
+
+export const user = (email, firstName, lastName,id) => {
+    return {
+        type: USER,
+        payload: {
+            email: email, firstName: firstName, lastName: lastName, id: id
+        }
+    };
+};
+
+
 
 export const logout = () => {
     return {

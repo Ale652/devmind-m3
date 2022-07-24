@@ -11,6 +11,7 @@ const ReadList = (props) => {
 
     const dispatch = useDispatch();
     const login = useSelector((state) => state.login);
+    const user = useSelector((state) => state.user);
     const books_read = useSelector((state) => state.books_read);
 
 
@@ -31,8 +32,8 @@ const ReadList = (props) => {
             onClick={(event) => {
                 const idBookToDelete = cellValues.id;
                 console.log(idBookToDelete);
-                console.log(cellValues);
-                axios.delete("http://localhost:8080/removeFromReadBookForReader/"+login.id+"/"+idBookToDelete, {
+                console.log(user.id);
+                axios.delete("http://localhost:8080/removeFromReadBookForReader/"+user.id+"/"+idBookToDelete, {
                 });
                 dispatch(getReadsdBooks(books_read.filter(item => item.id !== idBookToDelete)));
               }}

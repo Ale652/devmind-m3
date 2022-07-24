@@ -11,6 +11,7 @@ const WishList = (props) => {
 
     const dispatch = useDispatch();
     const login = useSelector((state) => state.login);
+    const user = useSelector((state) => state.user);
     const books_wished = useSelector((state) => state.books_wished);
 
 
@@ -32,7 +33,9 @@ const WishList = (props) => {
                 const idBookToDelete = cellValues.id;
                 console.log(idBookToDelete);
                 console.log(cellValues);
-                axios.delete("http://localhost:8080/removeFromWishedBookForReader/"+login.id+"/"+idBookToDelete, {
+                console.log(login);
+
+                axios.delete("http://localhost:8080/removeFromWishedBookForReader/"+user.id+"/"+idBookToDelete, {
                 });
                 dispatch(getBooksWishedBooks(books_wished.filter(item => item.id !== idBookToDelete)));
               }}

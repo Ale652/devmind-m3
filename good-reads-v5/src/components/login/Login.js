@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
 import {Box, Button, TextField} from "@mui/material";
 import { useDispatch } from "react-redux";
-import { login } from "../redux/actions/actions";
+import { login, user } from "../redux/actions/actions";
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
 import InputLabel from '@mui/material/InputLabel';
@@ -10,6 +10,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 import FormControl from '@mui/material/FormControl';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import axios from "axios";
 
 
 const Login = (props) => {
@@ -63,10 +64,18 @@ const Login = (props) => {
       .then(response => response.json())
       .then(data => {
          dispatch(login(data.email,data.role, data.token));
+
+        // Creating User State
+        axios.get(`http://localhost:8080/reader/1`)
+        .then((response) => { const userInfo = response.data; console.log(userInfo);
+                              dispatch(user(userInfo.email,userInfo.firstName, userInfo.lastName, userInfo.id));})
       })
       .catch((error) => {
         console.log(error);
       });
+
+
+
 
     setEmail("");
     setPassword("");      
