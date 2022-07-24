@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import Register from "../register/Register";
 import WishList from "../books-list/WishList";
 import ReadList from "../books-list/ReadList";
+import Explore from "../books-list/Explore";
 
 
 function TabPanel(props) {
@@ -125,11 +126,11 @@ const Profile = (props) => {
             <TabPanel value={value} index={0} style={{width: "100%"}}>
               <WishList />
             </TabPanel>
-            <TabPanel value={value} index={1}>
+            <TabPanel value={value} index={1} style={{width: "100%"}}>
               <ReadList />
             </TabPanel>
-            <TabPanel value={value} index={2}>
-              Explore
+            <TabPanel value={value} index={2} style={{width: "100%"}}>
+              <Explore />
             </TabPanel>
 
           </Box>

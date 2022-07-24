@@ -48,7 +48,7 @@ const WishList = (props) => {
   
 
     useEffect(() => {
-      (axios.get(`http://localhost:8080/getAllWishedBooksForReader/1`))
+      (axios.get(`http://localhost:8080/getAllWishedBooksForReader/`+user.id))
       .then((response) => {      
         dispatch(getBooksWishedBooks(response.data))
       });

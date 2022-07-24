@@ -46,7 +46,7 @@ const ReadList = (props) => {
   
 
     useEffect(() => {
-      (axios.get(`http://localhost:8080/getAllReadBooksForReader/1`))
+      (axios.get(`http://localhost:8080/getAllReadBooksForReader/`+user.id))
       .then((response) => {      
         dispatch(getReadsdBooks(response.data))
       });

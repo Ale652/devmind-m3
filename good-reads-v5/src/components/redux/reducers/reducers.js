@@ -1,4 +1,4 @@
-import { ADD_BOOK, GET_BOOKS, REGISTER, LOGIN, LOGOUT, SIGNUPP,SET_MODAL,CLOSE_MODAL, GET_WISHED_BOOKS, GET_READ_BOOKS, USER } from "../actions/actions";
+import { ADD_BOOK, GET_BOOKS, REGISTER, LOGIN, LOGOUT, SIGNUPP,SET_MODAL,CLOSE_MODAL, GET_WISHED_BOOKS, GET_READ_BOOKS, USER, ADD_BOOK_TO_WISH_LIST, ADD_BOOK_TO_READ_LIST} from "../actions/actions";
 
 const initialState = {
   books: [],
@@ -9,6 +9,8 @@ const initialState = {
   books_wished: [],
   books_read: [],
   user: {},
+  add_book_to_wish_list: [],
+  add_book_to_read_list: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -116,6 +118,29 @@ const rootReducer = (state = initialState, action) => {
           },
         ],
       }; break;
+
+      case ADD_BOOK_TO_WISH_LIST:
+      return {
+        ...state,
+        add_book_to_wish_list: [
+          ...state.add_book_to_wish_list,
+          {
+            book_id: action.payload.book_id,
+          },
+        ],
+      }; break;
+
+      case ADD_BOOK_TO_READ_LIST:
+        return {
+          ...state,
+          add_book_to_read_list: [
+            ...state.add_book_to_read_list,
+            {
+              book_id: action.payload.book_id,
+            },
+          ],
+        }; break;
+
 
 
       case SET_MODAL:
