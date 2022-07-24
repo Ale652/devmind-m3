@@ -135,7 +135,7 @@ public class BookService {
     }
 
     public void removeBookFromReadList(Long id_reader, Long id_book){
-        bookRepository.removeBookFromWishList(id_reader, id_book);
+        bookRepository.removeBookFromReadList(id_reader, id_book);
     }
 
 

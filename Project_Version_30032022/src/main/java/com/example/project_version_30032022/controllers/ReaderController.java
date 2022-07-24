@@ -45,7 +45,7 @@ public class ReaderController {
 
     @GetMapping(path = "/reader/{id}")
     public @ResponseBody
-    Reader getAuthor(@PathVariable String id) {
+    Reader getReader(@PathVariable String id) {
         return readerService.getReaderById(Long.valueOf(id)).get();
     }
 
