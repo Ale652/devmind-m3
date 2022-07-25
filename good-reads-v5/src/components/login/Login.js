@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Grid from "@mui/material/Grid";
 import {Box, Button, TextField} from "@mui/material";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { login, user } from "../redux/actions/actions";
 import IconButton from '@mui/material/IconButton';
 import Input from '@mui/material/Input';
@@ -21,6 +21,8 @@ const Login = (props) => {
   const [password, setPassword] = useState("");
   const [chekPassword, setCheckPassword] = useState("");
   const dispatch = useDispatch();
+  const userState = useSelector((state) => state.user);
+
 
 
 
@@ -62,18 +64,34 @@ const Login = (props) => {
         },
       })
       .then(response => response.json())
-      .then(data => {
-         dispatch(login(data.email,data.role, data.token));
-
-        // Creating User State
-        axios.get(`http://localhost:8080/reader/1`)
-        .then((response) => { const userInfo = response.data; console.log(userInfo);
-                              dispatch(user(userInfo.email,userInfo.firstName, userInfo.lastName, userInfo.id));})
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
+      .then((data) => {
+                            dispatch(login(data.email,data.role, data.token));
+                            // console.log(data.email);
+                            return data;})
+      .then((data) =>{
+        // console.log(data);
+        // console.log("here");
+        return fetch("http://localhost:8080/getReaderByEmail", {
+              method: "POST",
+              body: JSON.stringify({
+                email: data.email,
+              }),
+              headers: {
+                "Content-type": "application/json; charset=UTF-8",
+                "Accept": "application/json"
+              },
+            }).then(response => response.json())
+              .then(data => {
+                            // console.log(data);
+                            return axios.get(`http://localhost:8080/reader/`+data.id)})
+              .then((response) => { 
+                                    const userInfo = response.data; 
+                                    console.log(userInfo); 
+                                    console.log("userInfo");
+                                    dispatch(user(userInfo.email,userInfo.firstName, userInfo.lastName, userInfo.id));
+                                    })
+                                    
+              })
 
 
 

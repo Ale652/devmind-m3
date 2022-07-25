@@ -68,14 +68,14 @@ const rootReducer = (state = initialState, action) => {
 
             case LOGOUT:
             return {
-                
-                    ...state,
-                    login:
-                                {
-                                    email: undefined,
-                                    role: undefined,
-                                    token: undefined,
-                                }
+                    initialState: undefined
+                    // ...state,
+                    // login:
+                    //             {
+                    //                 email: undefined,
+                    //                 role: undefined,
+                    //                 token: undefined,
+                    //             }
                             ,
                 }; break;
 
