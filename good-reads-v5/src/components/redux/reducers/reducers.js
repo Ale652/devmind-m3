@@ -1,4 +1,5 @@
-import { ADD_BOOK, GET_BOOKS, REGISTER, LOGIN, LOGOUT, SIGNUPP,SET_MODAL,CLOSE_MODAL, GET_WISHED_BOOKS, GET_READ_BOOKS, USER, ADD_BOOK_TO_WISH_LIST, ADD_BOOK_TO_READ_LIST} from "../actions/actions";
+import { ADD_BOOK, GET_BOOKS, REGISTER, LOGIN, LOGOUT, SIGNUPP,SET_MODAL,CLOSE_MODAL, GET_WISHED_BOOKS, GET_READ_BOOKS, USER, 
+  ADD_BOOK_TO_WISH_LIST, ADD_BOOK_TO_READ_LIST, ADD_REVIEW} from "../actions/actions";
 
 const initialState = {
   books: [],
@@ -11,6 +12,7 @@ const initialState = {
   user: {},
   add_book_to_wish_list: [],
   add_book_to_read_list: [],
+  reviews: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -114,6 +116,23 @@ const rootReducer = (state = initialState, action) => {
             type: action.payload.type,
             publishedDate: action.payload.publishedDate,
             author_id: action.payload.author_id,
+            id: action.payload.id,
+          },
+        ],
+      }; break;
+
+
+      case ADD_REVIEW:
+      return {
+        ...state,
+        reviews: [
+          ...state.reviews,
+          {
+            comment: action.payload.comment,
+            rating: action.payload.rating,
+            publishedTimestamp: action.payload.publishedTimestamp,
+            book_id: action.payload.book_id,
+            reader_id: action.payload.reader_id,
             id: action.payload.id,
           },
         ],

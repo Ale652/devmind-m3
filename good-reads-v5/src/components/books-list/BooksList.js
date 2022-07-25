@@ -52,7 +52,6 @@ const BooksList = (props) => {
           description: newRow.description,
           type: newRow.type,
           publishedDate: newRow.publishedDate,
-          // author_id: newRow.author_id
         }),
         headers: {
           "Content-type": "application/json; charset=UTF-8",
@@ -76,30 +75,6 @@ const BooksList = (props) => {
     editModeValue=="row"?setEditModeValue(""):setEditModeValue("row");
   };
 
-
-
-//   const onCellClick = (cellInfo) => {
-
-//     const bookId = cellInfo.id;
-//     // console.log(bookId);
-
-//     axios.get(`http://localhost:8080/book/${bookId}`)
-//         .then((bookData) => {
-           
-//                const bookinfo = bookData.data;
-//               //  console.log(bookinfo);
-               
-
-//                dispatch(setModal(bookinfo.title,bookinfo.description,bookinfo.publishedDate,bookinfo.type,bookinfo.status,bookinfo.id,bookinfo.author));
-//             //    console.log("in modal " + user.username + " " + todo.id);
-            
-//         })
-//         .catch(() => {
-//             console.error("Something went wrong for modal");
-//         });
-// };
-
-
   
 
   const columns = [
@@ -114,27 +89,20 @@ const BooksList = (props) => {
         <Button
           variant="contained"
           color="primary"
-          // onCellClick={onCellClick}
            onClick={(e) => {
 
-            const bookId = cellValues.id;
-          // console.log(bookId);
+          const bookId = cellValues.id;
 
           axios.get(`http://localhost:8080/book/${bookId}`)
-        .then((bookData) => {
+         .then((bookData) => {
            
                const bookinfo = bookData.data;
-              //  console.log(bookinfo);
                
-
-               dispatch(setModal(bookinfo.title,bookinfo.description,bookinfo.publishedDate,bookinfo.type,bookinfo.status,bookinfo.id,bookinfo.author));
-            //    console.log("in modal " + user.username + " " + todo.id);
-            
-        })
-        .catch(() => {
-            console.error("Something went wrong for modal");
-        });
-
+               dispatch(setModal(bookinfo.title,bookinfo.description,bookinfo.publishedDate,bookinfo.type,bookinfo.status,bookinfo.id,bookinfo.author));           
+           })
+          .catch(() => {
+              console.error("Something went wrong for modal");
+          });
 
            }}
         >

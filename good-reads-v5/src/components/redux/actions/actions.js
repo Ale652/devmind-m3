@@ -13,8 +13,7 @@ export const GET_READ_BOOKS = "GET_READ_BOOKS";
 export const USER = "USER";
 export const ADD_BOOK_TO_WISH_LIST = "ADD_BOOK_TO_WISH_LIST";
 export const ADD_BOOK_TO_READ_LIST = "ADD_BOOK_TO_READ_LIST";
-
-
+export const ADD_REVIEW = "ADD_REVIEW";
 
 
 
@@ -58,6 +57,16 @@ export const addBook = (title, description, type, publishedDate, author_id, id) 
         type: ADD_BOOK,
         payload: {
             title: title, description: description, type: type, publishedDate: publishedDate, author_id: author_id, id: id
+        }
+    };
+};
+
+
+export const addReview = (comment, rating, publishedTimestamp, book_id, reader_id, id) => {
+    return {
+        type: ADD_BOOK,
+        payload: {
+            comment: comment, rating: rating, publishedTimestamp: publishedTimestamp, book_id: book_id, reader_id: reader_id, id: id
         }
     };
 };
