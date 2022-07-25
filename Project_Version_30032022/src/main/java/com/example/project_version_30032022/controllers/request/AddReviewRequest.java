@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class AddReviewRequest {
     private  String comment ;
-    private String rating;
+    private Long rating;
     private String publishedTimestamp;
     private Long book_id;
     private Long reader_id;

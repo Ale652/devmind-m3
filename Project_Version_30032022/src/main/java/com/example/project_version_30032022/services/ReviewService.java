@@ -60,6 +60,16 @@ public class ReviewService {
 
 
         reviewRepository.save(review);
+
+        // update new value in Book on global_rating with each review added
+        Long numberOfReviewsForThisBook = Long.valueOf(reviewRepository.getNumberReviewsForBook(optional_book.get().getId()));
+        System.out.println("number of reviews : " + numberOfReviewsForThisBook);
+        Long newGlobalRating = (optional_book.get().getGlobal_rating() * (numberOfReviewsForThisBook-1L) + addReviewRequest.getRating())/numberOfReviewsForThisBook;
+        System.out.println("new rating : " + newGlobalRating);
+        System.out.println("old global rating : " + optional_book.get().getGlobal_rating());
+        System.out.println("rating from UI : " + addReviewRequest.getRating());
+        optional_book.get().setGlobal_rating(newGlobalRating);
+        bookRepository.save(optional_book.get());
     }
 
 }

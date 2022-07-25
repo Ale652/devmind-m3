@@ -8,5 +8,6 @@ public class AddBookRequest {
     private String description;
     private String publishedDate;
     private String type;
+    private Long global_rating;
     private Long author_id;
 }

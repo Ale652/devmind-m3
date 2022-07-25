@@ -4,6 +4,7 @@ import com.example.project_version_30032022.controllers.dto.AddBookToReadListDTO
 import com.example.project_version_30032022.controllers.dto.AddBookToWishListDTO;
 import com.example.project_version_30032022.controllers.request.AddReaderRequest;
 import com.example.project_version_30032022.controllers.request.AddReviewRequest;
+import com.example.project_version_30032022.controllers.request.GetReaderRequestByEmail;
 import com.example.project_version_30032022.entities.Book;
 import com.example.project_version_30032022.entities.Reader;
 import com.example.project_version_30032022.entities.Review;
@@ -36,6 +37,11 @@ public class ReaderService {
     public Optional<Reader> getReaderById(Long id){
         return readerRepository.findById(id);
     }
+
+    public Reader getReaderByEmail(GetReaderRequestByEmail getReaderRequestByEmail){
+        return readerRepository.findByEmail(getReaderRequestByEmail.getEmail()).get();
+    }
+
 
 
     public void addReader(AddReaderRequest addReaderRequest){

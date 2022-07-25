@@ -25,7 +25,8 @@ public class Book {
     private String publishedDate;
     private String type;
 //    private StatusBook status; // published , unpublished or rejected
-private Integer status; // published , unpublished or rejected
+    private Integer status; // published , unpublished or rejected
+    private Long global_rating;
 
     //    private String author;
     @Id
@@ -153,6 +154,11 @@ private Integer status; // published , unpublished or rejected
     }
 
 
+    public Long getGlobal_rating() {
+        return global_rating;
+    }
 
-
+    public void setGlobal_rating(Long global_rating) {
+        this.global_rating = global_rating;
+    }
 }

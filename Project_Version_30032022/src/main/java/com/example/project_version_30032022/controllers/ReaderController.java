@@ -4,6 +4,7 @@ import com.example.project_version_30032022.controllers.dto.AddBookToWishListDTO
 import com.example.project_version_30032022.controllers.request.AddAuthorRequest;
 import com.example.project_version_30032022.controllers.request.AddReaderRequest;
 import com.example.project_version_30032022.controllers.request.AddReviewRequest;
+import com.example.project_version_30032022.controllers.request.GetReaderRequestByEmail;
 import com.example.project_version_30032022.entities.Author;
 import com.example.project_version_30032022.entities.Book;
 import com.example.project_version_30032022.entities.Reader;
@@ -17,8 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collections;
 import java.util.List;
 
-@CrossOrigin
 @RestController
+@CrossOrigin
 public class ReaderController {
 
 @Autowired
@@ -37,6 +38,11 @@ public class ReaderController {
         readerService.addReader(addReaderRequest);
     }
 
+    @PostMapping(path="/getReaderByEmail")
+    public Reader getReaderByEmail(@RequestBody GetReaderRequestByEmail getReaderRequestByEmail){
+        return readerService.getReaderByEmail(getReaderRequestByEmail);
+    }
+
     @GetMapping(path= "/getAllReaders")
     public List<Reader> getAllReaders(){
         return readerService.getAllReaders();
@@ -45,7 +51,7 @@ public class ReaderController {
 
     @GetMapping(path = "/reader/{id}")
     public @ResponseBody
-    Reader getReader(@PathVariable String id) {
+    Reader getAuthor(@PathVariable String id) {
         return readerService.getReaderById(Long.valueOf(id)).get();
     }
 

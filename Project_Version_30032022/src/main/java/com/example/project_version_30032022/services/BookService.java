@@ -58,6 +58,7 @@ public class BookService {
         book.setTitle(addBookRequest.getTitle());
         book.setType(addBookRequest.getType());
         book.setPublishedDate(addBookRequest.getPublishedDate());
+        book.setGlobal_rating(0L);
         book.setStatus(0);
 
         bookRepository.save(book);

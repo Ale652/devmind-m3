@@ -34,7 +34,7 @@ public class ReviewController {
 
     @GetMapping(path = "/review/{id}")
     public @ResponseBody
-    Review getAuthor(@PathVariable String id) {
+    Review getReviewById(@PathVariable String id) {
         return reviewService.getReviewById(Long.valueOf(id)).get();
     }
 

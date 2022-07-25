@@ -12,7 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class Review {
    private  String comment ;
-    private String rating;
+    private Long rating;
     private String publishedTimestamp;
     @Id
     @Column(name = "id")
