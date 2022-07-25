@@ -161,7 +161,7 @@ const ReadList = (props) => {
   
             <TextField id="filled-basic" label="Comment" variant="outlined" onChange={(event) => setComment(event.target.value)} />
   
-            <Rating name="half-rating" defaultValue={2.5} precision={0.5} onChange={(event) => setRating(event.target.value)} />
+            <Rating name="half-rating" defaultValue={2.5} precision={0.1} onChange={(event) => setRating(event.target.value)} />
   
             <TextField id="filled-basic" label="Published Timestap" variant="outlined" onChange={(event) => setPublishedTimestamp(event.target.value)} />
   
