@@ -168,12 +168,12 @@ const Explore = (props) => {
                             borderRadius="15px"
                             width="50%"
                             height="50%"
-                            bgcolor="#f5aa7f"
+                            bgcolor="#FFFFFF"
                             display="flex"
                             flexDirection="column"
                             p={3}
                         >
-                            <Box fontWeight="bold" py={1}>Person Info:</Box>
+                            <Box fontWeight="bold" py={1}>Book Info:</Box>
 
                             <Box width="100%" display="flex" alignItems="center">
                               Title : &nbsp; <span>{modal.title}</span>

@@ -10,6 +10,16 @@ import Alert from '@mui/material/Alert';
 import { Modal, TextField} from "@mui/material";
 import { setModal,closeModal } from "../redux/actions/actions";
 import { isDisabled } from "@testing-library/user-event/dist/utils";
+import Rating from '@mui/material/Rating';
+
+
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+import Paper from '@mui/material/Paper';
 
 // inspired from chapter Persistence https://mui.com/x/react-data-grid/editing/
 const useFakeMutation = () => {
@@ -97,8 +107,7 @@ const BooksList = (props) => {
          .then((bookData) => {
            
                const bookinfo = bookData.data;
-               
-               dispatch(setModal(bookinfo.title,bookinfo.description,bookinfo.publishedDate,bookinfo.type,bookinfo.status,bookinfo.id,bookinfo.author));           
+               dispatch(setModal(bookinfo.title,bookinfo.description,bookinfo.publishedDate,bookinfo.type,bookinfo.status, bookinfo.global_rating, bookinfo.id,bookinfo.author.email, bookinfo.author.firstName, bookinfo.author.lastName));           
            })
           .catch(() => {
               console.error("Something went wrong for modal");
@@ -180,6 +189,8 @@ const BooksList = (props) => {
       {modal && (<div>
                 <Modal open
                 >
+
+
                     <Box
                         width="100%"
                         height="100%"
@@ -192,30 +203,62 @@ const BooksList = (props) => {
                             borderRadius="15px"
                             width="50%"
                             height="50%"
-                            bgcolor="#f5aa7f"
+                            bgcolor="#FFFFFF"
                             display="flex"
                             flexDirection="column"
                             p={3}
                         >
-                            <Box fontWeight="bold" py={1}>Person Info:</Box>
+                            <Box fontWeight="bold" py={1}>Book Info:</Box>
 
-                            <Box width="100%" display="flex" alignItems="center">
-                              Title : &nbsp; <span>{modal.title}</span>
-                            </Box>
+                            <TableContainer component={Paper}>
+                              <TableBody>
 
-                            <Box width="100%" display="flex" alignItems="center">
-                              Description : &nbsp; <span>{modal.description}</span>
-                            </Box>
+                                <TableRow width="100%" display="flex" alignItems="center">
+                                  <TableCell>Title : &nbsp;</TableCell>
+                                  <TableCell><span>{modal.title}</span></TableCell>
+                                </TableRow>
 
-                            <Box width="100%" display="flex" alignItems="center">
-                              PublishedDate : &nbsp;  <span>{modal.publishedDate}</span>
-                            </Box>
-                            <Box width="100%" display="flex" alignItems="center">
-                              Type :  &nbsp;   <span>{modal.type}</span>
-                            </Box>
-                            <Box width="100%" display="flex" alignItems="center">
-                              Status :  &nbsp; <span>{modal.status}</span>
-                            </Box>
+                                <TableRow width="100%" display="flex" alignItems="center">
+                                  <TableCell>Description : &nbsp; </TableCell>
+                                  <TableCell><span>{modal.description}</span></TableCell>
+                                </TableRow>
+
+                                <TableRow width="100%" display="flex" alignItems="center">
+                                  <TableCell>PublishedDate : &nbsp; </TableCell>
+                                  <TableCell><span>{modal.publishedDate}</span></TableCell>
+                                </TableRow>
+
+                                <TableRow width="100%" display="flex" alignItems="center">
+                                  <TableCell>Type :  &nbsp;   </TableCell>
+                                  <TableCell><span>{modal.type}</span></TableCell>
+                                </TableRow>
+
+                                <TableRow width="100%" display="flex" alignItems="center">
+                                  <TableCell>Rating :  &nbsp; </TableCell>
+                                  <TableCell><span> 
+                                  <Rating name="half-rating" defaultValue={modal.global_rating} precision={0.5} />
+                                  </span></TableCell>
+                                </TableRow>
+
+                                <TableRow width="100%" display="flex" alignItems="center">
+                                  <TableCell>Status :  &nbsp; </TableCell>
+                                  <TableCell><span>{modal.status}</span></TableCell>
+                                </TableRow>
+
+                                <TableRow width="100%" display="flex" alignItems="center">
+                                  <TableCell>Author Email :  &nbsp; </TableCell>
+                                  <TableCell><span>{modal.author_email}</span> </TableCell>
+                                </TableRow>
+                                <TableRow width="100%" display="flex" alignItems="center">
+                                  <TableCell>Author First Name :  &nbsp; </TableCell>
+                                  <TableCell><span>{modal.author_firstName}</span></TableCell>
+                                </TableRow>
+                                <TableRow width="100%" display="flex" alignItems="center">
+                                  <TableCell>Author Last Name :  &nbsp;</TableCell> 
+                                  <TableCell><span>{modal.author_lastName}</span></TableCell>
+                                </TableRow>
+                              </TableBody>
+                            </TableContainer>
 
                             <Button variant="contained" 
                              onClick={() => dispatch(closeModal(modal))}

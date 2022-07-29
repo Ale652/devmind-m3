@@ -136,12 +136,12 @@ export const logout = () => {
     };
 };
 
-export const setModal = (title,description,publishedDate,type,status,id,author) => {
+export const setModal = (title,description,publishedDate,type,status, global_rating, id,author_email,author_firstName,author_lastName) => {
     return {
         type: SET_MODAL,
         payload: {
-            title: title,description: description,publishedDate:publishedDate,type:type,status:status,id:id,
-            author_email:author.email,author_firstName:author.firstName,author_lastName:author.lastname
+            title: title,description: description,publishedDate:publishedDate,type:type,status:status,global_rating:global_rating, id:id,
+            author_email:author_email,author_firstName:author_firstName,author_lastName:author_lastName,
         }
     };
 };

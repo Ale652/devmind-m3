@@ -172,10 +172,11 @@ const rootReducer = (state = initialState, action) => {
                                   publishedDate: action.payload.publishedDate,
                                   type: action.payload.type,
                                   status: action.payload.status,
+                                  global_rating: action.payload.global_rating,
                                   id: action.payload.id,
-                                  author_email: "action.payload.author.email",
-                                  author_firstName: "action.payload.author.firstName",
-                                  author_lastName: "action.payload.author.lastName",
+                                  author_email: action.payload.author_email,
+                                  author_firstName: action.payload.author_firstName,
+                                  author_lastName: action.payload.author_lastName,
                               }
                             };
                             break;
