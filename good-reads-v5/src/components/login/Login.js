@@ -71,27 +71,45 @@ const Login = (props) => {
       .then((data) =>{
         // console.log(data);
         // console.log("here");
-        return fetch("http://localhost:8080/getReaderByEmail", {
-              method: "POST",
-              body: JSON.stringify({
-                email: data.email,
-              }),
-              headers: {
-                "Content-type": "application/json; charset=UTF-8",
-                "Accept": "application/json"
-              },
-            }).then(response => response.json())
-              .then(data => {
-                            // console.log(data);
-                            return axios.get(`http://localhost:8080/reader/`+data.id)})
-              .then((response) => { 
-                                    const userInfo = response.data; 
-                                    console.log(userInfo); 
-                                    console.log("userInfo");
-                                    dispatch(user(userInfo.email,userInfo.firstName, userInfo.lastName, userInfo.id));
-                                    })
-                                    
-              })
+        if(data.role=="READER")
+          return fetch("http://localhost:8080/getReaderByEmail", {
+                method: "POST",
+                body: JSON.stringify({
+                  email: data.email,
+                }),
+                headers: {
+                  "Content-type": "application/json; charset=UTF-8",
+                  "Accept": "application/json"
+                },
+              }).then(response => response.json())
+                .then(data => {
+                              // console.log(data);
+                              return axios.get(`http://localhost:8080/reader/`+data.id)})
+                .then((response) => { 
+                                      const userInfo = response.data; 
+                                      console.log(userInfo); 
+                                      console.log("userInfo");
+                                      dispatch(user(userInfo.email,userInfo.firstName, userInfo.lastName, userInfo.id));
+                                      })
+                                      
+
+
+
+                                      if(data.role=="AUTHOR")
+                                      return fetch("http://localhost:8080/getAuthorByEmail", {
+                                            method: "POST",
+                                            body: JSON.stringify({
+                                              email: data.email,
+                                            }),
+                                            headers: {
+                                              "Content-type": "application/json; charset=UTF-8",
+                                              "Accept": "application/json"
+                                            },
+                                          }).then(response => response.json())
+                                            .then(data => { dispatch(user(data.email,data.firstName, data.lastName, data.id));
+                                                                  })
+
+                })
 
 
 

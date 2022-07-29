@@ -1,5 +1,5 @@
 import { ADD_BOOK, GET_BOOKS, REGISTER, LOGIN, LOGOUT, SIGNUPP,SET_MODAL,CLOSE_MODAL, GET_WISHED_BOOKS, GET_READ_BOOKS, USER, 
-  ADD_BOOK_TO_WISH_LIST, ADD_BOOK_TO_READ_LIST, ADD_REVIEW} from "../actions/actions";
+  ADD_BOOK_TO_WISH_LIST, ADD_BOOK_TO_READ_LIST, ADD_REVIEW, GET_AUTHOR_BOOKS, GET_AUTHOR_PUBLISHED_BOOKS, GET_AUTHOR_UNPUBLISHED_BOOKS} from "../actions/actions";
 
 const initialState = {
   books: [],
@@ -13,6 +13,9 @@ const initialState = {
   add_book_to_wish_list: [],
   add_book_to_read_list: [],
   reviews: [],
+  books_author :[],
+  books_author_published: [],
+  books_author_unpublished: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -88,6 +91,26 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
       books: action.payload.data,
+    }; break;
+
+
+    case GET_AUTHOR_BOOKS:
+      return {
+        ...state,
+        books_author: action.payload.data,
+    }; break;
+
+    case GET_AUTHOR_PUBLISHED_BOOKS:
+      return {
+        ...state,
+        books_author_published: action.payload.data,
+    }; break;
+
+
+    case GET_AUTHOR_UNPUBLISHED_BOOKS:
+      return {
+        ...state,
+        books_author_unpublished: action.payload.data,
     }; break;
 
 

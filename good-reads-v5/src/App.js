@@ -1,7 +1,9 @@
 
 import "./App.css";
-import AddBook from "./components/add-book/AddBook";
-import BooksList from "./components/books-list/BooksList";
+import AddBookAdmin from "./components/add-book/AddBookAdmin";
+import AddBookAuthor from "./components/add-book/AddBookAuthor";
+import BooksListAdmin from "./components/books-list/BooksListAdmin";
+import BooksListAuthor from "./components/books-list/BooksListAuthor";
 import Menu from "./components/menu/Menu";
 import {Routes, Route} from "react-router-dom";
 import Profile from "./components/profile/Profile";
@@ -12,6 +14,8 @@ import { useSelector } from "react-redux";
 import Button from "@mui/material/Button";
 import { useDispatch } from "react-redux";
 import { login } from "./components/redux/actions/actions";
+import BooksListReader from "./components/books-list/BooksListReader";
+import ProfileAuthor from "./components/profile/ProfileAuthor";
 
 
 function App() {
@@ -33,10 +37,10 @@ function App() {
                 <BrowserRouter>
                     <Menu/>
                         <Routes>
-                            <Route path="/addBook" element={<AddBook/>}/>
+                            <Route path="/addBook" element={<AddBookAdmin/>}/>
                         </Routes>
                         <Routes>
-                            <Route path="/Dashboard" element={<BooksList/>}/>
+                            <Route path="/Dashboard" element={<BooksListAdmin/>}/>
                         </Routes>
                         <Routes>
                             <Route path="/profile" element={<Profile/>}/>
@@ -60,7 +64,7 @@ function App() {
                 <BrowserRouter>
                     <Menu/>
                         <Routes>
-                            <Route path="/Dashboard" element={<BooksList/>}/>
+                            <Route path="/Dashboard" element={<BooksListReader/>}/>
                         </Routes>
                         <Routes>
                             <Route path="/profile" element={<Profile/>}/>
@@ -85,13 +89,13 @@ function App() {
                 <BrowserRouter>
                     <Menu/>
                         <Routes>
-                            <Route path="/addBook" element={<AddBook/>}/>
+                            <Route path="/addBook" element={<AddBookAuthor/>}/>
                         </Routes>
                         <Routes>
-                            <Route path="/Dashboard" element={<BooksList/>}/>
+                            <Route path="/Dashboard" element={<BooksListAuthor/>}/>
                         </Routes>
                         <Routes>
-                            <Route path="/profile" element={<Profile/>}/>
+                            <Route path="/profile" element={<ProfileAuthor/>}/>
                         </Routes>
                 </BrowserRouter>
             </Grid>

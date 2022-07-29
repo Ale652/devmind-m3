@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import {DataGrid} from '@mui/x-data-grid';
 import {useEffect} from "react";
-import { getBooks, addBookToWishList, addBookToReadList } from "../redux/actions/actions";
+import { getBooks, addBookToWishList, addBookToReadList, getMyAuthorBooks, getMyPublishedAuthorBooks } from "../redux/actions/actions";
 import {Box, Button} from "@mui/material";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
@@ -39,7 +39,7 @@ const useFakeMutation = () => {
 };
 
 
-const Explore = (props) => {
+const PublishedBooksAuthor = (props) => {
 
   const mutateRow = useFakeMutation();
   const [snackbar, setSnackbar] = React.useState(null);
@@ -50,6 +50,8 @@ const Explore = (props) => {
   const [editModeValue, setEditModeValue] = useState("");
   const modal = useSelector((state) => state.modal);
   const user = useSelector((state) => state.user);
+  const books_author = useSelector((state) => state.books_author);
+  const books_author_published = useSelector((state) => state.books_author_published);
 
  
 
@@ -86,67 +88,25 @@ const Explore = (props) => {
           Details
         </Button>
       );
-    }},
-    {field: "Wish", headerName: "Wish" , width: 150, onCellClick: e => {
-      e.event.preventDefault() 
-      console.log(e.event)
-  } , renderCell: (cellValues) => {
-      return (
-        <Button
-          variant="contained"
-          color="info"
-        onClick={(event) => {
-
-                fetch("http://localhost:8080/addBookToWishList/"+user.id, {
-                method: "POST",
-                body: JSON.stringify({
-                    id: cellValues.id,
-                }),
-                headers: {
-                    "Content-type": "application/json; charset=UTF-8",
-                },
-                });
-
-              dispatch(addBookToWishList(cellValues.id));
-            }}
-        >Add to Wish
-        </Button>
-      );
-    }},
-    {field: "read", headerName: "Read" , width: 150,  renderCell: (cellValues) => {
-      return (
-        <Button
-          variant="contained"
-          color="secondary"     
-          onClick={(event) => {
-
-              axios.post("http://localhost:8080/addBookToReadList/"+user.id+"/"+cellValues.id, {
-              });
-              dispatch(addBookToReadList(cellValues.id));
-            }}
-        >
-          Add to Read
-        </Button>
-      );
     }}
   ];
 
   useEffect(() => {
-    (axios.get(`http://localhost:8080/getAllBooksByStatus/1`))
-    .then((response) => {      
-      dispatch(getBooks(response.data))
+    (axios.get(`http://localhost:8080/getAllBooksByIdAuthorAndStatus/`+user.id+`/1`))
+    .then((response) => {     
+      dispatch(getMyPublishedAuthorBooks(response.data))
     });
   },[]);
 
   return (  
     <Box width="100%" height="100%" display="flex" justifyContent="center">
-      {books === undefined && <div>Loading...</div>}
-      {books && (
+      {books_author_published === undefined && <div>Loading...</div>}
+      {books_author_published && (
         <Box style={{ height: 300, width: "100%" }}>
           <DataGrid editMode={editModeValue}
           disableSelectionOnClick={true}
             autoHeight="5px"
-            rows={books} columns={columns}  key={books.length+1}
+            rows={books_author_published} columns={columns}  key={books_author_published.length+1}
             experimentalFeatures={{ newEditingApi: true }}
             
             />
@@ -248,4 +208,4 @@ const Explore = (props) => {
   );
 };
 
-export default Explore;
+export default PublishedBooksAuthor;

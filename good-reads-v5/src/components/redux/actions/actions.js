@@ -14,6 +14,11 @@ export const USER = "USER";
 export const ADD_BOOK_TO_WISH_LIST = "ADD_BOOK_TO_WISH_LIST";
 export const ADD_BOOK_TO_READ_LIST = "ADD_BOOK_TO_READ_LIST";
 export const ADD_REVIEW = "ADD_REVIEW";
+export const GET_AUTHOR_BOOKS = "GET_AUTHOR_BOOKS";
+export const GET_AUTHOR_PUBLISHED_BOOKS = "GET_AUTHOR_PUBLISHED_BOOKS";
+export const GET_AUTHOR_UNPUBLISHED_BOOKS = "GET_AUTHOR_UNPUBLISHED_BOOKS";
+
+
 
 
 
@@ -28,6 +33,38 @@ export const getBooks = (data) => {
         }
     };
 };
+
+
+
+export const getMyAuthorBooks = (data) => {
+    return {
+        type: GET_AUTHOR_BOOKS,
+        payload: {
+            data: data
+        }
+    };
+};
+
+
+export const getMyPublishedAuthorBooks = (data) => {
+    return {
+        type: GET_AUTHOR_PUBLISHED_BOOKS,
+        payload: {
+            data: data
+        }
+    };
+};
+
+
+export const getMyUnpublishedAuthorBooks = (data) => {
+    return {
+        type: GET_AUTHOR_UNPUBLISHED_BOOKS,
+        payload: {
+            data: data
+        }
+    };
+};
+
 
 export const getBooksWishedBooks = (data) => {
     return {

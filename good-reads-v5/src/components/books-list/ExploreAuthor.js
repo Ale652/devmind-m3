@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import {DataGrid} from '@mui/x-data-grid';
 import {useEffect} from "react";
-import { getBooks } from "../redux/actions/actions";
+import { getBooks, addBookToWishList, addBookToReadList, getMyAuthorBooks } from "../redux/actions/actions";
 import {Box, Button} from "@mui/material";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
@@ -39,7 +39,7 @@ const useFakeMutation = () => {
 };
 
 
-const BooksList = (props) => {
+const ExploreAuthor = (props) => {
 
   const mutateRow = useFakeMutation();
   const [snackbar, setSnackbar] = React.useState(null);
@@ -49,51 +49,18 @@ const BooksList = (props) => {
   const login = useSelector((state) => state.login);
   const [editModeValue, setEditModeValue] = useState("");
   const modal = useSelector((state) => state.modal);
-
-  const processRowUpdate = React.useCallback(
-    async (newRow) => {
-      // Make the HTTP request to save in the backend
-      console.log(newRow);
-
-      fetch("http://localhost:8080/editBook/"+newRow.id, {
-        method: "PUT",
-        body: JSON.stringify({
-          title: newRow.title,
-          description: newRow.description,
-          type: newRow.type,
-          publishedDate: newRow.publishedDate,
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      });
-          
-      dispatch(getBooks(books));
-    
-      const response = await mutateRow(newRow);
-      setSnackbar({ children: 'Book successfully saved', severity: 'success' });
-      return response;
-    },
-    [mutateRow],
-  );
-
-  const handleProcessRowUpdateError = React.useCallback((error) => {
-    setSnackbar({ children: error.message, severity: 'error' });
-  }, []);
-
-  const handleCellEditCommit = () => {
-    editModeValue=="row"?setEditModeValue(""):setEditModeValue("row");
-  };
-
+  const user = useSelector((state) => state.user);
+  const books_author = useSelector((state) => state.books_author);
   
+
+ 
 
   const columns = [
     {field: "id", headerName: "Id"},
-    {field: "title", headerName: "Title", editable: true, width: 450, },
+    {field: "title", headerName: "Title", editable: true, width: 350, },
     {field: "description", headerName: "Description", editable: true, width: 500,},
     {field: "type", headerName: "Type", width: 150},
     {field: "publishedDate", headerName: "PublishedDate", width: 150},
-    // {field: "author_id", headerName: "Author Id"},
     {field: "details", headerName: "Details" ,renderCell: (cellValues) => {
       return (
         <Button
@@ -101,76 +68,46 @@ const BooksList = (props) => {
           color="primary"
            onClick={(e) => {
 
-          const bookId = cellValues.id;
+            const bookId = cellValues.id;
 
           axios.get(`http://localhost:8080/book/${bookId}`)
-         .then((bookData) => {
+        .then((bookData) => {
            
                const bookinfo = bookData.data;
-               dispatch(setModal(bookinfo.title,bookinfo.description,bookinfo.publishedDate,bookinfo.type,bookinfo.status, bookinfo.global_rating, bookinfo.id,bookinfo.author.email, bookinfo.author.firstName, bookinfo.author.lastName));           
-           })
-          .catch(() => {
-              console.error("Something went wrong for modal");
-          });
+               
+               dispatch(setModal(bookinfo.title,bookinfo.description,bookinfo.publishedDate,bookinfo.type,bookinfo.status,bookinfo.id,bookinfo.author));
+            
+        })
+        .catch(() => {
+            console.error("Something went wrong for modal");
+        });
+
 
            }}
         >
           Details
         </Button>
       );
-    }},
-    {field: "edit", headerName: "Edit" , onCellClick: e => {
-      e.event.preventDefault() 
-      console.log(e.event)
-  } , renderCell: (cellValues) => {
-      return (
-        <Button
-          variant="contained"
-          color="info"
-          onClick={handleCellEditCommit}
-        >
-          {editModeValue=="row"?"Unedit":"Edit"}
-        </Button>
-      );
-    }},
-    {field: "delete", headerName: "Delete" , renderCell: (cellValues) => {
-      return (
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={(event) => {
-              const idBookToDelete = cellValues.id;
-              axios.delete("http://localhost:8080/book/"+idBookToDelete, {
-              });
-              dispatch(getBooks(books.filter(item => item.id !== idBookToDelete)));
-            }}
-        >
-          Delete
-        </Button>
-      );
     }}
   ];
 
   useEffect(() => {
-    (axios.get(`http://localhost:8080/getAllBooks`))
-    .then((response) => {      
-      dispatch(getBooks(response.data))
+    (axios.get(`http://localhost:8080/getAllBooksByIdAuthor/`+user.id))
+    .then((response) => {     
+      dispatch(getMyAuthorBooks(response.data))
     });
   },[]);
 
   return (  
     <Box width="100%" height="100%" display="flex" justifyContent="center">
-      {books === undefined && <div>Loading...</div>}
-      {books && (
+      {books_author === undefined && <div>Loading...</div>}
+      {books_author && (
         <Box style={{ height: 300, width: "100%" }}>
           <DataGrid editMode={editModeValue}
           disableSelectionOnClick={true}
             autoHeight="5px"
-            rows={books} columns={columns}  key={books.length+1}
-            processRowUpdate={processRowUpdate}
-            onProcessRowUpdateError={handleProcessRowUpdateError}
+            rows={books_author} columns={columns}  key={books_author.length+1}
             experimentalFeatures={{ newEditingApi: true }}
-            // onCellClick={onCellClick}
             
             />
             {!!snackbar && (
@@ -189,8 +126,6 @@ const BooksList = (props) => {
       {modal && (<div>
                 <Modal open
                 >
-
-
                     <Box
                         width="100%"
                         height="100%"
@@ -273,4 +208,4 @@ const BooksList = (props) => {
   );
 };
 
-export default BooksList;
+export default ExploreAuthor;
