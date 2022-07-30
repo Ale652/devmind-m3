@@ -37,7 +37,7 @@ const AddBookAdmin = (props) => {
         type: type,
         publishedDate: publishedDate,
         author_id: author_id,
-        id : 1
+        // id : 1
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",

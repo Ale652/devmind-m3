@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import {DataGrid} from '@mui/x-data-grid';
 import {useEffect} from "react";
-import { getBooks } from "../redux/actions/actions";
+import { getBooks, getRejectedBooks } from "../redux/actions/actions";
 import {Box, Button} from "@mui/material";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
@@ -12,6 +12,7 @@ import { setModal,closeModal } from "../redux/actions/actions";
 import { isDisabled } from "@testing-library/user-event/dist/utils";
 import Rating from '@mui/material/Rating';
 
+import {getAllProposedBooksToBeUnpublished} from  "../redux/actions/actions";
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -39,7 +40,7 @@ const useFakeMutation = () => {
 };
 
 
-const BooksListAdmin = (props) => {
+const BooksRejected = (props) => {
 
   const mutateRow = useFakeMutation();
   const [snackbar, setSnackbar] = React.useState(null);
@@ -49,6 +50,8 @@ const BooksListAdmin = (props) => {
   const login = useSelector((state) => state.login);
   const [editModeValue, setEditModeValue] = useState("");
   const modal = useSelector((state) => state.modal);
+  const books_rejected = useSelector((state) => state.books_rejected);
+  
 
   const processRowUpdate = React.useCallback(
     async (newRow) => {
@@ -149,63 +152,63 @@ const BooksListAdmin = (props) => {
         </Button>
       );
     }},
-    // {field: "publish", headerName: "Publish" , renderCell: (cellValues) => {
-    //   return (
-    //     <Button
-    //       variant="contained"
-    //       color="success"
-    //       // onClick={(event) => {
-    //       //     const idBookToDelete = cellValues.id;
-    //       //     axios.delete("http://localhost:8080/book/"+idBookToDelete, {
-    //       //     });
-    //       //     dispatch(getBooks(books.filter(item => item.id !== idBookToDelete)));
-    //       //   }}
+    {field: "unpublish", headerName: "Unpublish" , renderCell: (cellValues) => {
+      return (
+        <Button
+          variant="contained"
+          color="success"
+          // onClick={(event) => {
+          //     const idBookToDelete = cellValues.id;
+          //     axios.delete("http://localhost:8080/book/"+idBookToDelete, {
+          //     });
+          //     dispatch(getBooks(books.filter(item => item.id !== idBookToDelete)));
+          //   }}
 
 
-    //       onClick={(event) => {
-    //           const idBookToPublish = cellValues.id;
+          onClick={(event) => {
+            const idBookToPublish = cellValues.id;
               
-    //           fetch("http://localhost:8080/admin/publishBook/"+idBookToPublish, {
-    //             method: "PUT",
-    //             // body: JSON.stringify({
-    //             //   title: newRow.title,
-    //             //   description: newRow.description,
-    //             //   type: newRow.type,
-    //             //   publishedDate: newRow.publishedDate,
-    //             // }),
-    //             headers: {
-    //               "Content-type": "application/json; charset=UTF-8",
-    //             },
-    //           });
+              fetch("http://localhost:8080/admin/publishBook/"+idBookToPublish, {
+                method: "PUT",
+                // body: JSON.stringify({
+                //   title: newRow.title,
+                //   description: newRow.description,
+                //   type: newRow.type,
+                //   publishedDate: newRow.publishedDate,
+                // }),
+                headers: {
+                  "Content-type": "application/json; charset=UTF-8",
+                },
+              });
 
-    //           // dispatch(getBooks(response.data));
-    //         }}
+            //   dispatch(getAllProposedBooksToBePublished(response.data));
+            }}
 
 
-    //     >
-    //       Publish
-    //     </Button>
-    //   );
-    // }}
+        >
+          Publish
+        </Button>
+      );
+    }}
 
   ];
 
   useEffect(() => {
-    (axios.get(`http://localhost:8080/getAllBooks`))
+    (axios.get(`http://localhost:8080/getAllBooksByStatus/2`))
     .then((response) => {      
-      dispatch(getBooks(response.data))
+        dispatch(getRejectedBooks(response.data));
     });
   },[]);
 
   return (  
     <Box width="100%" height="100%" display="flex" justifyContent="center">
-      {books === undefined && <div>Loading...</div>}
-      {books && (
+      {books_rejected === undefined && <div>Loading...</div>}
+      {books_rejected && (
         <Box style={{ height: 300, width: "100%" }}>
           <DataGrid editMode={editModeValue}
           disableSelectionOnClick={true}
             autoHeight="5px"
-            rows={books} columns={columns}  key={books.length+1}
+            rows={books_rejected} columns={columns}  key={books_rejected.length+1}
             processRowUpdate={processRowUpdate}
             onProcessRowUpdateError={handleProcessRowUpdateError}
             experimentalFeatures={{ newEditingApi: true }}
@@ -312,4 +315,4 @@ const BooksListAdmin = (props) => {
   );
 };
 
-export default BooksListAdmin;
+export default BooksRejected;

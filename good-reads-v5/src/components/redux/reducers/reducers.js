@@ -1,5 +1,6 @@
 import { ADD_BOOK, GET_BOOKS, REGISTER, LOGIN, LOGOUT, SIGNUPP,SET_MODAL,CLOSE_MODAL, GET_WISHED_BOOKS, GET_READ_BOOKS, USER, 
-  ADD_BOOK_TO_WISH_LIST, ADD_BOOK_TO_READ_LIST, ADD_REVIEW, GET_AUTHOR_BOOKS, GET_AUTHOR_PUBLISHED_BOOKS, GET_AUTHOR_UNPUBLISHED_BOOKS} from "../actions/actions";
+  ADD_BOOK_TO_WISH_LIST, ADD_BOOK_TO_READ_LIST, ADD_REVIEW, GET_AUTHOR_BOOKS, GET_AUTHOR_PUBLISHED_BOOKS, GET_AUTHOR_UNPUBLISHED_BOOKS,
+  GET_ALL_BOOKS_TO_PUBLISH, GET_ALL_BOOKS_TO_UNPUBLISH, GET_REJECTED_BOOKS} from "../actions/actions";
 
 const initialState = {
   books: [],
@@ -16,6 +17,9 @@ const initialState = {
   books_author :[],
   books_author_published: [],
   books_author_unpublished: [],
+  books_proposed_to_be_published: [],
+  books_proposed_to_be_unpublished: [],
+  books_rejected: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -94,6 +98,13 @@ const rootReducer = (state = initialState, action) => {
     }; break;
 
 
+    case GET_REJECTED_BOOKS:
+      return {
+        ...state,
+        books_rejected: action.payload.data,
+    }; break;
+
+
     case GET_AUTHOR_BOOKS:
       return {
         ...state,
@@ -105,6 +116,22 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         books_author_published: action.payload.data,
     }; break;
+
+
+    case GET_ALL_BOOKS_TO_PUBLISH:
+      return {
+        ...state,
+        books_proposed_to_be_published: action.payload.data,
+    }; break;
+
+
+    case GET_ALL_BOOKS_TO_UNPUBLISH:
+      return {
+        ...state,
+        books_proposed_to_be_unpublished: action.payload.data,
+    }; break;
+
+
 
 
     case GET_AUTHOR_UNPUBLISHED_BOOKS:

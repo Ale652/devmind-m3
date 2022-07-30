@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { login } from "./components/redux/actions/actions";
 import BooksListReader from "./components/books-list/BooksListReader";
 import ProfileAuthor from "./components/profile/ProfileAuthor";
+import ProfileAdmin from "./components/profile/ProfileAdmin";
 
 
 function App() {
@@ -43,7 +44,7 @@ function App() {
                             <Route path="/Dashboard" element={<BooksListAdmin/>}/>
                         </Routes>
                         <Routes>
-                            <Route path="/profile" element={<Profile/>}/>
+                            <Route path="/profile" element={<ProfileAdmin/>}/>
                         </Routes>
                 </BrowserRouter>
             </Grid>

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import {DataGrid} from '@mui/x-data-grid';
 import {useEffect} from "react";
-import { getBooks } from "../redux/actions/actions";
+import { getBooks, addBookToWishList, addBookToReadList } from "../redux/actions/actions";
 import {Box, Button} from "@mui/material";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
@@ -39,7 +39,7 @@ const useFakeMutation = () => {
 };
 
 
-const BooksListAdmin = (props) => {
+const ExploreAdmin = (props) => {
 
   const mutateRow = useFakeMutation();
   const [snackbar, setSnackbar] = React.useState(null);
@@ -49,51 +49,16 @@ const BooksListAdmin = (props) => {
   const login = useSelector((state) => state.login);
   const [editModeValue, setEditModeValue] = useState("");
   const modal = useSelector((state) => state.modal);
+  const user = useSelector((state) => state.user);
 
-  const processRowUpdate = React.useCallback(
-    async (newRow) => {
-      // Make the HTTP request to save in the backend
-      console.log(newRow);
-
-      fetch("http://localhost:8080/editBook/"+newRow.id, {
-        method: "PUT",
-        body: JSON.stringify({
-          title: newRow.title,
-          description: newRow.description,
-          type: newRow.type,
-          publishedDate: newRow.publishedDate,
-        }),
-        headers: {
-          "Content-type": "application/json; charset=UTF-8",
-        },
-      });
-          
-      dispatch(getBooks(books));
-    
-      const response = await mutateRow(newRow);
-      setSnackbar({ children: 'Book successfully saved', severity: 'success' });
-      return response;
-    },
-    [mutateRow],
-  );
-
-  const handleProcessRowUpdateError = React.useCallback((error) => {
-    setSnackbar({ children: error.message, severity: 'error' });
-  }, []);
-
-  const handleCellEditCommit = () => {
-    editModeValue=="row"?setEditModeValue(""):setEditModeValue("row");
-  };
-
-  
+ 
 
   const columns = [
     {field: "id", headerName: "Id"},
-    {field: "title", headerName: "Title", editable: true, width: 450, },
+    {field: "title", headerName: "Title", editable: true, width: 350, },
     {field: "description", headerName: "Description", editable: true, width: 500,},
     {field: "type", headerName: "Type", width: 150},
     {field: "publishedDate", headerName: "PublishedDate", width: 150},
-    // {field: "author_id", headerName: "Author Id"},
     {field: "details", headerName: "Details" ,renderCell: (cellValues) => {
       return (
         <Button
@@ -101,17 +66,20 @@ const BooksListAdmin = (props) => {
           color="primary"
            onClick={(e) => {
 
-          const bookId = cellValues.id;
+            const bookId = cellValues.id;
 
           axios.get(`http://localhost:8080/book/${bookId}`)
-         .then((bookData) => {
+        .then((bookData) => {
            
                const bookinfo = bookData.data;
-               dispatch(setModal(bookinfo.title,bookinfo.description,bookinfo.publishedDate,bookinfo.type,bookinfo.status, bookinfo.global_rating, bookinfo.id,bookinfo.author.email, bookinfo.author.firstName, bookinfo.author.lastName));           
-           })
-          .catch(() => {
-              console.error("Something went wrong for modal");
-          });
+               
+               dispatch(setModal(bookinfo.title,bookinfo.description,bookinfo.publishedDate,bookinfo.type,bookinfo.status,bookinfo.id,bookinfo.author));
+            
+        })
+        .catch(() => {
+            console.error("Something went wrong for modal");
+        });
+
 
            }}
         >
@@ -119,79 +87,52 @@ const BooksListAdmin = (props) => {
         </Button>
       );
     }},
-    {field: "edit", headerName: "Edit" , onCellClick: e => {
-      e.event.preventDefault() 
-      console.log(e.event)
-  } , renderCell: (cellValues) => {
-      return (
-        <Button
-          variant="contained"
-          color="info"
-          onClick={handleCellEditCommit}
-        >
-          {editModeValue=="row"?"Unedit":"Edit"}
-        </Button>
-      );
-    }},
-    {field: "delete", headerName: "Delete" , renderCell: (cellValues) => {
-      return (
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={(event) => {
-              const idBookToDelete = cellValues.id;
-              axios.delete("http://localhost:8080/book/"+idBookToDelete, {
-              });
-              dispatch(getBooks(books.filter(item => item.id !== idBookToDelete)));
-            }}
-        >
-          Delete
-        </Button>
-      );
-    }},
-    // {field: "publish", headerName: "Publish" , renderCell: (cellValues) => {
-    //   return (
-    //     <Button
-    //       variant="contained"
-    //       color="success"
-    //       // onClick={(event) => {
-    //       //     const idBookToDelete = cellValues.id;
-    //       //     axios.delete("http://localhost:8080/book/"+idBookToDelete, {
-    //       //     });
-    //       //     dispatch(getBooks(books.filter(item => item.id !== idBookToDelete)));
-    //       //   }}
+//     {field: "Wish", headerName: "Wish" , width: 150, onCellClick: e => {
+//       e.event.preventDefault() 
+//       console.log(e.event)
+//   } , renderCell: (cellValues) => {
+//       return (
+//         <Button
+//           variant="contained"
+//           color="info"
+//         onClick={(event) => {
 
+//                 fetch("http://localhost:8080/addBookToWishList/"+user.id, {
+//                 method: "POST",
+//                 body: JSON.stringify({
+//                     id: cellValues.id,
+//                 }),
+//                 headers: {
+//                     "Content-type": "application/json; charset=UTF-8",
+//                 },
+//                 });
 
-    //       onClick={(event) => {
-    //           const idBookToPublish = cellValues.id;
-              
-    //           fetch("http://localhost:8080/admin/publishBook/"+idBookToPublish, {
-    //             method: "PUT",
-    //             // body: JSON.stringify({
-    //             //   title: newRow.title,
-    //             //   description: newRow.description,
-    //             //   type: newRow.type,
-    //             //   publishedDate: newRow.publishedDate,
-    //             // }),
-    //             headers: {
-    //               "Content-type": "application/json; charset=UTF-8",
-    //             },
-    //           });
+//               dispatch(addBookToWishList(cellValues.id));
+//             }}
+//         >Add to Wish
+//         </Button>
+//       );
+//     }},
+//     {field: "read", headerName: "Read" , width: 150,  renderCell: (cellValues) => {
+//       return (
+//         <Button
+//           variant="contained"
+//           color="secondary"     
+//           onClick={(event) => {
 
-    //           // dispatch(getBooks(response.data));
-    //         }}
-
-
-    //     >
-    //       Publish
-    //     </Button>
-    //   );
-    // }}
-
+//               axios.post("http://localhost:8080/addBookToReadList/"+user.id+"/"+cellValues.id, {
+//               });
+//               dispatch(addBookToReadList(cellValues.id));
+//             }}
+//         >
+//           Add to Read
+//         </Button>
+//       );
+//     }}
   ];
 
   useEffect(() => {
-    (axios.get(`http://localhost:8080/getAllBooks`))
+    (axios.get(`http://localhost:8080/getAllBooksByStatus/1`))
     .then((response) => {      
       dispatch(getBooks(response.data))
     });
@@ -206,10 +147,7 @@ const BooksListAdmin = (props) => {
           disableSelectionOnClick={true}
             autoHeight="5px"
             rows={books} columns={columns}  key={books.length+1}
-            processRowUpdate={processRowUpdate}
-            onProcessRowUpdateError={handleProcessRowUpdateError}
             experimentalFeatures={{ newEditingApi: true }}
-            // onCellClick={onCellClick}
             
             />
             {!!snackbar && (
@@ -228,8 +166,6 @@ const BooksListAdmin = (props) => {
       {modal && (<div>
                 <Modal open
                 >
-
-
                     <Box
                         width="100%"
                         height="100%"
@@ -312,4 +248,4 @@ const BooksListAdmin = (props) => {
   );
 };
 
-export default BooksListAdmin;
+export default ExploreAdmin;

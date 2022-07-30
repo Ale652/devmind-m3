@@ -17,6 +17,12 @@ export const ADD_REVIEW = "ADD_REVIEW";
 export const GET_AUTHOR_BOOKS = "GET_AUTHOR_BOOKS";
 export const GET_AUTHOR_PUBLISHED_BOOKS = "GET_AUTHOR_PUBLISHED_BOOKS";
 export const GET_AUTHOR_UNPUBLISHED_BOOKS = "GET_AUTHOR_UNPUBLISHED_BOOKS";
+export const GET_ALL_BOOKS_TO_PUBLISH = "GET_ALL_BOOKS_TO_PUBLISH";
+export const GET_ALL_BOOKS_TO_UNPUBLISH = "GET_ALL_BOOKS_TO_UNPUBLISH";
+export const GET_REJECTED_BOOKS = "GET_REJECTED_BOOKS";
+
+
+
 
 
 
@@ -28,6 +34,16 @@ export const GET_AUTHOR_UNPUBLISHED_BOOKS = "GET_AUTHOR_UNPUBLISHED_BOOKS";
 export const getBooks = (data) => {
     return {
         type: GET_BOOKS,
+        payload: {
+            data: data
+        }
+    };
+};
+
+
+export const getRejectedBooks = (data) => {
+    return {
+        type: GET_REJECTED_BOOKS,
         payload: {
             data: data
         }
@@ -55,6 +71,27 @@ export const getMyPublishedAuthorBooks = (data) => {
     };
 };
 
+
+
+
+export const getAllProposedBooksToBePublished = (data) => {
+    return {
+        type: GET_ALL_BOOKS_TO_PUBLISH,
+        payload: {
+            data: data
+        }
+    };
+};
+
+
+export const getAllProposedBooksToBeUnpublished = (data) => {
+    return {
+        type: GET_ALL_BOOKS_TO_UNPUBLISH,
+        payload: {
+            data: data
+        }
+    };
+};
 
 export const getMyUnpublishedAuthorBooks = (data) => {
     return {

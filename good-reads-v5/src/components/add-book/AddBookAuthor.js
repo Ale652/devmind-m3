@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addBook } from "../redux/actions/actions";
 import Button from "@mui/material/Button";
 import "./AddBook.css";
@@ -15,6 +15,7 @@ import Select from '@mui/material/Select';
 
 
 
+
 const AddBookAuthor = (props) => {
  
   const [title, setTitle] = useState("");
@@ -24,6 +25,8 @@ const AddBookAuthor = (props) => {
   const [author_id, setAuthorId] = useState("");
   const [id, setId] = useState("");
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+
 
   // const [dateValue, setDateValue] = React.useState(new Date('2014-08-18T21:11:54'));
 
@@ -36,8 +39,8 @@ const AddBookAuthor = (props) => {
         description: description,
         type: type,
         publishedDate: publishedDate,
-        author_id: author_id,
-        id : 1
+        author_id: user.id,
+        // id : 1
       }),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
