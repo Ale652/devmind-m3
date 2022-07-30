@@ -1,6 +1,7 @@
 import { ADD_BOOK, GET_BOOKS, REGISTER, LOGIN, LOGOUT, SIGNUPP,SET_MODAL,CLOSE_MODAL, GET_WISHED_BOOKS, GET_READ_BOOKS, USER, 
   ADD_BOOK_TO_WISH_LIST, ADD_BOOK_TO_READ_LIST, ADD_REVIEW, GET_AUTHOR_BOOKS, GET_AUTHOR_PUBLISHED_BOOKS, GET_AUTHOR_UNPUBLISHED_BOOKS,
-  GET_ALL_BOOKS_TO_PUBLISH, GET_ALL_BOOKS_TO_UNPUBLISH, GET_REJECTED_BOOKS} from "../actions/actions";
+  GET_ALL_BOOKS_TO_PUBLISH, GET_ALL_BOOKS_TO_UNPUBLISH, GET_REJECTED_BOOKS, GET_REVIEWS_FOR_BOOK,
+  SET_MODAL_BOOK_REVIEWS, CLOSE_MODAL_BOOK_REVIEWS} from "../actions/actions";
 
 const initialState = {
   books: [],
@@ -20,6 +21,8 @@ const initialState = {
   books_proposed_to_be_published: [],
   books_proposed_to_be_unpublished: [],
   books_rejected: [],
+  reviews_for_book: [],
+  modal_for_reviews_for_book: undefined,
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -240,6 +243,36 @@ const rootReducer = (state = initialState, action) => {
                             
                           };
                           break;
+
+
+
+                          case GET_REVIEWS_FOR_BOOK:
+                            return {
+                              ...state,
+                              reviews_for_book : action.payload.data,
+                          }; break;
+
+
+                          case SET_MODAL_BOOK_REVIEWS:
+                            return {
+                              ...state,
+                              
+                                  modal_for_reviews_for_book : action.payload.data,
+                              
+                            };
+                            break;
+
+
+                            case CLOSE_MODAL_BOOK_REVIEWS:
+
+                              return {
+                                ...state,
+                                modal_for_reviews_for_book: undefined,
+                                reviews_for_book: undefined,
+                                
+                              };
+                              break;
+                      
 
 
     default:

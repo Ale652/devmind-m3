@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import {DataGrid} from '@mui/x-data-grid';
 import {useEffect} from "react";
-import { getBooks } from "../redux/actions/actions";
+import { closeModalBookReviews, getBooks, setModalBookReviews, getReviewsForBook} from "../redux/actions/actions";
 import {Box, Button} from "@mui/material";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
@@ -49,6 +49,10 @@ const BooksListReader = (props) => {
   const login = useSelector((state) => state.login);
   const [editModeValue, setEditModeValue] = useState("");
   const modal = useSelector((state) => state.modal);
+  const modal_for_reviews_for_book = useSelector((state) => state.modal_for_reviews_for_book);
+  const [reviews_on_book, setReviewsOnBook] = useState('');
+  const reviews_for_book = useSelector((state) => state.reviews_for_book);
+  
 
   const processRowUpdate = React.useCallback(
     async (newRow) => {
@@ -86,6 +90,11 @@ const BooksListReader = (props) => {
   };
 
   
+  const columns_reviews = [
+    {field: "comment", headerName: "Comment"},
+    {field: "rating", headerName: "Rating", editable: true, width: 450, },
+    {field: "publishedTimestamp", headerName: "PublishedTimestamp", editable: true, width: 500,},
+  ]
 
   const columns = [
     {field: "id", headerName: "Id"},
@@ -107,6 +116,9 @@ const BooksListReader = (props) => {
          .then((bookData) => {
            
                const bookinfo = bookData.data;
+              //  console.log(modal_for_reviews_for_book);
+
+              //  console.log(books);
                dispatch(setModal(bookinfo.title,bookinfo.description,bookinfo.publishedDate,bookinfo.type,bookinfo.status, bookinfo.global_rating, bookinfo.id,bookinfo.author.email, bookinfo.author.firstName, bookinfo.author.lastName));           
            })
           .catch(() => {
@@ -118,7 +130,38 @@ const BooksListReader = (props) => {
           Details
         </Button>
       );
-    }}
+    }},
+
+
+    {field: "reviews", headerName: "Reviews" ,renderCell: (cellValues) => {
+      return (
+        <Button
+          variant="contained"
+          color="primary"
+           onClick={(e) => {
+
+          const bookIdReview = cellValues.id;
+
+          axios.get(`http://localhost:8080/bookReviews/${bookIdReview}`)
+         .then((bookDataReviews) => {
+           
+               const bookinfo = bookDataReviews.data;
+               console.log(bookinfo);              
+              dispatch(setModalBookReviews(bookinfo));      
+   
+           })
+          .catch(() => {
+              console.error("Something went wrong for modal");
+          });
+
+           }}
+        >
+          Reviews
+        </Button>
+      );
+    }},
+
+
   ];
 
   useEffect(() => {
@@ -127,6 +170,14 @@ const BooksListReader = (props) => {
       dispatch(getBooks(response.data))
     });
   },[]);
+
+
+//   useEffect(() => 
+//  {      
+//     console.log(modal_for_reviews_for_book)
+//     dispatch(getReviewsForBook(modal_for_reviews_for_book))
+ 
+//   },[modal_for_reviews_for_book]);
 
   return (  
     <Box width="100%" height="100%" display="flex" justifyContent="center">
@@ -232,6 +283,63 @@ const BooksListReader = (props) => {
 
                             <Button variant="contained" 
                              onClick={() => dispatch(closeModal(modal))}
+                            >Close Modal</Button>
+                        </Box>
+                    </Box>
+                </Modal>
+                </div>)}
+
+
+                
+                {
+                  modal_for_reviews_for_book && (<div>
+                <Modal open
+                >
+
+
+                    <Box
+                        width="100%"
+                        height="100%"
+                        display="flex"
+                        alignItems="center"
+                        justifyContent="center"
+                    >
+                        <Box
+                            position="relative"
+                            borderRadius="15px"
+                            width="50%"
+                            height="50%"
+                            bgcolor="#FFFFFF"
+                            display="flex"
+                            flexDirection="column"
+                            p={3}
+                        >
+                            <Box fontWeight="bold" py={1}>Book Reviews:</Box>
+
+
+
+
+
+
+
+
+        {modal_for_reviews_for_book && (
+        <Box style={{ height: 300, width: "100%" }}>
+          <DataGrid 
+            // autoHeight="5px"
+            rows={modal_for_reviews_for_book} columns={columns_reviews}  key={modal_for_reviews_for_book.length+1}
+            // processRowUpdate={processRowUpdate}
+            // onProcessRowUpdateError={handleProcessRowUpdateError}
+            // experimentalFeatures={{ newEditingApi: true }}
+            // onCellClick={onCellClick}
+            
+            />
+        </Box>
+      )}
+
+
+                            <Button variant="contained" 
+                             onClick={() => dispatch(closeModalBookReviews(modal_for_reviews_for_book))}
                             >Close Modal</Button>
                         </Box>
                     </Box>

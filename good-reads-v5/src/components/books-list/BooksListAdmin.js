@@ -87,6 +87,12 @@ const BooksListAdmin = (props) => {
 
   
 
+  const columns_reviews = [
+    {field: "comment", headerName: "comment"},
+    {field: "rating", headerName: "rating", editable: true, width: 450, },
+    {field: "publishedTimestamp", headerName: "publishedTimestamp", editable: true, width: 500,},
+  ]
+
   const columns = [
     {field: "id", headerName: "Id"},
     {field: "title", headerName: "Title", editable: true, width: 450, },

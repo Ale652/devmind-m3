@@ -20,6 +20,12 @@ export const GET_AUTHOR_UNPUBLISHED_BOOKS = "GET_AUTHOR_UNPUBLISHED_BOOKS";
 export const GET_ALL_BOOKS_TO_PUBLISH = "GET_ALL_BOOKS_TO_PUBLISH";
 export const GET_ALL_BOOKS_TO_UNPUBLISH = "GET_ALL_BOOKS_TO_UNPUBLISH";
 export const GET_REJECTED_BOOKS = "GET_REJECTED_BOOKS";
+export const GET_REVIEWS_FOR_BOOK = "GET_REVIEWS_FOR_BOOK";
+export const SET_MODAL_BOOK_REVIEWS = "SET_MODAL_BOOK_REVIEWS";
+export const CLOSE_MODAL_BOOK_REVIEWS = "CLOSE_MODAL_BOOK_REVIEWS";
+
+
+
 
 
 
@@ -226,6 +232,37 @@ export const closeModal = (modal) => {
         type: CLOSE_MODAL,
         payload: {
             modal : modal,
+        }
+    };
+};
+
+
+
+export const getReviewsForBook = (reviews_for_book) => {
+    return {
+        type: GET_REVIEWS_FOR_BOOK,
+        payload: {
+            reviews_for_book: reviews_for_book
+        }
+    };
+};
+
+
+export const setModalBookReviews = (data) => {
+    return {
+        type: SET_MODAL_BOOK_REVIEWS,
+        payload: {
+            data: data
+        }
+    };
+};
+
+
+export const closeModalBookReviews = (modal_for_reviews_for_book) => {
+    return {
+        type: CLOSE_MODAL_BOOK_REVIEWS,
+        payload: {
+            modal_for_reviews_for_book : modal_for_reviews_for_book,
         }
     };
 };
