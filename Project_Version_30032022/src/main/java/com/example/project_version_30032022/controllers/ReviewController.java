@@ -38,6 +38,12 @@ public class ReviewController {
         return reviewService.getReviewById(Long.valueOf(id)).get();
     }
 
+    @GetMapping(path = "/bookReviews/{id}")
+    public @ResponseBody
+    List<Review> getReviewsForBook(@PathVariable Long id) {
+        return reviewService.getReviewsForBook(id);
+    }
+
     @RequestMapping(path = "/review/{id}", method = RequestMethod.DELETE)
     public void deleteReview(@PathVariable String id) {
         reviewService.deleteReview(Long.valueOf(id));

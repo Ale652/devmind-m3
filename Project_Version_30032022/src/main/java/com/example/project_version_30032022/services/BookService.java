@@ -42,6 +42,13 @@ public class BookService {
 
     public List<Book> getBooksByStatus(String status){ return bookRepository.findByStatus(status);}
 
+    public List<Book> getBooksByIdAuthor(Long id_author){ return bookRepository.findByIdAuthor(id_author);}
+
+    public List<Book> getBooksByIdAuthorAndStatus(Long id_author, String status){
+        return bookRepository.findByIdAuthorAndStatus(id_author, status);}
+
+
+
 
 
     public void deleteBook(Long id){bookRepository.delete(bookRepository.getById(id));}

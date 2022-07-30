@@ -49,6 +49,17 @@ public class BookController {
         return bookService.getBooksByStatus(status);
     }
 
+    @GetMapping(path= "/getAllBooksByIdAuthor/{id_author}")
+    public List<Book> getAllBooksByIdAuthor(@PathVariable Long id_author){
+        return bookService.getBooksByIdAuthor(id_author);
+    }
+
+    @GetMapping(path= "/getAllBooksByIdAuthorAndStatus/{id_author}/{status}")
+    public List<Book> getAllBooksByIdAuthorAndStatus(@PathVariable Long id_author, @PathVariable String status){
+        return bookService.getBooksByIdAuthorAndStatus(id_author, status);
+    }
+
+
     @RequestMapping(path = "/book/{id}", method = RequestMethod.DELETE)
     public void deleteBook(@PathVariable String id) {
          bookService.deleteBook(Long.valueOf(id));

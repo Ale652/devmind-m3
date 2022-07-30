@@ -29,6 +29,8 @@ public class AdministratorService {
         return administratorRepository.findById(id);
     }
 
+
+
     public void addAdministrator(AddAdministratorRequest addAdministratorRequest){
         Administrator administrator = new Administrator();
         administrator.setEmail(addAdministratorRequest.getEmail());

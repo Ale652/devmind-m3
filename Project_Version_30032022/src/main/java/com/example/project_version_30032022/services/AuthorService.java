@@ -1,7 +1,10 @@
 package com.example.project_version_30032022.services;
 
 import com.example.project_version_30032022.controllers.request.AddAuthorRequest;
+import com.example.project_version_30032022.controllers.request.GetAuthorRequestByEmail;
+import com.example.project_version_30032022.controllers.request.GetReaderRequestByEmail;
 import com.example.project_version_30032022.entities.Author;
+import com.example.project_version_30032022.entities.Reader;
 import com.example.project_version_30032022.repositories.AuthorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +25,11 @@ public class AuthorService {
     public Optional<Author> getAuthorById(Long id){
         return authorRepository.findById(id);
     }
+
+    public Author getAuthorByEmail(GetAuthorRequestByEmail getAuthorRequestByEmail){
+        return authorRepository.findByEmail(getAuthorRequestByEmail.getEmail()).get();
+    }
+
 
 
     public void addAuthor(AddAuthorRequest addAuthorRequest){

@@ -36,6 +36,11 @@ public class ReviewService {
         return reviewRepository.findById(id);
     }
 
+    public List<Review> getReviewsForBook(Long id){
+        return reviewRepository.getReviewsForBook(id);
+    }
+
+
     /*
      Permite modificarea / stergerea unui review de catre persoana care l-a adaugat sau de catre administrator
 

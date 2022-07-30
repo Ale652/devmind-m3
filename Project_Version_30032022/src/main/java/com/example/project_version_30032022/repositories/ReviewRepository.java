@@ -16,4 +16,7 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     @Query(value="SELECT count(*) from review where id_book = ?1",nativeQuery = true)
     Integer getNumberReviewsForBook(Long id_book);
 
+
+    @Query(value="SELECT * from review where id_book = ?1",nativeQuery = true)
+    List<Review> getReviewsForBook(Long id_book);
 }

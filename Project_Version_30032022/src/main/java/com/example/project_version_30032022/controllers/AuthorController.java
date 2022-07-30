@@ -1,12 +1,11 @@
 package com.example.project_version_30032022.controllers;
 
 
-import com.example.project_version_30032022.controllers.request.AddAdministratorRequest;
-import com.example.project_version_30032022.controllers.request.AddAuthorRequest;
-import com.example.project_version_30032022.controllers.request.AddBookRequestTitleDescription;
+import com.example.project_version_30032022.controllers.request.*;
 import com.example.project_version_30032022.entities.Administrator;
 import com.example.project_version_30032022.entities.Author;
 import com.example.project_version_30032022.entities.Book;
+import com.example.project_version_30032022.entities.Reader;
 import com.example.project_version_30032022.services.AuthorService;
 import com.example.project_version_30032022.services.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +29,11 @@ public class AuthorController {
     @PostMapping(path="/addAuthor")
     public void addNewAuthor(@RequestBody AddAuthorRequest addAuthorRequest){
         authorService.addAuthor(addAuthorRequest);
+    }
+
+    @PostMapping(path="/getAuthorByEmail")
+    public Author getReaderByEmail(@RequestBody GetAuthorRequestByEmail getAuthorRequestByEmail){
+        return authorService.getAuthorByEmail(getAuthorRequestByEmail);
     }
 
     @GetMapping(path= "/getAllAuthors")
